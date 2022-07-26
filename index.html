@@ -36,28 +36,73 @@
                 </ul>
             </div>
             <div class="main">
-                <div class="login">
-                    <input type="text" class="login-id" placeholder="ID">
-                    <div class="dropdown">
-                        <div class="dropdown-select">
-                            <span class="select">
-                                Select Item
-                            </span>
-                            <i class="fa fa-caret-down icon"></i>
-                        </div>
-                        <div class="dropdown-list">
-                            <div class="dropdown-list__item">
-                                Application ID (Discord App)
+                <div class="login-setting">
+                    <div class="login">
+                        <input type="text" class="login-id" placeholder="ID">
+                        <div class="dropdown">
+                            <div class="dropdown-select">
+                                <span class="select">
+                                    Select Item
+                                </span>
+                                <i class="fa fa-caret-down icon"></i>
                             </div>
-                            <div class="dropdown-list__item">
-                                Discord Selfbot
+                            <div class="dropdown-list">
+                                <div class="dropdown-list__item">
+                                    Application ID (Discord App)
+                                </div>
+                                <div class="dropdown-list__item">
+                                    Discord Selfbot
+                                </div>
+                            </div>
+                        </div>
+                        <button class="login-btn">
+                            Login
+                        </button>
+                    </div>
+                    <div class="setting">
+                        <div class="setting-details">
+                            <label for="Details">Details</label>
+                            <input type="text" class="setting-details-input">
+                        </div>
+                        <div class="setting-state-party">
+                            <div class="setting-state">
+                                <label for="State">State</label>
+                                <input type="text" id="State" class="setting-state-input">
+                            </div>
+                            <div class="setting-party">
+                                <div class="Party-1">
+                                    <label for="Party">Party</label>
+                                    <input type="number" id="Party" class="Party-input-1" min="0" value="0">
+                                </div>
+                                <div class="Party-2">
+                                    <label for="of-party">of</label>
+                                    <input type="number" name="" id="" min="0" value="0" class="Party-input-2">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="setting-large-image">
+                            <div class="setting-large-image-url">
+                                <label for="Large-image-url">Large image url</label>
+                                <input type="url" id="Large-image-url" class="setting-large-image-url-input" placeholder="eg. https://source.unsplash.com/random">
+                            </div>
+                            <div class="setting-large-image-text">
+                                <label for="Large-image-text">Large image text</label>
+                                <input type="text" id="Large-image-text" class="setting-large-image-text-input" placeholder="eg. This is a large image">
+                            </div>
+                        </div>
+                        <div class="setting-small-image">
+                            <div class="setting-small-image-url">
+                                <label for="small-image-url">Small image url</label>
+                                <input type="url" id="small-image-url" class="setting-small-image-url-input" placeholder="eg. https://source.unsplash.com/random">
+                            </div>
+                            <div class="setting-small-image-text">
+                                <label for="small-image-text">Small image text</label>
+                                <input type="text" id="small-image-text" class="setting-small-image-text-input" placeholder="eg. This is a small image">
                             </div>
                         </div>
                     </div>
-                    <button class="login-btn">
-                        Login
-                    </button>
                 </div>
+
                 <div class="preview">
                     <div class="preview-thum-avt">
                         <div class="preview-thum"></div>
@@ -137,6 +182,16 @@
                         <div class="preview-rpc-button">
                             <button class="launch-rpc-btn">Launch RPC</button>
                             <button class="stop-rpc-btn">Stop</button>
+                        </div>
+                        <div class="preview-rpc-bar">
+                            <ul class="preview-rpc-set-list">
+                                <li><a href=""><i class="fas fa-donate icon-rpc-preview"></i></a></li>
+                                <li><a href=""><i class="fab fa-discord icon-rpc-preview"></i></a></li>
+                                <li><a href=""><i class="fab fa-github icon-rpc-preview"></i></a></li>
+                                <li><a href=""><i class="fas fa-globe icon-rpc-preview"></i></a></li>
+                                <li><a href=""><i class="fas fa-question-circle icon-rpc-preview"></i></a></li>
+                                <li><a href=""><i class="fas fa-cog icon-rpc-preview"></i></a></li>
+                            </ul>
                         </div>
                     </div>
                 </div>

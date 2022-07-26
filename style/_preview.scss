@@ -1,7 +1,7 @@
 .preview {
     width: 30%;
     background-color: $background-floating;
-    min-height: 700px;
+    min-height: 707px;
     height: 100%;
     border-radius: 10px;
 }
@@ -333,7 +333,7 @@
 }
 
 .preview-rpc-button {
-    margin-top: 50px;
+    margin-top: 30px;
     display: flex;
     gap: 10px;
 }
@@ -353,4 +353,30 @@
 
 .stop-rpc-btn {
     background-color: $danger;
+}
+
+.preview-rpc-bar {
+    margin-top: 15px;
+    border-radius: 5px;
+    background-color: $background-secondary;
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.preview-rpc-set-list {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+.icon-rpc-preview {
+    color: $interactive;
+    font-size: 18px;
+
+    &:hover {
+        color: $interactive-hover;
+    }
 }
