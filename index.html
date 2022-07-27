@@ -12,6 +12,11 @@
 
     <!-- link css -->
     <link rel="stylesheet" href="./style/index.css">
+
+    <!-- script -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <title>Document</title>
 </head>
 <body>
@@ -60,16 +65,44 @@
                         </button>
                     </div>
                     <div class="setting">
+                        <div class="setting-profile">
+                            <div class="tooltip">
+                                <i class="fas fa-question-circle icon-question"></i>
+                                <div class="tooltip-text blue right">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum eum sequi molestias fugit provident? Ratione, placeat eaque commodi sit quis quasi cumque fugiat deleniti eius cupiditate, mollitia ut, corporis dolorum.
+                                </div>
+                            </div>
+                            <label for="Profile">Profile Name</label>
+                            <input type="text" class="setting-profile-input">
+                        </div>
                         <div class="setting-details">
+                            <div class="tooltip">
+                                <i class="fas fa-question-circle icon-question"></i>
+                                <div class="tooltip-text blue right">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum eum sequi molestias fugit provident? Ratione, placeat eaque commodi sit quis quasi cumque fugiat deleniti eius cupiditate, mollitia ut, corporis dolorum.
+                                </div>
+                            </div>
                             <label for="Details">Details</label>
                             <input type="text" class="setting-details-input">
                         </div>
                         <div class="setting-state-party">
                             <div class="setting-state">
+                                <div class="tooltip">
+                                    <i class="fas fa-question-circle icon-question"></i>
+                                    <div class="tooltip-text blue right">
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum eum sequi molestias fugit provident? Ratione, placeat eaque commodi sit quis quasi cumque fugiat deleniti eius cupiditate, mollitia ut, corporis dolorum.
+                                    </div>
+                                </div>
                                 <label for="State">State</label>
                                 <input type="text" id="State" class="setting-state-input">
                             </div>
                             <div class="setting-party">
+                                <div class="tooltip">
+                                    <i class="fas fa-question-circle icon-question"></i>
+                                    <div class="tooltip-text blue right">
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum eum sequi molestias fugit provident? Ratione, placeat eaque commodi sit quis quasi cumque fugiat deleniti eius cupiditate, mollitia ut, corporis dolorum.
+                                    </div>
+                                </div>
                                 <div class="Party-1">
                                     <label for="Party">Party</label>
                                     <input type="number" id="Party" class="Party-input-1" min="0" value="0">
@@ -82,22 +115,153 @@
                         </div>
                         <div class="setting-large-image">
                             <div class="setting-large-image-url">
+                                <div class="tooltip">
+                                    <i class="fas fa-question-circle icon-question"></i>
+                                    <div class="tooltip-text blue right">
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum eum sequi molestias fugit provident? Ratione, placeat eaque commodi sit quis quasi cumque fugiat deleniti eius cupiditate, mollitia ut, corporis dolorum.
+                                    </div>
+                                </div>
                                 <label for="Large-image-url">Large image url</label>
                                 <input type="url" id="Large-image-url" class="setting-large-image-url-input" placeholder="eg. https://source.unsplash.com/random">
                             </div>
                             <div class="setting-large-image-text">
+                                <div class="tooltip">
+                                    <i class="fas fa-question-circle icon-question"></i>
+                                    <div class="tooltip-text blue right">
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum eum sequi molestias fugit provident? Ratione, placeat eaque commodi sit quis quasi cumque fugiat deleniti eius cupiditate, mollitia ut, corporis dolorum.
+                                    </div>
+                                </div>
                                 <label for="Large-image-text">Large image text</label>
                                 <input type="text" id="Large-image-text" class="setting-large-image-text-input" placeholder="eg. This is a large image">
                             </div>
                         </div>
                         <div class="setting-small-image">
                             <div class="setting-small-image-url">
+                                <div class="tooltip">
+                                    <i class="fas fa-question-circle icon-question"></i>
+                                    <div class="tooltip-text blue right">
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum eum sequi molestias fugit provident? Ratione, placeat eaque commodi sit quis quasi cumque fugiat deleniti eius cupiditate, mollitia ut, corporis dolorum.
+                                    </div>
+                                </div>
                                 <label for="small-image-url">Small image url</label>
                                 <input type="url" id="small-image-url" class="setting-small-image-url-input" placeholder="eg. https://source.unsplash.com/random">
                             </div>
                             <div class="setting-small-image-text">
+                                <div class="tooltip">
+                                    <i class="fas fa-question-circle icon-question"></i>
+                                    <div class="tooltip-text blue right">
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum eum sequi molestias fugit provident? Ratione, placeat eaque commodi sit quis quasi cumque fugiat deleniti eius cupiditate, mollitia ut, corporis dolorum.
+                                    </div>
+                                </div>
                                 <label for="small-image-text">Small image text</label>
                                 <input type="text" id="small-image-text" class="setting-small-image-text-input" placeholder="eg. This is a small image">
+                            </div>
+                        </div>
+                        <div class="setting-button-1">
+                            <div class="setting-btn-onoff">
+                                <div class="tooltip">
+                                    <i class="fas fa-question-circle icon-question"></i>
+                                    <div class="tooltip-text blue right">
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum eum sequi molestias fugit provident? Ratione, placeat eaque commodi sit quis quasi cumque fugiat deleniti eius cupiditate, mollitia ut, corporis dolorum.
+                                    </div>
+                                </div>
+                                <p class="">Button 1</p>
+                                <div class="switch-onoff-btn-1">
+                                    <input type="checkbox" id="switch" class="switch-input" />
+                                    <label for="switch" class="switch"></label>
+                                </div>
+                            </div>
+                            <div class="setting-btn-1-url-text">
+                                <div class="setting-btn-1-url">
+                                    <div class="tooltip">
+                                        <i class="fas fa-question-circle icon-question"></i>
+                                        <div class="tooltip-text blue right">
+                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum eum sequi molestias fugit provident? Ratione, placeat eaque commodi sit quis quasi cumque fugiat deleniti eius cupiditate, mollitia ut, corporis dolorum.
+                                        </div>
+                                    </div>
+                                    <label for="btn-1-url">URL</label>
+                                    <input type="url" name="btn-1-url" id="btn-1-url" class="setting-btn-1-url-input">
+                                </div>
+                                <div class="setting-btn-1-text">
+                                    <div class="tooltip">
+                                        <i class="fas fa-question-circle icon-question"></i>
+                                        <div class="tooltip-text blue right">
+                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum eum sequi molestias fugit provident? Ratione, placeat eaque commodi sit quis quasi cumque fugiat deleniti eius cupiditate, mollitia ut, corporis dolorum.
+                                        </div>
+                                    </div>
+                                    <label for="btn-1-text">Text</label>
+                                    <input type="text" name="btn-1-text" id="btn-1-text" class="setting-btn-1-text-input">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="setting-button-2">
+                            <div class="setting-btn-onoff">
+                                <div class="tooltip">
+                                    <i class="fas fa-question-circle icon-question"></i>
+                                    <div class="tooltip-text blue right">
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum eum sequi molestias fugit provident? Ratione, placeat eaque commodi sit quis quasi cumque fugiat deleniti eius cupiditate, mollitia ut, corporis dolorum.
+                                    </div>
+                                </div>
+                                <p class="">Button 2</p>
+                                <div class="switch-onoff-btn-2">
+                                    <input type="checkbox" id="switch" class="switch-input" />
+                                    <label for="switch" class="switch"></label>
+                                </div>
+                            </div>
+                            <div class="setting-btn-2-url-text">
+                                <div class="setting-btn-2-url">
+                                    <div class="tooltip">
+                                        <i class="fas fa-question-circle icon-question"></i>
+                                        <div class="tooltip-text blue right">
+                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum eum sequi molestias fugit provident? Ratione, placeat eaque commodi sit quis quasi cumque fugiat deleniti eius cupiditate, mollitia ut, corporis dolorum.
+                                        </div>
+                                    </div>
+                                    <label for="btn-2-url">URL</label>
+                                    <input type="url" name="btn-2-url" id="btn-2-url" class="setting-btn-2-url-input">
+                                </div>
+                                <div class="setting-btn-2-text">
+                                    <div class="tooltip">
+                                        <i class="fas fa-question-circle icon-question"></i>
+                                        <div class="tooltip-text blue right">
+                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum eum sequi molestias fugit provident? Ratione, placeat eaque commodi sit quis quasi cumque fugiat deleniti eius cupiditate, mollitia ut, corporis dolorum.
+                                        </div>
+                                    </div>
+                                    <label for="btn-2-text">Text</label>
+                                    <input type="text" name="btn-2-text" id="btn-2-text" class="setting-btn-2-text-input">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="setting-timestamp">
+                            <div class="setting-timestamp-title">
+                                <div class="tooltip">
+                                    <i class="fas fa-question-circle"></i>
+                                    <div class="tooltip-text blue right">
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum eum sequi molestias fugit provident? Ratione, placeat eaque commodi sit quis quasi cumque fugiat deleniti eius cupiditate, mollitia ut, corporis dolorum.
+                                    </div>
+                                </div>
+                                <p>Timestamp</p>
+                            </div>
+                            <div class="setting-timestamp-main">
+                                <div class="">
+                                    <input type="checkbox" name="" id="">
+                                    <label for="">None</label>
+                                </div>
+                                <div class="">
+                                    <input type="checkbox" name="" id="">
+                                    <label for="">Since RPC started</label>
+                                </div>
+                                <div class="">
+                                    <input type="checkbox" name="" id="">
+                                    <label for="">Since last presence update</label>
+                                </div>
+                                <div class="">
+                                    <input type="checkbox" name="" id="">
+                                    <label for="">Your local time</label>
+                                </div>
+                                <div class="">
+                                    <label for="">Custom</label>
+                                    <input type="datetime-local" name="" id="">
+                                </div>
                             </div>
                         </div>
                     </div>

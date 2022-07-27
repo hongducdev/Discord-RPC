@@ -44,3 +44,111 @@ ul, li {
 a {
   text-decoration: none;
 }
+
+.tooltip {
+  position: relative;
+  cursor: pointer;
+  display: inline-block;
+}
+.tooltip .tooltip-text {
+  position: absolute;
+  z-index: 10;
+  visibility: hidden;
+  border: none;
+  border-radius: 5px;
+  padding: 7px;
+  word-wrap: break-word;
+  text-align: center;
+}
+.tooltip .tooltip-text.black {
+  background-color: black;
+  color: white;
+  --tooltip-arrow-color: black;
+}
+.tooltip .tooltip-text.blue {
+  background-color: #7688d4;
+  color: white;
+  --tooltip-arrow-color: #7688d4;
+}
+.tooltip .tooltip-text.top {
+  width: fit-content;
+  bottom: 150%;
+  margin-left: -75%;
+}
+.tooltip .tooltip-text.bottom {
+  width: fit-content;
+  top: 150%;
+  margin-left: -75%;
+}
+.tooltip .tooltip-text.left {
+  top: -5px;
+  right: 110%;
+}
+.tooltip .tooltip-text.right {
+  width: 500px;
+  top: -5px;
+  left: 110%;
+}
+.tooltip .tooltip-text.top::after {
+  content: " ";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: var(--tooltip-arrow-color) transparent transparent transparent;
+}
+.tooltip .tooltip-text.bottom::after {
+  content: " ";
+  position: absolute;
+  bottom: 100%;
+  /* At the top of the tooltip */
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent var(--tooltip-arrow-color) transparent;
+}
+.tooltip .tooltip-text.left::after {
+  content: " ";
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  /* To the right of the tooltip */
+  margin-top: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent transparent var(--tooltip-arrow-color);
+}
+.tooltip .tooltip-text.right::after {
+  content: " ";
+  position: absolute;
+  top: 15%;
+  right: 100%;
+  /* To the left of the tooltip */
+  margin-top: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent var(--tooltip-arrow-color) transparent transparent;
+}
+.tooltip:hover .tooltip-text {
+  visibility: visible;
+  animation-name: openTooltip;
+  animation-duration: 250ms;
+  animation-fill-mode: linear;
+}
+
+@keyframes openTooltip {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.icon-question {
+  color: #b9bbbe;
+  margin-right: 10px;
+}

@@ -49,6 +49,125 @@ a {
   text-decoration: none;
 }
 
+.tooltip {
+  position: relative;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.tooltip .tooltip-text {
+  position: absolute;
+  z-index: 10;
+  visibility: hidden;
+  border: none;
+  border-radius: 5px;
+  padding: 7px;
+  word-wrap: break-word;
+  text-align: center;
+}
+
+.tooltip .tooltip-text.black {
+  background-color: black;
+  color: white;
+  --tooltip-arrow-color: black;
+}
+
+.tooltip .tooltip-text.blue {
+  background-color: #7688d4;
+  color: white;
+  --tooltip-arrow-color: #7688d4;
+}
+
+.tooltip .tooltip-text.top {
+  width: fit-content;
+  bottom: 150%;
+  margin-left: -75%;
+}
+
+.tooltip .tooltip-text.bottom {
+  width: fit-content;
+  top: 150%;
+  margin-left: -75%;
+}
+
+.tooltip .tooltip-text.left {
+  top: -5px;
+  right: 110%;
+}
+
+.tooltip .tooltip-text.right {
+  width: 500px;
+  top: -5px;
+  left: 110%;
+}
+
+.tooltip .tooltip-text.top::after {
+  content: " ";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: var(--tooltip-arrow-color) transparent transparent transparent;
+}
+
+.tooltip .tooltip-text.bottom::after {
+  content: " ";
+  position: absolute;
+  bottom: 100%;
+  /* At the top of the tooltip */
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent var(--tooltip-arrow-color) transparent;
+}
+
+.tooltip .tooltip-text.left::after {
+  content: " ";
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  /* To the right of the tooltip */
+  margin-top: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent transparent var(--tooltip-arrow-color);
+}
+
+.tooltip .tooltip-text.right::after {
+  content: " ";
+  position: absolute;
+  top: 15%;
+  right: 100%;
+  /* To the left of the tooltip */
+  margin-top: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent var(--tooltip-arrow-color) transparent transparent;
+}
+
+.tooltip:hover .tooltip-text {
+  visibility: visible;
+  animation-name: openTooltip;
+  animation-duration: 250ms;
+  animation-fill-mode: linear;
+}
+
+@keyframes openTooltip {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.icon-question {
+  color: #b9bbbe;
+  margin-right: 10px;
+}
+
 .root {
   background-color: rgb(54, 57, 63);
   width: 100vw;
@@ -605,14 +724,17 @@ a {
   width: 100%;
   padding: 10px;
   border-radius: 10px;
-  min-height: 630px;
+  max-height: 630px;
+  overflow-x: auto;
 }
 
 .setting label {
   color: #b9bbbe;
 }
 
-.setting input {
+.setting input[type=text],
+.setting input[type=number],
+.setting input[type=url] {
   height: 50px;
   border: 1px solid rgba(0, 0, 0, 0.3);
   border-radius: 5px;
@@ -621,7 +743,9 @@ a {
   background-color: rgba(0, 0, 0, 0.1);
   color: #b9bbbe;
 }
-.setting input:focus {
+.setting input[type=text]:focus,
+.setting input[type=number]:focus,
+.setting input[type=url]:focus {
   border-color: #4768ff;
 }
 
@@ -719,6 +843,93 @@ a {
 .setting-small-image-url-input,
 .setting-small-image-text-input {
   width: 100%;
+}
+
+.setting-profile {
+  padding-bottom: 10px;
+}
+
+.setting-profile label {
+  padding-right: 10px;
+}
+
+.switch {
+  position: relative;
+  cursor: pointer;
+  width: 4rem;
+  height: 2rem;
+  display: block;
+  margin: 0 auto;
+  overflow: hidden;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  background: #000;
+  border-radius: 100rem;
+  transition: background-color 0.25s linear;
+}
+
+.switch:after {
+  content: "";
+  position: absolute;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 4rem;
+  background-color: #fff;
+  top: 4px;
+  left: 5px;
+  transition: background-color 0.25s linear, transform 0.25s linear;
+}
+
+.switch-input {
+  display: none;
+}
+
+.switch-input:checked + .switch {
+  background-color: #6a5af9;
+}
+
+.switch-input:checked + .switch:after {
+  transform: translateX(2rem);
+  background-color: white;
+}
+
+.setting-btn-onoff {
+  margin-top: 20px;
+  color: #b9bbbe;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.setting-btn-1-url-text {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-top: 10px;
+}
+
+.setting-btn-1-url label,
+.setting-btn-1-text label {
+  padding-right: 10px;
+}
+
+.setting-btn-2-url-text {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-top: 10px;
+}
+
+.setting-btn-2-url label,
+.setting-btn-2-text label {
+  padding-right: 10px;
+}
+
+.setting-timestamp-title {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  color: #b9bbbe;
+  gap: 10px;
 }
 
 /*# sourceMappingURL=index.css.map */
