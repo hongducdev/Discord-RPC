@@ -49,6 +49,10 @@ a {
   text-decoration: none;
 }
 
+.root {
+  overflow-y: hidden;
+}
+
 .tooltip {
   position: relative;
   cursor: pointer;
@@ -725,7 +729,8 @@ a {
   padding: 10px;
   border-radius: 10px;
   max-height: 630px;
-  overflow-x: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .setting label {
@@ -734,6 +739,7 @@ a {
 
 .setting input[type=text],
 .setting input[type=number],
+.setting input[type=datetime-local],
 .setting input[type=url] {
   height: 50px;
   border: 1px solid rgba(0, 0, 0, 0.3);
@@ -745,6 +751,7 @@ a {
 }
 .setting input[type=text]:focus,
 .setting input[type=number]:focus,
+.setting input[type=datetime-local]:focus,
 .setting input[type=url]:focus {
   border-color: #4768ff;
 }
@@ -933,7 +940,7 @@ a {
 }
 
 .setting-name-appID {
-  display: none;
+  display: flex;
   align-items: center;
   gap: 10px;
   margin-bottom: 10px;
