@@ -1,0 +1,46 @@
+{
+    "DISCORD_EMPLOYEE": {
+        "url": "https://discord.com/assets/48d5bdcffe9e7848067c2e187f1ef951.svg",
+        "popup": "Discord Staff"
+    },
+    "PARTNERED_SERVER_OWNER": {
+        "url": "https://discord.com/assets/34306011e46e87f8ef25f3415d3b99ca.svg",
+        "popup": "Partnered Server Owner"
+    },
+    "DISCORD_CERTIFIED_MODERATOR": {
+        "url": "https://discord.com/assets/c981e58b5ea4b7fedd3a643cf0c60564.svg",
+        "popup": "Discord Certified Moderator"
+    },
+    "HYPESQUAD_EVENTS": {
+        "url": "https://discord.com/assets/e666a84a7a5ea2abbbfa73adf22e627b.svg",
+        "popup": "HypeSquad Events"
+    },
+    "HOUSE_BRAVERY": {
+        "url": "https://discord.com/assets/efcc751513ec434ea4275ecda4f61136.svg",
+        "popup": "HypeSquad Bravery"
+    },
+    "HOUSE_BRILLIANCE": {
+        "url": "https://discord.com/assets/ec8e92568a7c8f19a052ef42f862ff18.svg",
+        "popup": "HypeSquad Brilliance"
+    },
+    "HOUSE_BALANCE": {
+        "url": "https://discord.com/assets/9f00b18e292e10fc0ae84ff5332e8b0b.svg",
+        "popup": "HypeSquad Balance"
+    },
+    "BUGHUNTER_LEVEL_1": {
+        "url": "https://discord.com/assets/8353d89b529e13365c415aef08d1d1f4.svg",
+        "popup": "Discord Bug Hunter"
+    },
+    "BUGHUNTER_LEVEL_2": {
+        "url": "https://discord.com/assets/f599063762165e0d23e8b11b684765a8.svg",
+        "popup": "Discord Bug Hunter"
+    },
+    "EARLY_VERIFIED_BOT_DEVELOPER": {
+        "url": "https://discord.com/assets/4441e07fe0f46b3cb41b79366236fca6.svg",
+        "popup": "Early Verified Bot Developer"
+    },
+    "EARLY_SUPPORTER": {
+        "url": "https://discord.com/assets/b802e9af134ff492276d94220e36ec5c.svg",
+        "popup": "Early Supporter"
+    }
+}

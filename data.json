@@ -1,0 +1,21 @@
+{
+    "language": "en",
+    "profile": {
+        "aiko": {
+            "name": "",
+            "type": "",
+            "application_id": "",
+            "url": "",
+            "state": "",
+            "details": "",
+            "party": {},
+            "timestamps": {},
+            "assets": {},
+            "buttons": []
+        },
+        "pinkduwc": {}
+    },
+    "devtool": true,
+    "background": null,
+    "check_for_update": true
+}

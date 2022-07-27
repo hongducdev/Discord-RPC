@@ -1,0 +1,29 @@
+{
+    "exit": {
+        "title": "Confirm",
+        "message": "Are you sure you want to exit the application?",
+        "buttons": [
+            "Yes",
+            "No"
+        ]
+    },
+    "minimize": {
+        "title": "NyanRPC is running in background",
+        "body": "You can close the application in the taskbar"
+    },
+    "tray": {
+        "hide": "Hide App",
+        "show": "Show App",
+        "exit": "Quit"
+    },
+    "html": {
+        "profile": {
+            "save": "Save",
+            "delete": "Delete"
+        },
+        "login": {
+            "self": "Selfbot",
+            "app": "Application ID (Discord App)"
+        }
+    }
+}
