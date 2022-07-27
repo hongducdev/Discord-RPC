@@ -342,7 +342,7 @@ a {
 .preview {
   width: 30%;
   background-color: #18191c;
-  min-height: 707px;
+  min-height: 625px;
   height: 100%;
   border-radius: 10px;
 }
@@ -459,14 +459,12 @@ a {
   transform: translateX(-50%);
 }
 
-.preview-about,
 .preview-rpc {
   margin-top: 15px;
   color: #b9bbbe;
   padding: 0 24px;
 }
 
-.preview-about-title,
 .preview-rpc-title {
   text-transform: uppercase;
   font-weight: 700;
