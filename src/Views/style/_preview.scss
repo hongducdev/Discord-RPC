@@ -1,7 +1,7 @@
 .preview {
     width: 30%;
     background-color: $background-floating;
-    min-height: 707px;
+    min-height: 625px;
     height: 100%;
     border-radius: 10px;
 }
@@ -119,14 +119,12 @@
     transform: translateX(-50%);
 }
 
-.preview-about,
 .preview-rpc {
     margin-top: 15px;
     color: $interactive;
     padding: 0 24px;
 }
 
-.preview-about-title,
 .preview-rpc-title {
     text-transform: uppercase;
     font-weight: 700;

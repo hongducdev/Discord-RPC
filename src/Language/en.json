@@ -19,11 +19,112 @@
     "html": {
         "profile": {
             "save": "Save",
-            "delete": "Delete"
+            "delete": "Delete",
+            "name": {
+                "title": "Profile Name",
+                "message": "Enter a name for this profile"
+            }
         },
         "login": {
             "self": "Selfbot",
-            "app": "Application ID (Discord App)"
+            "app": "Application ID (Discord App)",
+            "login": "Login",
+            "item": "Select Item"
+        },
+        "rpc": {
+            "name": {
+                "title": "Name",
+                "message": "Application Name - Only for Selfbot"
+            },
+            "appid": {
+                "title": "Application ID",
+                "message": "Application ID - Only for Selfbot"
+            },
+            "details": {
+                "title": "Details",
+                "message": "RPC Details"
+            },
+            "state": {
+                "title": "State",
+                "message": "RPC State"
+            },
+            "party": {
+                "title": "Party",
+                "message": "RPC Party (min , max)",
+                "of": "of"
+            },
+            "asset": {
+                "large": {
+                    "image": {
+                        "title": "Large Image",
+                        "message": "Large Image URL, AssetID, AssetName"
+                    },
+                    "text": {
+                        "title": "Large Text",
+                        "message": "Large Text (Hover)"
+                    }
+                },
+                "small": {
+                    "image": {
+                        "title": "Small Image",
+                        "message": "Small Image URL, AssetID, AssetName"
+                    },
+                    "text": {
+                        "title": "Small Text",
+                        "message": "Small Text (Hover)"
+                    }
+                }
+            },
+            "button1": {
+                "message": "Add buttons to the RPC",
+                "title": "Button 1",
+                "url": {
+                    "title": "URL",
+                    "message": "Button URL"
+                },
+                "text": {
+                    "title": "Text",
+                    "message": "Button Text"
+                }
+            },
+            "button2": {
+                "message": "Add buttons to the RPC",
+                "title": "Button 2",
+                "url": {
+                    "title": "URL",
+                    "message": "Button URL"
+                },
+                "text": {
+                    "title": "Text",
+                    "message": "Button Text"
+                }
+            },
+            "time": {
+                "title": "Timestamp",
+                "message": "{Time} elapsed since the start of the RPC",
+                "options": {
+                    "off": "None",
+                    "app": "Since NyanRPC started",
+                    "update": "Since last presence update",
+                    "local": "Your local time (Time Sync)",
+                    "custom": "Custom"
+                }
+            }
+        },
+        "preview": {
+            "type": "PLAYING A GAME",
+            "name": "Visual Studio Code",
+            "details": "Edit client.js",
+            "state": "Workspace: NyanRPC",
+            "time": "elapsed",
+            "asset": {
+                "large": "This is a large image",
+                "small": "This is a small image"
+            }
+        },
+        "app": {
+            "update": "Update RPC",
+            "stop": "Stop"
         }
     }
 }

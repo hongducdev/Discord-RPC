@@ -1,10 +1,13 @@
 console.log('Back-end by aiko-chan-ai');
+// Regex filter LanguageCode
 const regex = /(?<=>)(\s*)(JSON=\S+)(\s*)(?=<\/)/gim;
+// Load Language
 const loadLang = async (langcode = 'en') => {
     const res = await axios.get(`${document.URL.replace('/rpc', '')}/src/Language/${langcode}.json`);
     console.log(res.data, typeof res.data);
     return res.data;
 }
+// Replace UI Language
 async function replaceAll(lang_ = 'en') {
     let body_ = $('body').html();
     const matches = body_.match(regex).map(text => text.replace(/\s+/gim, '').split('</')[0]);
@@ -22,6 +25,7 @@ async function replaceAll(lang_ = 'en') {
     });
     $('body').html(body_);
 }
+// convert string object path
 const getValuefromObjectString = (obj, str) => {
     const keySplit = str.split('.');
     const result = obj[keySplit[0]];
@@ -30,3 +34,11 @@ const getValuefromObjectString = (obj, str) => {
     }
     return result;
 }
+// Replace Image
+const convertImgToSVG = async (imageLink) => {
+    const res = await axios.get(imageLink);
+    return res.data;
+}
+$(document).ready(async () => {
+    await replaceAll();
+});
