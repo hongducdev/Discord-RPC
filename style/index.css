@@ -932,4 +932,11 @@ a {
   gap: 10px;
 }
 
+.setting-name-appID {
+  display: none;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
 /*# sourceMappingURL=index.css.map */

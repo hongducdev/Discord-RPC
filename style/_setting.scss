@@ -210,3 +210,11 @@
     color: $interactive;
     gap: 10px;
 }
+
+.setting-name-appID {
+    // display: flex;
+    display: none;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
