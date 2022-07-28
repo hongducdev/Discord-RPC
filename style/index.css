@@ -79,12 +79,16 @@ a {
 }
 
 .tooltip .tooltip-text.top {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
   width: fit-content;
   bottom: 150%;
   margin-left: -75%;
 }
 
 .tooltip .tooltip-text.bottom {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
   width: fit-content;
   top: 150%;
   margin-left: -75%;
@@ -150,9 +154,21 @@ a {
 
 .tooltip:hover .tooltip-text {
   visibility: visible;
-  animation-name: openTooltip;
-  animation-duration: 250ms;
-  animation-fill-mode: linear;
+  -webkit-animation-name: openTooltip;
+          animation-name: openTooltip;
+  -webkit-animation-duration: 250ms;
+          animation-duration: 250ms;
+  -webkit-animation-fill-mode: linear;
+          animation-fill-mode: linear;
+}
+
+@-webkit-keyframes openTooltip {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes openTooltip {
@@ -214,63 +230,6 @@ a {
 
 .login-setting {
   width: 70%;
-}
-
-.saved {
-  background-color: #2f3136;
-  width: 100%;
-  padding: 10px;
-  border-radius: 10px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.profile-list {
-  display: flex;
-  gap: 10px;
-}
-
-.profile {
-  background-color: #97cdfc;
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  cursor: pointer;
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 30px;
-}
-
-.profile-edit {
-  display: flex;
-  gap: 10px;
-}
-
-.save-profile {
-  color: white;
-  font-weight: 500;
-  background-color: #38e654;
-  padding: 10px 30px;
-  border-radius: 5px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-}
-
-.del-profile {
-  color: white;
-  font-weight: 500;
-  background-color: #ff3a3b;
-  padding: 10px 30px;
-  border-radius: 5px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
 }
 
 .login {
@@ -419,6 +378,8 @@ a {
 }
 
 .preview-flag-tooltip .preview-flag-tooltip__text.top {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
   width: fit-content;
   bottom: 105%;
   margin-left: -285%;
@@ -437,9 +398,12 @@ a {
 
 .preview-flag-tooltip:hover .preview-flag-tooltip__text {
   visibility: visible;
-  animation-name: openTooltip;
-  animation-duration: 250ms;
-  animation-fill-mode: linear;
+  -webkit-animation-name: openTooltip;
+          animation-name: openTooltip;
+  -webkit-animation-duration: 250ms;
+          animation-duration: 250ms;
+  -webkit-animation-fill-mode: linear;
+          animation-fill-mode: linear;
 }
 
 @keyframes openTooltip {
@@ -534,6 +498,8 @@ a {
 }
 
 .rpc-img-large .rpc-image-large-text.top {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
   width: fit-content;
   bottom: 90%;
   margin-left: -65%;
@@ -552,9 +518,12 @@ a {
 
 .rpc-img-large:hover .rpc-image-large-text {
   visibility: visible;
-  animation-name: openTooltip;
-  animation-duration: 250ms;
-  animation-fill-mode: linear;
+  -webkit-animation-name: openTooltip;
+          animation-name: openTooltip;
+  -webkit-animation-duration: 250ms;
+          animation-duration: 250ms;
+  -webkit-animation-fill-mode: linear;
+          animation-fill-mode: linear;
 }
 
 @keyframes openTooltip {
@@ -570,7 +539,8 @@ a {
   height: 80px;
   image-resolution: contain;
   background-size: cover;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   border-radius: 12px;
 }
 
@@ -603,6 +573,8 @@ a {
 }
 
 .rpc-img-small .rpc-image-small-text.top {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
   width: fit-content;
   bottom: 90%;
   margin-left: -5%;
@@ -620,6 +592,8 @@ a {
 }
 
 .rpc-img-small .rpc-image-small-text.bottom {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
   width: fit-content;
   top: 250%;
   margin-left: -5%;
@@ -639,9 +613,12 @@ a {
 
 .rpc-img-small:hover .rpc-image-small-text {
   visibility: visible;
-  animation-name: openTooltip;
-  animation-duration: 250ms;
-  animation-fill-mode: linear;
+  -webkit-animation-name: openTooltip;
+          animation-name: openTooltip;
+  -webkit-animation-duration: 250ms;
+          animation-duration: 250ms;
+  -webkit-animation-fill-mode: linear;
+          animation-fill-mode: linear;
 }
 
 .rpc-image-small {
@@ -649,7 +626,8 @@ a {
   height: 30px;
   image-resolution: contain;
   background-size: cover;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   border-radius: 50%;
   border: 2px solid #18191c;
   position: absolute;
@@ -1018,6 +996,4 @@ a {
 .setting-appID input,
 .setting-name input {
   width: 100%;
-}
-
-/*# sourceMappingURL=index.css.map */
+}/*# sourceMappingURL=index.css.map */

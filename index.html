@@ -1,56 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- google font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
 
     <!-- Default -->
-    <!-- <link rel="stylesheet" href="./style/index.css">
+    <link rel="stylesheet" href="./style/index.css" />
+    <link rel="stylesheet" href="./style/chrome.css" />
+    <script src="https://unpkg.com/draggabilly@2.2.0/dist/draggabilly.pkgd.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <title>Document</title> -->
-
-
-    <!-- App only header -->
-    <link rel="stylesheet" href="./src/Views/style/index.css" />
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="./src/Views/index.js"></script>
-    <title>NyanRPC - v2.0</title>
+    <script src="./js/chrome-tabs.js"></script>
+    <script src="./js/index.js"></script>
+    <title>Document</title>
 </head>
+
 <body>
     <div class="root">
         <div class="container">
-            <div class="saved">
-                <ul class="profile-list">
-                    <li class="profile profile-1">
-                        T
-                    </li>
-                    <li class="profile profile-plus">
-                        <i class="fas fa-plus"></i>
-                    </li>
-                </ul>
-                <ul class="profile-edit">
-                    <li class="save-profile">
-                        JSON=profile.save
-                    </li>
-                    <li class="del-profile">
-                        JSON=profile.delete
-                    </li>
-                </ul>
+         <div class="saved">
+        <!-- Chrome tabs -->
+          <div class="chrome-tabs" style="--tab-content-margin: 9px">
+          <div class="chrome-tabs-content">
+            <div class="chrome-tab">
+              <div class="chrome-tab-dividers"></div>
+              <div class="chrome-tab-background">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg"><defs><symbol id="chrome-tab-geometry-left" viewBox="0 0 214 36"><path d="M17 0h197v36H0v-2c4.5 0 9-3.5 9-8V8c0-4.5 3.5-8 8-8z"/></symbol><symbol id="chrome-tab-geometry-right" viewBox="0 0 214 36"><use xlink:href="#chrome-tab-geometry-left"/></symbol><clipPath id="crop"><rect class="mask" width="100%" height="100%" x="0"/></clipPath></defs><svg width="52%" height="100%"><use xlink:href="#chrome-tab-geometry-left" width="214" height="36" class="chrome-tab-geometry"/></svg><g transform="scale(-1, 1)"><svg width="52%" height="100%" x="-100%" y="0"><use xlink:href="#chrome-tab-geometry-right" width="214" height="36" class="chrome-tab-geometry"/></svg></g></svg>
+              </div>
+              <div class="chrome-tab-content">
+                <div class="chrome-tab-favicon" style="background-image: url('demo/images/google-favicon.ico')"></div>
+                <div class="chrome-tab-title">Google</div>
+                <div class="chrome-tab-drag-handle"></div>
+                <div class="chrome-tab-close"></div>
+              </div>
+            </div>
+            <div class="chrome-tab" active>
+              <div class="chrome-tab-dividers"></div>
+              <div class="chrome-tab-background">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg"><defs><symbol id="chrome-tab-geometry-left" viewBox="0 0 214 36"><path d="M17 0h197v36H0v-2c4.5 0 9-3.5 9-8V8c0-4.5 3.5-8 8-8z"/></symbol><symbol id="chrome-tab-geometry-right" viewBox="0 0 214 36"><use xlink:href="#chrome-tab-geometry-left"/></symbol><clipPath id="crop"><rect class="mask" width="100%" height="100%" x="0"/></clipPath></defs><svg width="52%" height="100%"><use xlink:href="#chrome-tab-geometry-left" width="214" height="36" class="chrome-tab-geometry"/></svg><g transform="scale(-1, 1)"><svg width="52%" height="100%" x="-100%" y="0"><use xlink:href="#chrome-tab-geometry-right" width="214" height="36" class="chrome-tab-geometry"/></svg></g></svg>
+              </div>
+              <div class="chrome-tab-content">
+                <div class="chrome-tab-favicon" style="background-image: url('demo/images/facebook-favicon.ico')"></div>
+                <div class="chrome-tab-title">Facebook</div>
+                <div class="chrome-tab-drag-handle"></div>
+                <div class="chrome-tab-close"></div>
+              </div>
+            </div>
+          </div>
+          <div class="chrome-tabs-bottom-bar"></div>
+          <!-- Styles to prevent flash after JS initialization -->
+          <style>
+            .chrome-tabs .chrome-tab {
+              width: 258px
+            }
+
+            .chrome-tabs .chrome-tab:nth-child(1) {
+              transform: translate3d(0px, 0, 0)
+            }
+
+            .chrome-tabs .chrome-tab:nth-child(2) {
+              transform: translate3d(239px, 0, 0)
+            }
+          </style>
+        </div>
+        <div class="chrome-tabs-optional-shadow-below-bottom-bar"></div>
+        <div class="mock-browser-content">
+          <div class="buttons">
+            <button data-theme-toggle>Toggle dark theme</button>
+            <button data-add-tab>Add new tab</button>
+            <button data-add-background-tab>Add tab in the background</button>
+            <button data-remove-tab>Remove active tab</button>
+          </div>
+        </div>
             </div>
             <div class="main">
                 <div class="login-setting">
                     <div class="login">
-                        <input type="text" class="login-id" placeholder="ID">
+                        <input type="text" class="login-id" placeholder="ID" />
                         <div class="dropdown">
                             <div class="dropdown-select">
                                 <span class="select">
@@ -67,9 +102,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button class="login-btn">
-                            JSON=login.login
-                        </button>
+                        <button class="login-btn">JSON=login.login</button>
                     </div>
                     <div class="setting">
                         <div class="setting-profile">
@@ -80,7 +113,7 @@
                                 </div>
                             </div>
                             <label for="Profile">JSON=profile.name.title</label>
-                            <input type="text" class="setting-profile-input">
+                            <input type="text" class="setting-profile-input" />
                         </div>
                         <div class="setting-name-appID">
                             <div class="setting-name">
@@ -91,7 +124,7 @@
                                     </div>
                                 </div>
                                 <label for="name">JSON=rpc.name.title</label>
-                                <input type="text" class="setting-name-input" placeholder="Visual Studio Code">
+                                <input type="text" class="setting-name-input" placeholder="Visual Studio Code" />
                             </div>
                             <div class="setting-appID">
                                 <div class="tooltip">
@@ -101,7 +134,7 @@
                                     </div>
                                 </div>
                                 <label for="appID">JSON=rpc.appid.title</label>
-                                <input type="text" class="setting-appID-input">
+                                <input type="text" class="setting-appID-input" />
                             </div>
                         </div>
                         <div class="setting-details">
@@ -112,7 +145,7 @@
                                 </div>
                             </div>
                             <label for="Details">JSON=rpc.details.title</label>
-                            <input type="text" class="setting-details-input" placeholder="Edit client.js">
+                            <input type="text" class="setting-details-input" placeholder="Edit client.js" />
                         </div>
                         <div class="setting-state-party">
                             <div class="setting-state">
@@ -123,7 +156,8 @@
                                     </div>
                                 </div>
                                 <label for="State">JSON=rpc.state.title</label>
-                                <input type="text" id="State" class="setting-state-input" placeholder="Workspace: NyanRPC">
+                                <input type="text" id="State" class="setting-state-input"
+                                    placeholder="Workspace: NyanRPC" />
                             </div>
                             <div class="setting-party">
                                 <div class="tooltip">
@@ -134,11 +168,11 @@
                                 </div>
                                 <div class="Party-1">
                                     <label for="Party">JSON=rpc.party.title</label>
-                                    <input type="number" id="Party" class="Party-input-1" min="0" value="0" max="999">
+                                    <input type="number" id="Party" class="Party-input-1" min="0" value="0" max="999" />
                                 </div>
                                 <div class="Party-2">
                                     <label for="of-party">JSON=rpc.party.of</label>
-                                    <input type="number" name="" id="" min="0" value="0" class="Party-input-2">
+                                    <input type="number" name="" id="" min="0" value="0" class="Party-input-2" />
                                 </div>
                             </div>
                         </div>
@@ -151,7 +185,8 @@
                                     </div>
                                 </div>
                                 <label for="Large-image-url">JSON=rpc.asset.large.image.title</label>
-                                <input type="url" id="Large-image-url" class="setting-large-image-url-input" placeholder="eg. https://source.unsplash.com/random">
+                                <input type="url" id="Large-image-url" class="setting-large-image-url-input"
+                                    placeholder="eg. https://source.unsplash.com/random" />
                             </div>
                             <div class="setting-large-image-text">
                                 <div class="tooltip">
@@ -161,7 +196,8 @@
                                     </div>
                                 </div>
                                 <label for="Large-image-text">JSON=rpc.asset.large.text.title</label>
-                                <input type="text" id="Large-image-text" class="setting-large-image-text-input" placeholder="eg. This is a large image">
+                                <input type="text" id="Large-image-text" class="setting-large-image-text-input"
+                                    placeholder="eg. This is a large image" />
                             </div>
                         </div>
                         <div class="setting-small-image">
@@ -173,7 +209,8 @@
                                     </div>
                                 </div>
                                 <label for="small-image-url">JSON=rpc.asset.small.image.title</label>
-                                <input type="url" id="small-image-url" class="setting-small-image-url-input" placeholder="eg. https://source.unsplash.com/random">
+                                <input type="url" id="small-image-url" class="setting-small-image-url-input"
+                                    placeholder="eg. https://source.unsplash.com/random" />
                             </div>
                             <div class="setting-small-image-text">
                                 <div class="tooltip">
@@ -183,7 +220,8 @@
                                     </div>
                                 </div>
                                 <label for="small-image-text">JSON=rpc.asset.small.text.title</label>
-                                <input type="text" id="small-image-text" class="setting-small-image-text-input" placeholder="eg. This is a small image">
+                                <input type="text" id="small-image-text" class="setting-small-image-text-input"
+                                    placeholder="eg. This is a small image" />
                             </div>
                         </div>
                         <div class="setting-button-1">
@@ -209,7 +247,7 @@
                                         </div>
                                     </div>
                                     <label for="btn-1-url">JSON=rpc.button1.url.title</label>
-                                    <input type="url" name="btn-1-url" id="btn-1-url" class="setting-btn-1-url-input">
+                                    <input type="url" name="btn-1-url" id="btn-1-url" class="setting-btn-1-url-input" />
                                 </div>
                                 <div class="setting-btn-1-text">
                                     <div class="tooltip">
@@ -219,7 +257,8 @@
                                         </div>
                                     </div>
                                     <label for="btn-1-text">JSON=rpc.button1.text.title</label>
-                                    <input type="text" name="btn-1-text" id="btn-1-text" class="setting-btn-1-text-input">
+                                    <input type="text" name="btn-1-text" id="btn-1-text"
+                                        class="setting-btn-1-text-input" />
                                 </div>
                             </div>
                         </div>
@@ -246,7 +285,7 @@
                                         </div>
                                     </div>
                                     <label for="btn-2-url">JSON=rpc.button2.url.title</label>
-                                    <input type="url" name="btn-2-url" id="btn-2-url" class="setting-btn-2-url-input">
+                                    <input type="url" name="btn-2-url" id="btn-2-url" class="setting-btn-2-url-input" />
                                 </div>
                                 <div class="setting-btn-2-text">
                                     <div class="tooltip">
@@ -256,7 +295,8 @@
                                         </div>
                                     </div>
                                     <label for="btn-2-text">JSON=rpc.button2.text.title</label>
-                                    <input type="text" name="btn-2-text" id="btn-2-text" class="setting-btn-2-text-input">
+                                    <input type="text" name="btn-2-text" id="btn-2-text"
+                                        class="setting-btn-2-text-input" />
                                 </div>
                             </div>
                         </div>
@@ -272,24 +312,24 @@
                             </div>
                             <div class="setting-timestamp-main">
                                 <div class="">
-                                    <input type="checkbox" name="" id="">
+                                    <input type="checkbox" name="" id="" />
                                     <label for="">JSON=rpc.time.options.off</label>
                                 </div>
                                 <div class="">
-                                    <input type="checkbox" name="" id="">
+                                    <input type="checkbox" name="" id="" />
                                     <label for="">JSON=rpc.time.options.app</label>
                                 </div>
                                 <div class="">
-                                    <input type="checkbox" name="" id="">
+                                    <input type="checkbox" name="" id="" />
                                     <label for="">JSON=rpc.time.options.update</label>
                                 </div>
                                 <div class="">
-                                    <input type="checkbox" name="" id="">
+                                    <input type="checkbox" name="" id="" />
                                     <label for="">JSON=rpc.time.options.local</label>
                                 </div>
                                 <div class="">
                                     <label for="">JSON=rpc.time.options.custom</label>
-                                    <input type="datetime-local" name="" id="">
+                                    <input type="datetime-local" name="" id="" />
                                 </div>
                             </div>
                         </div>
@@ -300,7 +340,7 @@
                     <div class="preview-thum-avt">
                         <div class="preview-thum"></div>
                         <div class="preview-avt">
-                            <img src="https://cdn.discordapp.com/embed/avatars/0.png" alt="">
+                            <img src="https://cdn.discordapp.com/embed/avatars/0.png" alt="" />
                         </div>
                     </div>
                     <div class="preview-flag">
@@ -315,12 +355,8 @@
                     </div>
                     <div class="preview-info">
                         <div class="preview-name">
-                            <h2 class="preview-username">
-                                Discord
-                            </h2>
-                            <span class="preview-tag">
-                                #0000
-                            </span>
+                            <h2 class="preview-username">Discord</h2>
+                            <span class="preview-tag"> #0000 </span>
                         </div>
                     </div>
                     <div class="preview-harizontal"></div>
@@ -332,13 +368,13 @@
                             <div class="rpc-main">
                                 <div class="rpc-image">
                                     <div class="rpc-img-large">
-                                        <img src="https://source.unsplash.com/random" alt="" class="rpc-image-large">
+                                        <img src="https://source.unsplash.com/random" alt="" class="rpc-image-large" />
                                         <p class="rpc-image-large-text top blue">
                                             JSON=preview.asset.large
                                         </p>
                                     </div>
                                     <div class="rpc-img-small">
-                                        <img src="https://source.unsplash.com/random" alt="" class="rpc-image-small">
+                                        <img src="https://source.unsplash.com/random" alt="" class="rpc-image-small" />
                                         <p class="rpc-image-small-text bottom blue">
                                             JSON=preview.asset.small
                                         </p>
@@ -354,27 +390,46 @@
                                     <p class="rpc-content-3">
                                         Workspace: NyanRPC
                                     </p>
-                                    <p class="rpc-content-4" id="preview_time">
-                                    </p>
+                                    <p class="rpc-content-4" id="preview_time"></p>
                                 </div>
                             </div>
                             <div class="rpc-button">
-                                <button class="rpc-btn-1">JSON=rpc.button1.text.title</button>
-                                <button class="rpc-btn-2">JSON=rpc.button2.text.title</button>
+                                <button class="rpc-btn-1">
+                                    JSON=rpc.button1.text.title
+                                </button>
+                                <button class="rpc-btn-2">
+                                    JSON=rpc.button2.text.title
+                                </button>
                             </div>
                         </div>
                         <div class="preview-rpc-button">
-                            <button class="launch-rpc-btn">JSON=app.update</button>
-                            <button class="stop-rpc-btn">JSON=app.stop</button>
+                            <button class="launch-rpc-btn">
+                                JSON=app.update
+                            </button>
+                            <button class="stop-rpc-btn">
+                                JSON=app.stop
+                            </button>
                         </div>
                         <div class="preview-rpc-bar">
                             <ul class="preview-rpc-set-list">
-                                <li><a href=""><i class="fas fa-donate icon-rpc-preview"></i></a></li>
-                                <li><a href=""><i class="fab fa-discord icon-rpc-preview"></i></a></li>
-                                <li><a href=""><i class="fab fa-github icon-rpc-preview"></i></a></li>
-                                <li><a href=""><i class="fas fa-globe icon-rpc-preview"></i></a></li>
-                                <li><a href=""><i class="fas fa-question-circle icon-rpc-preview"></i></a></li>
-                                <li><a href=""><i class="fas fa-cog icon-rpc-preview"></i></a></li>
+                                <li>
+                                    <a href=""><i class="fas fa-donate icon-rpc-preview"></i></a>
+                                </li>
+                                <li>
+                                    <a href=""><i class="fab fa-discord icon-rpc-preview"></i></a>
+                                </li>
+                                <li>
+                                    <a href=""><i class="fab fa-github icon-rpc-preview"></i></a>
+                                </li>
+                                <li>
+                                    <a href=""><i class="fas fa-globe icon-rpc-preview"></i></a>
+                                </li>
+                                <li>
+                                    <a href=""><i class="fas fa-question-circle icon-rpc-preview"></i></a>
+                                </li>
+                                <li>
+                                    <a href=""><i class="fas fa-cog icon-rpc-preview"></i></a>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -386,4 +441,5 @@
     <!-- font awesome -->
     <script src="https://kit.fontawesome.com/7dd86c08e8.js" crossorigin="anonymous"></script>
 </body>
+
 </html>
