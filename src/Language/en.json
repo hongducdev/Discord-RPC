@@ -113,9 +113,6 @@
         },
         "preview": {
             "type": "PLAYING A GAME",
-            "name": "Visual Studio Code",
-            "details": "Edit client.js",
-            "state": "Workspace: NyanRPC",
             "time": "elapsed",
             "asset": {
                 "large": "This is a large image",
@@ -125,6 +122,10 @@
         "app": {
             "update": "Update RPC",
             "stop": "Stop"
+        },
+        "error": {
+            "maxprofiles": "You can only have up to 10 profiles",
+            "": ""
         }
     }
 }

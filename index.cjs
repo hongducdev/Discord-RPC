@@ -122,15 +122,18 @@ async function start() {
 	await nyanRPC.start();
     //
     nyanRPC.app.io.on('connection', (socket) => {
+		console.log('Loaded SocketIO');
 		// Load Event
 		function_.default.loadEvent(
 			{
 				nyan: nyanRPC,
+				eval: (await_ = true, command) => { return eval(await_ ? `(async() => {${command}} )()` : command) }
 			},
 			socket,
 			'SocketIO',
 			true,
 		);
+		socket.emit('ready');
 	});
 	mainWindow.loadURL('http://localhost:' + nyanRPC.port + '/rpc');
 	if (!app.isPackaged) mainWindow.webContents.openDevTools();

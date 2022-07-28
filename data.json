@@ -9,9 +9,11 @@
             "state": "",
             "details": "",
             "party": {},
-            "timestamps": {},
+            "timestamps": 0,
             "assets": {},
-            "buttons": []
+            "buttons": [],
+            "mode": 1,
+            "token": ""
         },
         "pinkduwc": {}
     },
