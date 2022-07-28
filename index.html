@@ -11,33 +11,35 @@
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- Default -->
-    <!-- <link rel="stylesheet" href="./style/index.css">
+    <link rel="stylesheet" href="./style/index.css">
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <title>Document</title> -->
+    <title>Document</title>
 
 
     <!-- App only header -->
-    <link rel="stylesheet" href="./src/Views/style/index.css" />
+    <!-- <link rel="stylesheet" href="./src/Views/style/index.css" />
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="./src/Views/index.js"></script>
-    <title>NyanRPC - v2.0</title>
+    <title>NyanRPC - v2.0</title> -->
 </head>
 <body>
     <div class="root">
         <div class="container">
             <div class="saved">
-                <ul class="profile-list">
-                    <li class="profile profile-1">
-                        T
-                    </li>
-                    <li class="profile profile-plus">
+                <div class="profile-control">
+                    <ul class="profile-list">
+                        <li class="profile profile-1">
+                            T
+                        </li>
+                    </ul>
+                    <div class="profile profile-plus">
                         <i class="fas fa-plus"></i>
-                    </li>
-                </ul>
+                    </div>
+                </div>
                 <ul class="profile-edit">
                     <li class="save-profile">
                         JSON=profile.save
@@ -233,8 +235,8 @@
                                 </div>
                                 <p class="">JSON=rpc.button2.title</p>
                                 <div class="switch-onoff-btn-2">
-                                    <input type="checkbox" id="switch" class="switch-input" />
-                                    <label for="switch" class="switch"></label>
+                                    <input type="checkbox" id="switch-2" class="switch-input" />
+                                    <label for="switch-2" class="switch"></label>
                                 </div>
                             </div>
                             <div class="setting-btn-2-url-text">
@@ -385,5 +387,6 @@
 
     <!-- font awesome -->
     <script src="https://kit.fontawesome.com/7dd86c08e8.js" crossorigin="anonymous"></script>
+    <script src="./index.js"></script>
 </body>
 </html>

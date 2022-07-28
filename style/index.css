@@ -222,12 +222,16 @@ a {
   padding: 10px;
   border-radius: 10px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+}
+
+.profile-control {
+  display: flex;
 }
 
 .profile-list {
   display: flex;
+  justify-content: flex-start;
   gap: 10px;
 }
 
@@ -244,8 +248,13 @@ a {
   font-size: 30px;
 }
 
+.profile-plus {
+  margin-left: 10px;
+}
+
 .profile-edit {
   display: flex;
+  margin-left: auto;
   gap: 10px;
 }
 
