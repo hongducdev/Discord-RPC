@@ -96,7 +96,7 @@ a {
 }
 
 .tooltip .tooltip-text.right {
-  width: 500px;
+  max-width: 500px;
   top: -5px;
   left: 110%;
 }
@@ -139,7 +139,7 @@ a {
 .tooltip .tooltip-text.right::after {
   content: " ";
   position: absolute;
-  top: 15%;
+  top: 30%;
   right: 100%;
   /* To the left of the tooltip */
   margin-top: -5px;
@@ -166,6 +166,28 @@ a {
 .icon-question {
   color: #b9bbbe;
   margin-right: 10px;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #2e3338;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #202225;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #202225;
 }
 
 .root {
@@ -723,7 +745,7 @@ a {
   width: 100%;
   padding: 10px;
   border-radius: 10px;
-  max-height: 630px;
+  max-height: 545px;
   overflow-y: auto;
   overflow-x: hidden;
 }
@@ -752,7 +774,7 @@ a {
 }
 
 .setting-details {
-  width: 70%;
+  width: 100%;
   display: flex;
   align-items: center;
   margin-bottom: 10px;
@@ -767,13 +789,14 @@ a {
 }
 
 .setting-state-party {
+  width: 100%;
   display: flex;
   align-items: center;
   gap: 20px;
 }
 
 .setting-state {
-  width: 40%;
+  width: 50%;
   display: flex;
   align-items: center;
   margin-bottom: 10px;
@@ -791,11 +814,12 @@ a {
   display: flex;
   align-items: center;
   gap: 10px;
+  width: 50%;
 }
 
 .Party-1,
 .Party-2 {
-  width: 40%;
+  width: 50%;
   display: flex;
   align-items: center;
   margin-bottom: 10px;
@@ -808,13 +832,13 @@ a {
 
 .Party-input-1,
 .Party-input-2 {
-  width: 60%;
+  width: 100%;
 }
 
 .setting-large-image-url,
 .setting-large-image-text {
   margin-bottom: 10px;
-  width: 70%;
+  width: 100%;
   display: flex;
   align-items: center;
 }
@@ -832,7 +856,7 @@ a {
 .setting-small-image-url,
 .setting-small-image-text {
   margin-bottom: 10px;
-  width: 70%;
+  width: 100%;
   display: flex;
   align-items: center;
 }
@@ -849,10 +873,17 @@ a {
 
 .setting-profile {
   padding-bottom: 10px;
+  width: 100%;
+  display: flex;
+  align-items: center;
 }
 
 .setting-profile label {
   padding-right: 10px;
+}
+
+.setting-profile input {
+  width: 100%;
 }
 
 .switch {
@@ -907,6 +938,7 @@ a {
   align-items: center;
   gap: 20px;
   margin-top: 10px;
+  width: 100%;
 }
 
 .setting-btn-1-url label,
@@ -914,16 +946,41 @@ a {
   padding-right: 10px;
 }
 
+.setting-btn-1-url,
+.setting-btn-1-text {
+  width: 50%;
+  display: flex;
+  align-items: center;
+}
+
+.setting-btn-1-url input,
+.setting-btn-1-text input {
+  width: 100%;
+}
+
 .setting-btn-2-url-text {
   display: flex;
   align-items: center;
   gap: 20px;
   margin-top: 10px;
+  width: 100%;
 }
 
 .setting-btn-2-url label,
 .setting-btn-2-text label {
   padding-right: 10px;
+}
+
+.setting-btn-2-url,
+.setting-btn-2-text {
+  width: 50%;
+  display: flex;
+  align-items: center;
+}
+
+.setting-btn-2-url input,
+.setting-btn-2-text input {
+  width: 100%;
 }
 
 .setting-timestamp-title {
@@ -943,6 +1000,24 @@ a {
   align-items: center;
   gap: 10px;
   margin-bottom: 10px;
+  width: 100%;
+}
+
+.setting-appID,
+.setting-name {
+  width: 50%;
+  display: flex;
+  align-items: center;
+}
+
+.setting-appID label,
+.setting-name label {
+  margin-right: 10px;
+}
+
+.setting-appID input,
+.setting-name input {
+  width: 100%;
 }
 
 /*# sourceMappingURL=index.css.map */
