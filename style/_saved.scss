@@ -29,6 +29,19 @@
     justify-content: center;
     align-items: center;
     font-size: 30px;
+    position: relative;
+}
+
+// active profile
+.profile.active::after {
+    content: "";
+    position: absolute;
+    background-color: $interactive;
+    width: 30px;
+    height: 5px;
+    bottom: -10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
 }
 
 .profile-plus {
