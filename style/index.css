@@ -231,6 +231,14 @@ a {
   transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
 }
 
+.dropdown-list.disable {
+  display: none;
+}
+
+.dropdown-list.disable .dropdown-select {
+  background-color: #202225;
+}
+
 .dropdown-list__item {
   padding: 10px;
   font-size: 14px;
