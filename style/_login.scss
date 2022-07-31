@@ -24,61 +24,6 @@
     }
 }
 
-.dropdown {
-    width: 30%;
-    position: relative;
-}
-
-.dropdown:hover .dropdown-list {
-    opacity: 1;
-    visibility: visible;
-}
-
-.dropdown-select {
-    height: 50px;
-    padding: 10px;
-    border-radius: 5px;
-    background-color: #2a2c30;
-    border: 1px solid rgba(0, 0, 0, 0.3);
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 14px;
-    cursor: pointer;
-    color: $interactive;
-
-    &:focus,
-    &:hover {
-        border-color: $primary;
-    }
-}
-
-.dropdown-list {
-    border-radius: 5px;
-    background-color: #2a2c30;
-    color: $interactive;
-    position: absolute;
-    top: 110%;
-    left: 0;
-    right: 0;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
-}
-
-.dropdown-list__item {
-    padding: 10px;
-    font-size: 14px;
-    cursor: pointer;
-}
-
-.dropdown-list__item:hover {
-    background-color: $primary;
-    color: white;
-    border-radius: 5px;
-}
-
 .login-btn {
     width: 30%;
     background-color: $primary;

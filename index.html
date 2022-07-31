@@ -54,18 +54,18 @@
                 <div class="login-setting">
                     <div class="login">
                         <input type="text" class="login-id" placeholder="ID">
-                        <div class="dropdown">
-                            <div class="dropdown-select">
-                                <span class="select">
+                        <div class="dropdown dropdown-login">
+                            <div class="dropdown-select dropdown-select-login">
+                                <span class="select select-login">
                                     JSON=login.item
                                 </span>
                                 <i class="fa fa-caret-down icon"></i>
                             </div>
-                            <div class="dropdown-list">
-                                <div class="dropdown-list__item">
+                            <div class="dropdown-list dropdown-list-login">
+                                <div class="dropdown-list__item dropdown-list__item-login">
                                     JSON=login.app
                                 </div>
-                                <div class="dropdown-list__item">
+                                <div class="dropdown-list__item dropdown-list__item-login">
                                     JSON=login.self
                                 </div>
                             </div>
@@ -274,26 +274,35 @@
                                 <p>JSON=rpc.time.title</p>
                             </div>
                             <div class="setting-timestamp-main">
-                                <div class="">
-                                    <input type="checkbox" name="" id="">
-                                    <label for="">JSON=rpc.time.options.off</label>
+                                <div class="dropdown dropdown-timestamp">
+                                    <div class="dropdown-select dropdown-select-timestamp">
+                                        <span class="select select-timestamp">
+                                            JSON=login.item
+                                        </span>
+                                        <i class="fa fa-caret-down icon"></i>
+                                    </div>
+                                    <div class="dropdown-list dropdown-list-timestamp">
+                                        <div class="dropdown-list__item dropdown-list__item-timestamp">
+                                            JSON=rpc.time.options.off
+                                        </div>
+                                        <div class="dropdown-list__item dropdown-list__item-timestamp">
+                                            JSON=rpc.time.options.app
+                                        </div>
+                                        <div class="dropdown-list__item dropdown-list__item-timestamp">
+                                            JSON=rpc.time.options.update
+                                        </div>
+                                        <div class="dropdown-list__item dropdown-list__item-timestamp">
+                                            JSON=rpc.time.options.local
+                                        </div>
+                                        <div class="dropdown-list__item dropdown-list__item-timestamp">
+                                            JSON=rpc.time.options.custom
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="">
-                                    <input type="checkbox" name="" id="">
-                                    <label for="">JSON=rpc.time.options.app</label>
-                                </div>
-                                <div class="">
-                                    <input type="checkbox" name="" id="">
-                                    <label for="">JSON=rpc.time.options.update</label>
-                                </div>
-                                <div class="">
-                                    <input type="checkbox" name="" id="">
-                                    <label for="">JSON=rpc.time.options.local</label>
-                                </div>
-                                <div class="">
+                                <!-- <div class="">
                                     <label for="">JSON=rpc.time.options.custom</label>
                                     <input type="datetime-local" name="" id="">
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>
