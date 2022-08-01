@@ -52,7 +52,9 @@ function createTray(minimize = false) {
 	tray.setContextMenu(contextMenu);
 }
 
-function loadFile(devMode = false, writeData) {
+function loadFile(devMode, writeData) {
+	console.log(app.getPath('userData'));
+	devMode = !app.isPackaged;
 	const pathFolder = path.resolve(app.getPath('userData'), 'NyanRPCdata');
 	// if no folder => make folder
 	if (!fs.existsSync(pathFolder) && !devMode) {
@@ -64,7 +66,7 @@ function loadFile(devMode = false, writeData) {
 	//
 	let defaultData = {
 		language: 'en',
-		profile: {},
+		profile: [],
 		devtool: true,
 		background: null,
 		check_for_update: true,
@@ -93,7 +95,7 @@ async function start() {
 	const config = (await import('./config.js')).default;
 	const indexApp = await import('./src/index.js');
     const function_ = (await import('./src/Utils/functions.js'));
-	const nyanRPC = new indexApp.NyanRPC();
+	const nyanRPC = new indexApp.NyanRPC(app.isPackaged);
     //
 	console.log(config);
 	lang = loadLanguage(data_.language);
@@ -115,7 +117,7 @@ async function start() {
 			contextIsolation: true,
 			nodeIntegration: true,
 			enableRemoteModule: true,
-			devTools: !app.isPackaged ? true : data_?.devtoolEnable ?? false,
+			// devTools: !app.isPackaged ? true : data_?.devtoolEnable ?? false,
 			preload: path.resolve(app.getAppPath(), 'preload.cjs'),
 		},
 	});
@@ -127,11 +129,16 @@ async function start() {
 		function_.default.loadEvent(
 			{
 				nyan: nyanRPC,
-				eval: (await_ = true, command) => { return eval(await_ ? `(async() => {${command}} )()` : command) }
+				eval: (await_ = true, command) => {
+					return eval(
+						await_ ? `(async() => {${command}} )()` : command,
+					);
+				},
 			},
 			socket,
 			'SocketIO',
 			true,
+			app.isPackaged,
 		);
 		socket.emit('ready');
 	});
@@ -171,6 +178,11 @@ async function start() {
 	});
 
 	mainWindow.webContents.on('will-navigate', function (e, url) {
+		if (
+			url == `${'http://localhost:' + nyanRPC.port + '/dino'}` ||
+			url == `${'http://localhost:' + nyanRPC.port + '/rpc'}`
+		)
+			return mainWindow.loadURL(url);
 		e.preventDefault();
 		electron.shell.openExternal(url);
 	});

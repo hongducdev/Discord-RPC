@@ -25,8 +25,14 @@ app.use(
 );
 
 app.use(cors());
-
-app.use(express.static(path.resolve('.')));
+let pathCorrect_ = path.resolve('.', 'resources', 'app');
+// check if path exists
+if (!fs.existsSync(pathCorrect_)) {
+	pathCorrect_ = path.resolve(
+		'.',
+	);
+}
+app.use(express.static(pathCorrect_));
 
 const eventTable = new ascii(`Express Routes Status`);
 eventTable.setHeading(
@@ -35,43 +41,51 @@ eventTable.setHeading(
 	chalk.bold.blueBright('File'),
 	chalk.bold.greenBright('Status'),
 );
+let pathCorrect = path.resolve('.', 'src', 'Express', 'routes');
+// check if path exists
+if (!fs.existsSync(pathCorrect)) {
+	pathCorrect = path.resolve(
+		'.',
+		'resources',
+		'app',
+		'src',
+		'Express',
+		'routes',
+	);
+}
 
-for await (const folder of fs.readdirSync(
-	path.resolve('.', 'src', 'Express', 'routes'),
-)) {
+for await (const folder of fs.readdirSync(pathCorrect)) {
 	const type = folder;
 	await Promise.all(
-		fs
-			.readdirSync(path.resolve('.', 'src', 'Express', 'routes', type))
-			.map(async (file) => {
-				const route = file;
-				try {
-					const routeFile = (
-						await import(`./routes/${type}/${route}`)
-					).default;
-					app[type](`${routeFile.path}`, routeFile.run);
-					eventTable.addRow(
-						chalk.bold.magentaBright(type.toUpperCase()),
-						chalk.bold.yellowBright(routeFile.path),
-						chalk.bold.cyanBright(file),
-						chalk.bold.greenBright('✔'),
-					);
-				} catch (e) {
-					eventTable.addRow(
-						chalk.bold.magentaBright(type.toUpperCase()),
-						chalk.bold.yellowBright('?'),
-						chalk.bold.cyanBright(file),
-						chalk.bold.redBright(e.message),
-					);
-				}
-			}),
+		fs.readdirSync(path.resolve(pathCorrect, type)).map(async (file) => {
+			const route = file;
+			try {
+				const routeFile = (
+					await import(`./routes/${type}/${route}`)
+				).default;
+				app[type](`${routeFile.path}`, routeFile.run);
+				eventTable.addRow(
+					chalk.bold.magentaBright(type.toUpperCase()),
+					chalk.bold.yellowBright(routeFile.path),
+					chalk.bold.cyanBright(file),
+					chalk.bold.greenBright('✔'),
+				);
+			} catch (e) {
+				eventTable.addRow(
+					chalk.bold.magentaBright(type.toUpperCase()),
+					chalk.bold.yellowBright('?'),
+					chalk.bold.cyanBright(file),
+					chalk.bold.redBright(e.message),
+				);
+			}
+		}),
 	);
 }
 
 console.log(eventTable.toString());
 
 export default {
-    express: app,
-    http: http,
-    io: io,
+	express: app,
+	http: http,
+	io: io,
 };

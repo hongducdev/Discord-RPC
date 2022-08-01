@@ -1,23 +1,66 @@
 {
-    "language": "en",
-    "profile": {
-        "aiko": {
-            "name": "",
-            "type": "",
-            "application_id": "",
-            "url": "",
-            "state": "",
-            "details": "",
-            "party": {},
-            "timestamps": 0,
-            "assets": {},
-            "buttons": [],
-            "mode": 1,
-            "token": ""
+  "language": "en",
+  "profile": [
+    {
+      "profile": "aiko",
+      "name": "",
+      "type": "",
+      "application_id": "817229550684471297",
+      "url": "",
+      "state": "state",
+      "details": "detail",
+      "party": {
+        "min": "99",
+        "max": "0"
+      },
+      "timestamps": null,
+      "assets": {
+        "large_text": "",
+        "large_image": "",
+        "small_text": "",
+        "small_image": ""
+      },
+      "buttons": [
+        {
+          "url": "",
+          "text": ""
         },
-        "pinkduwc": {}
+        {
+          "url": "",
+          "text": ""
+        }
+      ],
+      "mode": 1,
+      "token": ""
     },
-    "devtool": true,
-    "background": null,
-    "check_for_update": true
+    {
+      "profile": "New Profile",
+      "name": "",
+      "type": "",
+      "application_id": "817229550684471297",
+      "url": "",
+      "state": "",
+      "details": "",
+      "party": {
+        "min": "0",
+        "max": ""
+      },
+      "timestamps": null,
+      "assets": {
+        "large_text": "",
+        "large_image": "",
+        "small_text": "",
+        "small_image": ""
+      },
+      "buttons": [
+        {},
+        {}
+      ],
+      "mode": 1,
+      "token": ""
+    }
+  ],
+  "devtool": true,
+  "background": null,
+  "check_for_update": true
 }

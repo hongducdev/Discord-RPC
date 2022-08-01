@@ -1,6 +1,6 @@
 {
   "name": "rpcapps",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Simple Discord RPC Client ~nya",
   "build": {
     "appId": "NyanRPC",
@@ -10,12 +10,12 @@
       "target": [
         "nsis"
       ],
-      "icon": "assets/img/icon.ico",
+      "icon": "src/Assets/icon.ico",
       "legalTrademarks": "GitHub"
     },
     "nsis": {
-      "installerIcon": "assets/img/icon.ico",
-      "uninstallerIcon": "assets/img/exe.ico",
+      "installerIcon": "src/Assets/icon.ico",
+      "uninstallerIcon": "src/Assets/icon.ico",
       "uninstallDisplayName": "${productName} ${version}",
       "license": "license.txt",
       "multiLanguageInstaller": false,
@@ -29,15 +29,14 @@
       "menuCategory": false
     }
   },
-  "main": "index.js",
+  "main": "index.cjs",
   "type": "module",
   "scripts": {
     "test": "npm i && npm run download && npm run build && pause",
     "start": "electron index.cjs",
     "download": "npm i -g electron electron-builder",
-    "buildPortable": "electron-packager . nyan --overwrite --asar=true --platform=win32 --arch=x64 --electronVersion=18.0.4  --icon=assets/img/icon.ico --prune=true --out=release-builds --version-string.CompanyName=Aiko  --version-string.FileDescription=A Discord RPC product  --version-string.ProductName=\"NyanRPC\"",
-    "build": "electron-builder",
-    "build:css": "tailwindcss -i ./src/Views/input.css -o ./src/Views/output.css --watch"
+    "buildPortable": "electron-packager . nyan --overwrite --platform=win32 --arch=x64 --electronVersion=18.0.4  --icon=src/Assets/icon.ico --prune=true --out=release-builds --version-string.CompanyName=Aiko  --version-string.FileDescription=A Discord RPC product  --version-string.ProductName=\"NyanRPC\"",
+    "build": "electron-builder"
   },
   "keywords": [],
   "author": "",
@@ -48,13 +47,13 @@
     "chalk": "^5.0.1",
     "cors": "^2.8.5",
     "discord-rpc": "^4.0.1",
-    "discord.js-selfbot-v13": "^2.4.2",
+    "discord.js-selfbot-v13": "^2.4.7",
     "express": "^4.18.1",
     "path": "^0.12.7",
     "socket.io": "^4.5.1",
     "url": "^0.11.0"
   },
   "devDependencies": {
-    "electron": "^19.0.8"
+    "electron": "^19.0.10"
   }
 }

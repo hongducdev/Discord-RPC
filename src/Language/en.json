@@ -29,6 +29,7 @@
             "self": "Selfbot",
             "app": "Application ID (Discord App)",
             "login": "Login",
+            "logout": "Logout",
             "item": "Select Item"
         },
         "rpc": {
@@ -125,7 +126,22 @@
         },
         "error": {
             "maxprofiles": "You can only have up to 10 profiles",
-            "": ""
+            "profile_login_valid_id": "Invalid Discord Application ID",
+            "profile_login_valid_token": "Invalid Discord TOKEN",
+            "login": [
+                "Whoa! You are not logged in to Discord!",
+                "Please login to Discord and try again, baka",
+                "Heh, you can't login to Discord without a token / Application ID, baka"
+            ]
+        },
+        "confirm": {
+            "delete": "Are you sure you want to delete this profile?",
+            "deleted": "Profile deleted !",
+            "logout": "Are you sure you want to logout RPC?"
+        },
+        "success": {
+            "stop": "Clear Presence successfully",
+            "save": "Save data successfully"
         }
     }
 }

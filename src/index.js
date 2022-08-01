@@ -11,16 +11,18 @@ import RPC from 'discord-rpc';
 import * as Discord from 'discord.js-selfbot-v13';
 
 export class NyanRPC {
-	constructor() {
+	constructor(packaged) {
 		// Object.defineProperty(this, 'electron', { value: electron });
 		this.port = functions.random(4500, 5000);
 		this.app = app;
 		this._rpcClient = new RPC.Client({ transport: 'ipc' });
-		this._selfClient = new Discord.Client();
+		this._selfClient = new Discord.Client({ DMSync: false });
+		this.client = null;
+		this.packaged = packaged;
 	}
 	// Load event
 	_loadNodeEvent() {
-		functions.loadEvent(this, process, 'Nodejs', false);
+		functions.loadEvent(this, process, 'Nodejs', false, this.packaged);
 	}
 	// Start port
 	_testPort(i = 0) {
@@ -40,5 +42,11 @@ export class NyanRPC {
 	start() {
 		this._loadNodeEvent();
 		return this._testPort();
+	}
+
+	refresh() {
+		this.client = null;
+		this._rpcClient = new RPC.Client({ transport: 'ipc' });
+		this._selfClient = new Discord.Client({ DMSync: false });
 	}
 }

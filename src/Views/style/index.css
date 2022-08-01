@@ -79,12 +79,16 @@ a {
 }
 
 .tooltip .tooltip-text.top {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
   width: fit-content;
   bottom: 150%;
   margin-left: -75%;
 }
 
 .tooltip .tooltip-text.bottom {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
   width: fit-content;
   top: 150%;
   margin-left: -75%;
@@ -150,9 +154,21 @@ a {
 
 .tooltip:hover .tooltip-text {
   visibility: visible;
-  animation-name: openTooltip;
-  animation-duration: 250ms;
-  animation-fill-mode: linear;
+  -webkit-animation-name: openTooltip;
+          animation-name: openTooltip;
+  -webkit-animation-duration: 250ms;
+          animation-duration: 250ms;
+  -webkit-animation-fill-mode: linear;
+          animation-fill-mode: linear;
+}
+
+@-webkit-keyframes openTooltip {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes openTooltip {
@@ -188,6 +204,67 @@ a {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #202225;
+}
+
+.dropdown {
+  width: 30%;
+  position: relative;
+}
+
+.dropdown:hover .dropdown-list {
+  opacity: 1;
+  visibility: visible;
+}
+
+.dropdown-select {
+  height: 50px;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #2a2c30;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  cursor: pointer;
+  color: #b9bbbe;
+}
+.dropdown-select:focus, .dropdown-select:hover {
+  border-color: #b9bbbe;
+}
+
+.dropdown-list {
+  border-radius: 5px;
+  background-color: #2a2c30;
+  color: #b9bbbe;
+  position: absolute;
+  top: 110%;
+  left: 0;
+  right: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+
+.dropdown-list.disable {
+  display: none;
+}
+
+.dropdown-list.disable .dropdown-select {
+  background-color: #202225;
+}
+
+.dropdown-list__item {
+  padding: 10px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.dropdown-list__item:hover {
+  background-color: #4768ff;
+  color: white;
+  border-radius: 5px;
 }
 
 .root {
@@ -246,6 +323,18 @@ a {
   justify-content: center;
   align-items: center;
   font-size: 30px;
+  position: relative;
+}
+
+.profile.active::after {
+  content: "";
+  position: absolute;
+  background-color: #b9bbbe;
+  width: 30px;
+  height: 5px;
+  bottom: -10px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 
 .profile-plus {
@@ -305,59 +394,6 @@ a {
 }
 .login-id:focus {
   border-color: #4768ff;
-}
-
-.dropdown {
-  width: 30%;
-  position: relative;
-}
-
-.dropdown:hover .dropdown-list {
-  opacity: 1;
-  visibility: visible;
-}
-
-.dropdown-select {
-  height: 50px;
-  padding: 10px;
-  border-radius: 5px;
-  background-color: #2a2c30;
-  border: 1px solid rgba(0, 0, 0, 0.3);
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 14px;
-  cursor: pointer;
-  color: #b9bbbe;
-}
-.dropdown-select:focus, .dropdown-select:hover {
-  border-color: #4768ff;
-}
-
-.dropdown-list {
-  border-radius: 5px;
-  background-color: #2a2c30;
-  color: #b9bbbe;
-  position: absolute;
-  top: 110%;
-  left: 0;
-  right: 0;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
-}
-
-.dropdown-list__item {
-  padding: 10px;
-  font-size: 14px;
-  cursor: pointer;
-}
-
-.dropdown-list__item:hover {
-  background-color: #4768ff;
-  color: white;
-  border-radius: 5px;
 }
 
 .login-btn {
@@ -428,6 +464,8 @@ a {
 }
 
 .preview-flag-tooltip .preview-flag-tooltip__text.top {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
   width: fit-content;
   bottom: 105%;
   margin-left: -285%;
@@ -446,9 +484,12 @@ a {
 
 .preview-flag-tooltip:hover .preview-flag-tooltip__text {
   visibility: visible;
-  animation-name: openTooltip;
-  animation-duration: 250ms;
-  animation-fill-mode: linear;
+  -webkit-animation-name: openTooltip;
+          animation-name: openTooltip;
+  -webkit-animation-duration: 250ms;
+          animation-duration: 250ms;
+  -webkit-animation-fill-mode: linear;
+          animation-fill-mode: linear;
 }
 
 @keyframes openTooltip {
@@ -543,6 +584,8 @@ a {
 }
 
 .rpc-img-large .rpc-image-large-text.top {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
   width: fit-content;
   bottom: 90%;
   margin-left: -65%;
@@ -561,9 +604,12 @@ a {
 
 .rpc-img-large:hover .rpc-image-large-text {
   visibility: visible;
-  animation-name: openTooltip;
-  animation-duration: 250ms;
-  animation-fill-mode: linear;
+  -webkit-animation-name: openTooltip;
+          animation-name: openTooltip;
+  -webkit-animation-duration: 250ms;
+          animation-duration: 250ms;
+  -webkit-animation-fill-mode: linear;
+          animation-fill-mode: linear;
 }
 
 @keyframes openTooltip {
@@ -579,7 +625,8 @@ a {
   height: 80px;
   image-resolution: contain;
   background-size: cover;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   border-radius: 12px;
 }
 
@@ -612,6 +659,8 @@ a {
 }
 
 .rpc-img-small .rpc-image-small-text.top {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
   width: fit-content;
   bottom: 90%;
   margin-left: -5%;
@@ -629,6 +678,8 @@ a {
 }
 
 .rpc-img-small .rpc-image-small-text.bottom {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
   width: fit-content;
   top: 250%;
   margin-left: -5%;
@@ -648,9 +699,12 @@ a {
 
 .rpc-img-small:hover .rpc-image-small-text {
   visibility: visible;
-  animation-name: openTooltip;
-  animation-duration: 250ms;
-  animation-fill-mode: linear;
+  -webkit-animation-name: openTooltip;
+          animation-name: openTooltip;
+  -webkit-animation-duration: 250ms;
+          animation-duration: 250ms;
+  -webkit-animation-fill-mode: linear;
+          animation-fill-mode: linear;
 }
 
 .rpc-image-small {
@@ -658,7 +712,8 @@ a {
   height: 30px;
   image-resolution: contain;
   background-size: cover;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   border-radius: 50%;
   border: 2px solid #18191c;
   position: absolute;
@@ -698,6 +753,10 @@ a {
 .rpc-btn-1:hover,
 .rpc-btn-2:hover {
   background-color: rgba(79, 84, 92, 0.1607843137);
+}
+.rpc-btn-1.hidden,
+.rpc-btn-2.hidden {
+  opacity: 0;
 }
 
 .preview-rpc-button {
@@ -1029,4 +1088,10 @@ a {
   width: 100%;
 }
 
-/*# sourceMappingURL=index.css.map */
+.setting-timestamp-main {
+  margin-top: 10px;
+}
+
+.dropdown-timestamp {
+  margin-bottom: 10px;
+}/*# sourceMappingURL=index.css.map */
