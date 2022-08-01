@@ -719,6 +719,10 @@ a {
 .rpc-btn-2:hover {
   background-color: rgba(79, 84, 92, 0.1607843137);
 }
+.rpc-btn-1.hidden,
+.rpc-btn-2.hidden {
+  opacity: 0;
+}
 
 .preview-rpc-button {
   margin-top: 30px;
