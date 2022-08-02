@@ -1,0 +1,53 @@
+.modal__github__content {
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 100px;
+}
+
+.github-hongduc {
+    text-align: center;
+
+    & img {
+        width: 200px;
+        height: 200px;
+        background-position: center;
+        background-size: cover;
+        border-radius: 50%;
+        margin-bottom: 20px;
+    }
+
+    & a {
+        color: white;
+        font-weight: 600;
+        font-size: 24px;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
+.github-shiraori {
+    text-align: center;
+
+    & img {
+        width: 200px;
+        height: 200px;
+        background-position: center;
+        background-size: cover;
+        border-radius: 50%;
+        margin-bottom: 20px;
+    }
+
+    & a {
+        color: white;
+        font-weight: 600;
+        font-size: 24px;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}

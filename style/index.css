@@ -80,16 +80,12 @@ a {
 }
 
 .tooltip .tooltip-text.top {
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
   width: fit-content;
   bottom: 150%;
   margin-left: -75%;
 }
 
 .tooltip .tooltip-text.bottom {
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
   width: fit-content;
   top: 150%;
   margin-left: -75%;
@@ -155,21 +151,9 @@ a {
 
 .tooltip:hover .tooltip-text {
   visibility: visible;
-  -webkit-animation-name: openTooltip;
-          animation-name: openTooltip;
-  -webkit-animation-duration: 250ms;
-          animation-duration: 250ms;
-  -webkit-animation-fill-mode: linear;
-          animation-fill-mode: linear;
-}
-
-@-webkit-keyframes openTooltip {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  animation-name: openTooltip;
+  animation-duration: 250ms;
+  animation-fill-mode: linear;
 }
 
 @keyframes openTooltip {
@@ -277,6 +261,83 @@ a {
   background-color: rgba(0, 0, 0, 0.7);
   display: none;
   position: fixed;
+}
+
+.btn {
+  background-color: #4768ff;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.modal {
+  position: absolute;
+  z-index: 30;
+  background-color: #2f3136;
+  min-width: 700px;
+  height: 500px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 15px;
+}
+
+.modal__control {
+  position: relative;
+  background-color: #dbdbdb;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal__control__bar {
+  position: absolute;
+  left: 10px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.modal__control__close {
+  background-color: #ff6059;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  color: #ff6059;
+  font-size: 10px;
+}
+.modal__control__close:hover .modal__control__close__icon {
+  color: white;
+}
+
+.modal__control__yellow {
+  background-color: #ffca2e;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.modal__control__green {
+  background-color: #28c941;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.modal__control__content {
+  color: #b9bbbe;
+  padding: 20px;
 }
 
 .root {
@@ -476,8 +537,6 @@ a {
 }
 
 .preview-flag-tooltip .preview-flag-tooltip__text.top {
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
   width: fit-content;
   bottom: 105%;
   margin-left: -285%;
@@ -496,12 +555,9 @@ a {
 
 .preview-flag-tooltip:hover .preview-flag-tooltip__text {
   visibility: visible;
-  -webkit-animation-name: openTooltip;
-          animation-name: openTooltip;
-  -webkit-animation-duration: 250ms;
-          animation-duration: 250ms;
-  -webkit-animation-fill-mode: linear;
-          animation-fill-mode: linear;
+  animation-name: openTooltip;
+  animation-duration: 250ms;
+  animation-fill-mode: linear;
 }
 
 @keyframes openTooltip {
@@ -596,8 +652,6 @@ a {
 }
 
 .rpc-img-large .rpc-image-large-text.top {
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
   width: fit-content;
   bottom: 90%;
   margin-left: -65%;
@@ -616,12 +670,9 @@ a {
 
 .rpc-img-large:hover .rpc-image-large-text {
   visibility: visible;
-  -webkit-animation-name: openTooltip;
-          animation-name: openTooltip;
-  -webkit-animation-duration: 250ms;
-          animation-duration: 250ms;
-  -webkit-animation-fill-mode: linear;
-          animation-fill-mode: linear;
+  animation-name: openTooltip;
+  animation-duration: 250ms;
+  animation-fill-mode: linear;
 }
 
 @keyframes openTooltip {
@@ -637,8 +688,7 @@ a {
   height: 80px;
   image-resolution: contain;
   background-size: cover;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   border-radius: 12px;
 }
 
@@ -671,8 +721,6 @@ a {
 }
 
 .rpc-img-small .rpc-image-small-text.top {
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
   width: fit-content;
   bottom: 90%;
   margin-left: -5%;
@@ -690,8 +738,6 @@ a {
 }
 
 .rpc-img-small .rpc-image-small-text.bottom {
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
   width: fit-content;
   top: 250%;
   margin-left: -5%;
@@ -711,12 +757,9 @@ a {
 
 .rpc-img-small:hover .rpc-image-small-text {
   visibility: visible;
-  -webkit-animation-name: openTooltip;
-          animation-name: openTooltip;
-  -webkit-animation-duration: 250ms;
-          animation-duration: 250ms;
-  -webkit-animation-fill-mode: linear;
-          animation-fill-mode: linear;
+  animation-name: openTooltip;
+  animation-duration: 250ms;
+  animation-fill-mode: linear;
 }
 
 .rpc-image-small {
@@ -724,8 +767,7 @@ a {
   height: 30px;
   image-resolution: contain;
   background-size: cover;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   border-radius: 50%;
   border: 2px solid #18191c;
   position: absolute;
@@ -1184,4 +1226,156 @@ a {
   display: flex;
   align-items: center;
   gap: 20px;
-}/*# sourceMappingURL=index.css.map */
+}
+
+.modal__control__content__update {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.modal__control__save {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+}
+
+.modal__github__content {
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 100px;
+}
+
+.github-hongduc {
+  text-align: center;
+}
+.github-hongduc img {
+  width: 200px;
+  height: 200px;
+  background-position: center;
+  background-size: cover;
+  border-radius: 50%;
+  margin-bottom: 20px;
+}
+.github-hongduc a {
+  color: white;
+  font-weight: 600;
+  font-size: 24px;
+}
+.github-hongduc a:hover {
+  text-decoration: underline;
+}
+
+.github-shiraori {
+  text-align: center;
+}
+.github-shiraori img {
+  width: 200px;
+  height: 200px;
+  background-position: center;
+  background-size: cover;
+  border-radius: 50%;
+  margin-bottom: 20px;
+}
+.github-shiraori a {
+  color: white;
+  font-weight: 600;
+  font-size: 24px;
+}
+.github-shiraori a:hover {
+  text-decoration: underline;
+}
+
+.modal__discord__content {
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 100px;
+}
+
+.discord-hongduc {
+  text-align: center;
+}
+.discord-hongduc img {
+  width: 200px;
+  height: 200px;
+  background-position: center;
+  background-size: cover;
+  border-radius: 50%;
+  margin-bottom: 20px;
+}
+.discord-hongduc a {
+  color: white;
+  font-weight: 600;
+  font-size: 24px;
+}
+.discord-hongduc a:hover {
+  text-decoration: underline;
+}
+
+.discord-shiraori {
+  text-align: center;
+}
+.discord-shiraori img {
+  width: 200px;
+  height: 200px;
+  background-position: center;
+  background-size: cover;
+  border-radius: 50%;
+  margin-bottom: 20px;
+}
+.discord-shiraori a {
+  color: white;
+  font-weight: 600;
+  font-size: 24px;
+}
+.discord-shiraori a:hover {
+  text-decoration: underline;
+}
+
+.check__updated {
+  position: absolute;
+  width: 400px;
+  height: 100px;
+  background-color: #38e654;
+  top: 30px;
+  right: 30px;
+  border-radius: 15px;
+  color: white;
+}
+
+.check__updated__content {
+  position: absolute;
+  top: 50%;
+  left: 35%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  display: flex;
+  gap: 10px;
+}
+
+.check__update {
+  position: absolute;
+  width: 400px;
+  height: 100px;
+  background-color: #ff3a3b;
+  top: 30px;
+  right: 30px;
+  border-radius: 15px;
+  color: white;
+}
+
+.check__update__content {
+  position: absolute;
+  top: 50%;
+  left: 35%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  display: flex;
+  gap: 10px;
+}
+
+/*# sourceMappingURL=index.css.map */

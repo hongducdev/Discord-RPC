@@ -1,0 +1,41 @@
+.check__updated {
+    position: absolute;
+    width: 400px;
+    height: 100px;
+    background-color: $success;
+    top: 30px;
+    right: 30px;
+    border-radius: 15px;
+    color: white;
+}
+
+.check__updated__content {
+    position: absolute;
+    top: 50%;
+    left: 35%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    display: flex;
+    gap: 10px;
+}
+
+.check__update {
+    position: absolute;
+    width: 400px;
+    height: 100px;
+    background-color: $danger;
+    top: 30px;
+    right: 30px;
+    border-radius: 15px;
+    color: white;
+}
+
+.check__update__content {
+    position: absolute;
+    top: 50%;
+    left: 35%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    display: flex;
+    gap: 10px;
+}
