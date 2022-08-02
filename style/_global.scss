@@ -215,7 +215,7 @@ a {
   top: 110%;
   left: 0;
   right: 0;
-  opacity: 0;
+  // opacity: 0;
   visibility: hidden;
   transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
 }
@@ -238,4 +238,14 @@ a {
   background-color: #4768ff;
   color: white;
   border-radius: 5px;
+}
+
+.overlay {
+  position: absolute;
+  z-index: 20;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
 }

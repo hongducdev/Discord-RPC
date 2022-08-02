@@ -181,9 +181,27 @@ const updateSetting = (profileSelect = 0) => {
     //
 }
 
+const modalSetting = () => {
+	const iconSetting = $('.icon__setting');
+	const overlay = $('.overlay');
+	const modal = $('.modal__setting');
+	const modalClose = $('.modal__control__close');
+
+	iconSetting.click(() => {
+		overlay.css('display', 'block');
+		modal.css('display', 'block');
+	})
+
+	modalClose.click(() => {
+		overlay.css('display', 'none');
+		modal.css('display', 'none');
+	});
+}
+
 // Ready event
 $(document).ready(async () => {
 	await replaceAll();
     timer();
     handlerProfileClick();
+	modalSetting();
 });
