@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,312 +9,336 @@
     <!-- google font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
 
     <!-- Default -->
-    
+    <!--
     <link rel="stylesheet" href="./style/index.css">
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <title>Document</title>
+-->
 
 
     <!-- App only header -->
-    <!-- <link rel="stylesheet" href="./src/Views/style/index.css" />
+    <link rel="stylesheet" href="./src/Views/style/index.css" />
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="./src/Views/index.js"></script>
-    <title>NyanRPC - v2.0</title> -->
+    <title>NyanRPC - v2.0</title>
 </head>
+
 <body>
     <div class="root">
-        <!-- <section class="overlay" id="overlay"></section> -->
+        <section class="overlay" id="overlay"></section>
         <div class="container">
             <div class="saved">
                 <div class="profile-control">
-                    <ul class="profile-list">
-                        <li class="profile active" id="profile-0">
-                            N
-                        </li>
+                    <ul class="profile-list" id="profile-list">
                     </ul>
                     <div class="profile profile-plus">
                         <i class="fas fa-plus"></i>
                     </div>
                 </div>
                 <ul class="profile-edit">
-                    <li class="save-profile">
+                    <li class="save-profile" id="save-profile">
                         JSON=profile.save
                     </li>
-                    <li class="del-profile">
+                    <li class="del-profile" id="delete-profile">
                         JSON=profile.delete
                     </li>
                 </ul>
             </div>
             <div class="main">
                 <div class="login-setting">
-                    <div class="login">
-                        <input type="text" class="login-id" placeholder="ID">
-                        <div class="dropdown dropdown-login">
-                            <div class="dropdown-select dropdown-select-login">
-                                <span class="select select-login">
-                                    JSON=login.item
-                                </span>
-                                <i class="fa fa-caret-down icon"></i>
-                            </div>
-                            <div class="dropdown-list dropdown-list-login disable">
-                                <div class="dropdown-list__item dropdown-list__item-login">
-                                    JSON=login.app
+                    <fieldset id="setting-login">
+                        <div class="login">
+                            <input type="text" class="login-id" placeholder="ID / Token" required="true" disabled
+                                id="profile-input">
+                            <div class="dropdown dropdown-login">
+                                <div class="dropdown-select dropdown-select-login">
+                                    <span class="select select-login" id="profile-modelogin">
+                                        JSON=login.item
+                                    </span>
+                                    <i class="fa fa-caret-down icon"></i>
                                 </div>
-                                <div class="dropdown-list__item dropdown-list__item-login">
-                                    JSON=login.self
+                                <div class="dropdown-list dropdown-list-login" id="dropdown-login">
+                                    <div class="dropdown-list__item dropdown-list__item-login" id="profile-login-app">
+                                        JSON=login.app
+                                    </div>
+                                    <div class="dropdown-list__item dropdown-list__item-login" id="profile-login-sb">
+                                        JSON=login.self
+                                    </div>
                                 </div>
                             </div>
+                            <button class="login-btn" id="rpc-login">
+                                JSON=login.login
+                            </button>
                         </div>
-                        <button class="login-btn">
-                            JSON=login.login
-                        </button>
-                    </div>
-                    <div class="setting">
-                        <div class="setting-profile">
-                            <div class="tooltip">
-                                <i class="fas fa-question-circle icon-question"></i>
-                                <div class="tooltip-text blue right">
-                                    JSON=profile.name.message
-                                </div>
-                            </div>
-                            <label for="Profile">JSON=profile.name.title</label>
-                            <input type="text" class="setting-profile-input">
-                        </div>
-                        <div class="setting-name-appID">
-                            <div class="setting-name">
+                    </fieldset>
+                    <fieldset id="setting-panel">
+                        <div class="setting">
+                            <div class="setting-profile">
                                 <div class="tooltip">
                                     <i class="fas fa-question-circle icon-question"></i>
                                     <div class="tooltip-text blue right">
-                                        JSON=rpc.name.message
+                                        JSON=profile.name.message
                                     </div>
                                 </div>
-                                <label for="name">JSON=rpc.name.title</label>
-                                <input type="text" class="setting-name-input" placeholder="Visual Studio Code">
+                                <label for="Profile">JSON=profile.name.title</label>
+                                <input type="text" class="setting-profile-input" id="profile-name" value="New Profile">
                             </div>
-                            <div class="setting-appID">
-                                <div class="tooltip">
-                                    <i class="fas fa-question-circle icon-question"></i>
-                                    <div class="tooltip-text blue right">
-                                        JSON=rpc.appid.message
-                                    </div>
-                                </div>
-                                <label for="appID">JSON=rpc.appid.title</label>
-                                <input type="text" class="setting-appID-input">
-                            </div>
-                        </div>
-                        <div class="setting-details">
-                            <div class="tooltip">
-                                <i class="fas fa-question-circle icon-question"></i>
-                                <div class="tooltip-text blue right">
-                                    JSON=rpc.details.message
-                                </div>
-                            </div>
-                            <label for="Details">JSON=rpc.details.title</label>
-                            <input type="text" class="setting-details-input" placeholder="Edit client.js">
-                        </div>
-                        <div class="setting-state-party">
-                            <div class="setting-state">
-                                <div class="tooltip">
-                                    <i class="fas fa-question-circle icon-question"></i>
-                                    <div class="tooltip-text blue right">
-                                        JSON=rpc.state.message
-                                    </div>
-                                </div>
-                                <label for="State">JSON=rpc.state.title</label>
-                                <input type="text" id="State" class="setting-state-input" placeholder="Workspace: NyanRPC">
-                            </div>
-                            <div class="setting-party">
-                                <div class="tooltip">
-                                    <i class="fas fa-question-circle icon-question"></i>
-                                    <div class="tooltip-text blue right">
-                                        JSON=rpc.party.message
-                                    </div>
-                                </div>
-                                <div class="Party-1">
-                                    <label for="Party">JSON=rpc.party.title</label>
-                                    <input type="number" id="Party" class="Party-input-1" min="0" value="0" max="999">
-                                </div>
-                                <div class="Party-2">
-                                    <label for="of-party">JSON=rpc.party.of</label>
-                                    <input type="number" name="" id="" min="0" value="0" class="Party-input-2">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="setting-large-image">
-                            <div class="setting-large-image-url">
-                                <div class="tooltip">
-                                    <i class="fas fa-question-circle icon-question"></i>
-                                    <div class="tooltip-text blue right">
-                                        JSON=rpc.asset.large.image.message
-                                    </div>
-                                </div>
-                                <label for="Large-image-url">JSON=rpc.asset.large.image.title</label>
-                                <input type="url" id="Large-image-url" class="setting-large-image-url-input" placeholder="eg. https://source.unsplash.com/random">
-                            </div>
-                            <div class="setting-large-image-text">
-                                <div class="tooltip">
-                                    <i class="fas fa-question-circle icon-question"></i>
-                                    <div class="tooltip-text blue right">
-                                        JSON=rpc.asset.large.text.message
-                                    </div>
-                                </div>
-                                <label for="Large-image-text">JSON=rpc.asset.large.text.title</label>
-                                <input type="text" id="Large-image-text" class="setting-large-image-text-input" placeholder="eg. This is a large image">
-                            </div>
-                        </div>
-                        <div class="setting-small-image">
-                            <div class="setting-small-image-url">
-                                <div class="tooltip">
-                                    <i class="fas fa-question-circle icon-question"></i>
-                                    <div class="tooltip-text blue right">
-                                        JSON=rpc.asset.small.image.message
-                                    </div>
-                                </div>
-                                <label for="small-image-url">JSON=rpc.asset.small.image.title</label>
-                                <input type="url" id="small-image-url" class="setting-small-image-url-input" placeholder="eg. https://source.unsplash.com/random">
-                            </div>
-                            <div class="setting-small-image-text">
-                                <div class="tooltip">
-                                    <i class="fas fa-question-circle icon-question"></i>
-                                    <div class="tooltip-text blue right">
-                                        JSON=rpc.asset.small.text.message
-                                    </div>
-                                </div>
-                                <label for="small-image-text">JSON=rpc.asset.small.text.title</label>
-                                <input type="text" id="small-image-text" class="setting-small-image-text-input" placeholder="eg. This is a small image">
-                            </div>
-                        </div>
-                        <div class="setting-button-1">
-                            <div class="setting-btn-onoff">
-                                <div class="tooltip">
-                                    <i class="fas fa-question-circle icon-question"></i>
-                                    <div class="tooltip-text blue right">
-                                        JSON=rpc.button1.message
-                                    </div>
-                                </div>
-                                <p class="">JSON=rpc.button1.title</p>
-                                <div class="switch-onoff-btn-1">
-                                    <input type="checkbox" id="switch" class="switch-input" />
-                                    <label for="switch" class="switch"></label>
-                                </div>
-                            </div>
-                            <div class="setting-btn-1-url-text">
-                                <div class="setting-btn-1-url">
+                            <div class="setting-name-appID">
+                                <div class="setting-name">
                                     <div class="tooltip">
                                         <i class="fas fa-question-circle icon-question"></i>
                                         <div class="tooltip-text blue right">
-                                            JSON=rpc.button1.url.message
+                                            JSON=rpc.name.message
                                         </div>
                                     </div>
-                                    <label for="btn-1-url">JSON=rpc.button1.url.title</label>
-                                    <input type="url" name="btn-1-url" id="btn-1-url" class="setting-btn-1-url-input">
+                                    <label for="name">JSON=rpc.name.title</label>
+                                    <input type="text" class="setting-name-input" placeholder="Visual Studio Code"
+                                        id="rpc-name">
                                 </div>
-                                <div class="setting-btn-1-text">
+                                <div class="setting-appID">
                                     <div class="tooltip">
                                         <i class="fas fa-question-circle icon-question"></i>
                                         <div class="tooltip-text blue right">
-                                            JSON=rpc.button1.text.message
+                                            JSON=rpc.appid.message
                                         </div>
                                     </div>
-                                    <label for="btn-1-text">JSON=rpc.button1.text.title</label>
-                                    <input type="text" name="btn-1-text" id="btn-1-text" class="setting-btn-1-text-input">
+                                    <label for="appID">JSON=rpc.appid.title</label>
+                                    <input type="number" class="setting-appID-input" id="rpc-appid" max="19" min="17">
                                 </div>
                             </div>
-                        </div>
-                        <div class="setting-button-2">
-                            <div class="setting-btn-onoff">
+                            <div class="setting-details">
                                 <div class="tooltip">
                                     <i class="fas fa-question-circle icon-question"></i>
                                     <div class="tooltip-text blue right">
-                                        JSON=rpc.button2.message
+                                        JSON=rpc.details.message
                                     </div>
                                 </div>
-                                <p class="">JSON=rpc.button2.title</p>
-                                <div class="switch-onoff-btn-2">
-                                    <input type="checkbox" id="switch-2" class="switch-input" />
-                                    <label for="switch-2" class="switch"></label>
-                                </div>
+                                <label for="Details">JSON=rpc.details.title</label>
+                                <input type="text" class="setting-details-input" placeholder="Edit client.js"
+                                    id="rpc-details">
                             </div>
-                            <div class="setting-btn-2-url-text">
-                                <div class="setting-btn-2-url">
+                            <div class="setting-state-party">
+                                <div class="setting-state">
                                     <div class="tooltip">
                                         <i class="fas fa-question-circle icon-question"></i>
                                         <div class="tooltip-text blue right">
-                                            JSON=rpc.button2.url.message
+                                            JSON=rpc.state.message
                                         </div>
                                     </div>
-                                    <label for="btn-2-url">JSON=rpc.button2.url.title</label>
-                                    <input type="url" name="btn-2-url" id="btn-2-url" class="setting-btn-2-url-input">
+                                    <label for="rpc-state">JSON=rpc.state.title</label>
+                                    <input type="text" class="setting-state-input" placeholder="Workspace: NyanRPC"
+                                        id="rpc-state">
                                 </div>
-                                <div class="setting-btn-2-text">
+                                <div class="setting-party">
                                     <div class="tooltip">
                                         <i class="fas fa-question-circle icon-question"></i>
                                         <div class="tooltip-text blue right">
-                                            JSON=rpc.button2.text.message
+                                            JSON=rpc.party.message
                                         </div>
                                     </div>
-                                    <label for="btn-2-text">JSON=rpc.button2.text.title</label>
-                                    <input type="text" name="btn-2-text" id="btn-2-text" class="setting-btn-2-text-input">
+                                    <div class="Party-1">
+                                        <label for="rpc-party-min">JSON=rpc.party.title</label>
+                                        <input type="number" id="rpc-party-min" class="Party-input-1" min="0" value="0"
+                                            max="999">
+                                    </div>
+                                    <div class="Party-2">
+                                        <label for="of-party">JSON=rpc.party.of</label>
+                                        <input type="number" name="" id="rpc-party-max" min="0" value="0"
+                                            class="Party-input-2">
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="setting-timestamp">
-                            <div class="setting-timestamp-title">
-                                <div class="tooltip">
-                                    <i class="fas fa-question-circle"></i>
-                                    <div class="tooltip-text blue right">
-                                        JSON=rpc.time.message
+                            <div class="setting-large-image">
+                                <div class="setting-large-image-url">
+                                    <div class="tooltip">
+                                        <i class="fas fa-question-circle icon-question"></i>
+                                        <div class="tooltip-text blue right">
+                                            JSON=rpc.asset.large.image.message
+                                        </div>
                                     </div>
+                                    <label for="Large-image-url">JSON=rpc.asset.large.image.title</label>
+                                    <input type="url" id="Large-image-url" class="setting-large-image-url-input"
+                                        placeholder="eg. https://source.unsplash.com/random" list="assets">
                                 </div>
-                                <p>JSON=rpc.time.title</p>
+                                <div class="setting-large-image-text">
+                                    <div class="tooltip">
+                                        <i class="fas fa-question-circle icon-question"></i>
+                                        <div class="tooltip-text blue right">
+                                            JSON=rpc.asset.large.text.message
+                                        </div>
+                                    </div>
+                                    <label for="Large-image-text">JSON=rpc.asset.large.text.title</label>
+                                    <input type="text" id="Large-image-text" class="setting-large-image-text-input"
+                                        placeholder="eg. This is a large image">
+                                </div>
                             </div>
-                            <div class="setting-timestamp-main">
-                                <div class="dropdown dropdown-timestamp">
-                                    <div class="dropdown-select dropdown-select-timestamp">
-                                        <span class="select select-timestamp">
-                                            JSON=login.item
-                                        </span>
-                                        <i class="fa fa-caret-down icon"></i>
+                            <div class="setting-small-image">
+                                <div class="setting-small-image-url">
+                                    <div class="tooltip">
+                                        <i class="fas fa-question-circle icon-question"></i>
+                                        <div class="tooltip-text blue right">
+                                            JSON=rpc.asset.small.image.message
+                                        </div>
                                     </div>
-                                    <div class="dropdown-list dropdown-list-timestamp">
-                                        <div class="dropdown-list__item dropdown-list__item-timestamp">
-                                            JSON=rpc.time.options.off
+                                    <label for="small-image-url">JSON=rpc.asset.small.image.title</label>
+                                    <input type="url" id="small-image-url" class="setting-small-image-url-input"
+                                        placeholder="eg. https://source.unsplash.com/random" list="assets">
+                                </div>
+                                <div class="setting-small-image-text">
+                                    <div class="tooltip">
+                                        <i class="fas fa-question-circle icon-question"></i>
+                                        <div class="tooltip-text blue right">
+                                            JSON=rpc.asset.small.text.message
                                         </div>
-                                        <div class="dropdown-list__item dropdown-list__item-timestamp">
-                                            JSON=rpc.time.options.app
+                                    </div>
+                                    <label for="small-image-text">JSON=rpc.asset.small.text.title</label>
+                                    <input type="text" id="small-image-text" class="setting-small-image-text-input"
+                                        placeholder="eg. This is a small image">
+                                </div>
+                            </div>
+                            <div>
+                                <datalist id="assets">
+                                </datalist>
+                            </div>
+                            <div class="setting-button-1">
+                                <div class="setting-btn-onoff">
+                                    <div class="tooltip">
+                                        <i class="fas fa-question-circle icon-question"></i>
+                                        <div class="tooltip-text blue right">
+                                            JSON=rpc.button1.message
                                         </div>
-                                        <div class="dropdown-list__item dropdown-list__item-timestamp">
-                                            JSON=rpc.time.options.update
-                                        </div>
-                                        <div class="dropdown-list__item dropdown-list__item-timestamp">
-                                            JSON=rpc.time.options.local
-                                        </div>
-                                        <div class="dropdown-list__item dropdown-list__item-timestamp">
-                                            JSON=rpc.time.options.custom
-                                        </div>
+                                    </div>
+                                    <p class="">JSON=rpc.button1.title</p>
+                                    <div class="switch-onoff-btn-1">
+                                        <input type="checkbox" id="switch" class="switch-input" />
+                                        <label for="switch" class="switch"></label>
                                     </div>
                                 </div>
-                                <!-- <div class="">
+                                <div class="setting-btn-1-url-text">
+                                    <div class="setting-btn-1-url">
+                                        <div class="tooltip">
+                                            <i class="fas fa-question-circle icon-question"></i>
+                                            <div class="tooltip-text blue right">
+                                                JSON=rpc.button1.url.message
+                                            </div>
+                                        </div>
+                                        <label for="btn-1-url">JSON=rpc.button1.url.title</label>
+                                        <input type="url" name="btn-1-url" id="btn-1-url"
+                                            class="setting-btn-1-url-input">
+                                    </div>
+                                    <div class="setting-btn-1-text">
+                                        <div class="tooltip">
+                                            <i class="fas fa-question-circle icon-question"></i>
+                                            <div class="tooltip-text blue right">
+                                                JSON=rpc.button1.text.message
+                                            </div>
+                                        </div>
+                                        <label for="btn-1-text">JSON=rpc.button1.text.title</label>
+                                        <input type="text" name="btn-1-text" id="btn-1-text"
+                                            class="setting-btn-1-text-input">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="setting-button-2">
+                                <div class="setting-btn-onoff">
+                                    <div class="tooltip">
+                                        <i class="fas fa-question-circle icon-question"></i>
+                                        <div class="tooltip-text blue right">
+                                            JSON=rpc.button2.message
+                                        </div>
+                                    </div>
+                                    <p class="">JSON=rpc.button2.title</p>
+                                    <div class="switch-onoff-btn-2">
+                                        <input type="checkbox" id="switch-2" class="switch-input" />
+                                        <label for="switch-2" class="switch"></label>
+                                    </div>
+                                </div>
+                                <div class="setting-btn-2-url-text">
+                                    <div class="setting-btn-2-url">
+                                        <div class="tooltip">
+                                            <i class="fas fa-question-circle icon-question"></i>
+                                            <div class="tooltip-text blue right">
+                                                JSON=rpc.button2.url.message
+                                            </div>
+                                        </div>
+                                        <label for="btn-2-url">JSON=rpc.button2.url.title</label>
+                                        <input type="url" name="btn-2-url" id="btn-2-url"
+                                            class="setting-btn-2-url-input">
+                                    </div>
+                                    <div class="setting-btn-2-text">
+                                        <div class="tooltip">
+                                            <i class="fas fa-question-circle icon-question"></i>
+                                            <div class="tooltip-text blue right">
+                                                JSON=rpc.button2.text.message
+                                            </div>
+                                        </div>
+                                        <label for="btn-2-text">JSON=rpc.button2.text.title</label>
+                                        <input type="text" name="btn-2-text" id="btn-2-text"
+                                            class="setting-btn-2-text-input">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="setting-timestamp">
+                                <div class="setting-timestamp-title">
+                                    <div class="tooltip">
+                                        <i class="fas fa-question-circle"></i>
+                                        <div class="tooltip-text blue right">
+                                            JSON=rpc.time.message
+                                        </div>
+                                    </div>
+                                    <p>JSON=rpc.time.title</p>
+                                </div>
+                                <div class="setting-timestamp-main" id="time-list">
+                                    <div class="dropdown dropdown-timestamp">
+                                        <div class="dropdown-select dropdown-select-timestamp">
+                                            <span class="select select-timestamp" id="rpc-timetitle">
+                                                JSON=login.item
+                                            </span>
+                                            <i class="fa fa-caret-down icon"></i>
+                                        </div>
+                                        <div class="dropdown-list dropdown-list-timestamp">
+                                            <div class="dropdown-list__item dropdown-list__item-timestamp"
+                                                id="rpc-time0">
+                                                JSON=rpc.time.options.off
+                                            </div>
+                                            <div class="dropdown-list__item dropdown-list__item-timestamp"
+                                                id="rpc-time1">
+                                                JSON=rpc.time.options.app
+                                            </div>
+                                            <div class="dropdown-list__item dropdown-list__item-timestamp"
+                                                id="rpc-time2">
+                                                JSON=rpc.time.options.update
+                                            </div>
+                                            <div class="dropdown-list__item dropdown-list__item-timestamp"
+                                                id="rpc-time3">
+                                                JSON=rpc.time.options.local
+                                            </div>
+                                            <div class="dropdown-list__item dropdown-list__item-timestamp"
+                                                id="rpc-time4">
+                                                JSON=rpc.time.options.custom
+                                            </div>
+                                        </div>
+                                    </div>
                                     <label for="">JSON=rpc.time.options.custom</label>
-                                    <input type="datetime-local" name="" id="">
-                                </div> -->
+                                    <input type="datetime-local" name="" id="rpc-time-custom">
+                                </div>
                             </div>
-                        </div>
-                    </div>
+                    </fieldset>
                 </div>
 
                 <div class="preview">
                     <div class="preview-thum-avt">
                         <div class="preview-thum"></div>
                         <div class="preview-avt">
-                            <img src="https://cdn.discordapp.com/embed/avatars/0.png" alt="">
+                            <img id="preview-avatar" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="">
                         </div>
                     </div>
                     <div class="preview-flag">
@@ -328,10 +353,10 @@
                     </div>
                     <div class="preview-info">
                         <div class="preview-name">
-                            <h2 class="preview-username">
+                            <h2 class="preview-username" id="preview-username">
                                 Discord
                             </h2>
-                            <span class="preview-tag">
+                            <span class="preview-tag" id="preview-tag">
                                 #0000
                             </span>
                         </div>
@@ -345,26 +370,28 @@
                             <div class="rpc-main">
                                 <div class="rpc-image">
                                     <div class="rpc-img-large">
-                                        <img src="https://source.unsplash.com/random" alt="" class="rpc-image-large">
-                                        <p class="rpc-image-large-text top blue">
+                                        <img id="preview-asset-large-image" src="https://source.unsplash.com/random"
+                                            alt="" class="rpc-image-large">
+                                        <p id="preview-asset-large-text" class="rpc-image-large-text top blue">
                                             JSON=preview.asset.large
                                         </p>
                                     </div>
                                     <div class="rpc-img-small">
-                                        <img src="https://source.unsplash.com/random" alt="" class="rpc-image-small">
-                                        <p class="rpc-image-small-text bottom blue">
+                                        <img id="preview-asset-small-image" src="https://source.unsplash.com/random"
+                                            alt="" class="rpc-image-small">
+                                        <p id="preview-asset-small-text" class="rpc-image-small-text bottom blue">
                                             JSON=preview.asset.small
                                         </p>
                                     </div>
                                 </div>
                                 <div class="rpc-content">
-                                    <h4 class="rpc-content-1">
+                                    <h4 class="rpc-content-1" id="preview-name">
                                         Visual Studio Code
                                     </h4>
-                                    <p class="rpc-content-2">
+                                    <p class="rpc-content-2" id="preview-details">
                                         Edit client.js
                                     </p>
-                                    <p class="rpc-content-3">
+                                    <p class="rpc-content-3" id="preview-state">
                                         Workspace: NyanRPC
                                     </p>
                                     <p class="rpc-content-4" id="preview_time">
@@ -372,13 +399,13 @@
                                 </div>
                             </div>
                             <div class="rpc-button">
-                                <button class="rpc-btn-1 hidden">JSON=rpc.button1.text.title</button>
-                                <button class="rpc-btn-2">JSON=rpc.button2.text.title</button>
+                                <button class="rpc-btn-1" id="preview-btn-1">JSON=rpc.button1.text.title</button>
+                                <button class="rpc-btn-2" id="preview-btn-2">JSON=rpc.button2.text.title</button>
                             </div>
                         </div>
                         <div class="preview-rpc-button">
-                            <button class="launch-rpc-btn">JSON=app.update</button>
-                            <button class="stop-rpc-btn">JSON=app.stop</button>
+                            <button class="launch-rpc-btn" id="rpc-update">JSON=app.update</button>
+                            <button class="stop-rpc-btn" id="rpc-stop">JSON=app.stop</button>
                         </div>
                         <div class="preview-rpc-bar">
                             <ul class="preview-rpc-set-list">
@@ -393,43 +420,42 @@
                     </div>
                 </div>
             </div>
-
-            <!-- <div class="modal__setting">
-                <div class="modal__control">
-                    <div class="modal__control__bar">
-                        <div class="modal__control__close">
-                            <i class="fas fa-times modal__control__close__icon"></i>
-                        </div>
-                        <div class="modal__control__yellow"></div>
-                        <div class="modal__control__green"></div>
+        </div>
+        <div class="modal__setting">
+            <div class="modal__control">
+                <div class="modal__control__bar">
+                    <div class="modal__control__close">
+                        <i class="fas fa-times modal__control__close__icon"></i>
                     </div>
-                    <div class="modal__control__title">
-                        <h2>JSON=modal.title</h2>
+                    <div class="modal__control__yellow"></div>
+                    <div class="modal__control__green"></div>
+                </div>
+                <div class="modal__control__title">
+                    <h2>JSON=modal.setting.title</h2>
+                </div>
+            </div>
+            <div class="modal__control__content">
+                <div class="modal__control__content__update"></div>
+                <div class="modal__control__content__languague">
+                    <p class="">JSON=modal.setting.language.title</p>
+                    <div class="dropdown dropdown-language">
+                        <div class="dropdown-select dropdown-select-language">
+                            <span class="select select-language">
+                                JSON=modal.setting.language.item
+                            </span>
+                            <i class="fa fa-caret-down icon"></i>
+                        </div>
+                        <div class="dropdown-list dropdown-list-language">
+                            <div class="dropdown-list__item dropdown-list__item-language">
+                                EngLish
+                            </div>
+                            <div class="dropdown-list__item dropdown-list__item-language">
+                                Vietnamese
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="modal__control__content">
-                    <div class="modal__control__content__update"></div>
-                    <div class="modal__control__content__languague">
-                        <p class="">Language</p>
-                        <div class="dropdown dropdown-language">
-                            <div class="dropdown-select dropdown-select-language">
-                                <span class="select select-language">
-                                    JSON=language.item
-                                </span>
-                                <i class="fa fa-caret-down icon"></i>
-                            </div>
-                            <div class="dropdown-list dropdown-list-language">
-                                <div class="dropdown-list__item dropdown-list__item-language">
-                                    JSON=language.item.1
-                                </div>
-                                <div class="dropdown-list__item dropdown-list__item-language">
-                                    JSON=language.item.2
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
+            </div>
         </div>
     </div>
 
@@ -437,4 +463,5 @@
     <script src="https://kit.fontawesome.com/7dd86c08e8.js" crossorigin="anonymous"></script>
     <script src="./index.js"></script>
 </body>
+
 </html>

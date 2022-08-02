@@ -41,7 +41,8 @@ h6 {
   overflow-wrap: break-word;
 }
 
-ul, li {
+ul,
+li {
   list-style: none;
 }
 
@@ -79,12 +80,16 @@ a {
 }
 
 .tooltip .tooltip-text.top {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
   width: fit-content;
   bottom: 150%;
   margin-left: -75%;
 }
 
 .tooltip .tooltip-text.bottom {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
   width: fit-content;
   top: 150%;
   margin-left: -75%;
@@ -150,9 +155,21 @@ a {
 
 .tooltip:hover .tooltip-text {
   visibility: visible;
-  animation-name: openTooltip;
-  animation-duration: 250ms;
-  animation-fill-mode: linear;
+  -webkit-animation-name: openTooltip;
+          animation-name: openTooltip;
+  -webkit-animation-duration: 250ms;
+          animation-duration: 250ms;
+  -webkit-animation-fill-mode: linear;
+          animation-fill-mode: linear;
+}
+
+@-webkit-keyframes openTooltip {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes openTooltip {
@@ -258,6 +275,8 @@ a {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.7);
+  display: none;
+  position: fixed;
 }
 
 .root {
@@ -457,6 +476,8 @@ a {
 }
 
 .preview-flag-tooltip .preview-flag-tooltip__text.top {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
   width: fit-content;
   bottom: 105%;
   margin-left: -285%;
@@ -475,9 +496,12 @@ a {
 
 .preview-flag-tooltip:hover .preview-flag-tooltip__text {
   visibility: visible;
-  animation-name: openTooltip;
-  animation-duration: 250ms;
-  animation-fill-mode: linear;
+  -webkit-animation-name: openTooltip;
+          animation-name: openTooltip;
+  -webkit-animation-duration: 250ms;
+          animation-duration: 250ms;
+  -webkit-animation-fill-mode: linear;
+          animation-fill-mode: linear;
 }
 
 @keyframes openTooltip {
@@ -572,6 +596,8 @@ a {
 }
 
 .rpc-img-large .rpc-image-large-text.top {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
   width: fit-content;
   bottom: 90%;
   margin-left: -65%;
@@ -590,9 +616,12 @@ a {
 
 .rpc-img-large:hover .rpc-image-large-text {
   visibility: visible;
-  animation-name: openTooltip;
-  animation-duration: 250ms;
-  animation-fill-mode: linear;
+  -webkit-animation-name: openTooltip;
+          animation-name: openTooltip;
+  -webkit-animation-duration: 250ms;
+          animation-duration: 250ms;
+  -webkit-animation-fill-mode: linear;
+          animation-fill-mode: linear;
 }
 
 @keyframes openTooltip {
@@ -608,7 +637,8 @@ a {
   height: 80px;
   image-resolution: contain;
   background-size: cover;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   border-radius: 12px;
 }
 
@@ -641,6 +671,8 @@ a {
 }
 
 .rpc-img-small .rpc-image-small-text.top {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
   width: fit-content;
   bottom: 90%;
   margin-left: -5%;
@@ -658,6 +690,8 @@ a {
 }
 
 .rpc-img-small .rpc-image-small-text.bottom {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
   width: fit-content;
   top: 250%;
   margin-left: -5%;
@@ -677,9 +711,12 @@ a {
 
 .rpc-img-small:hover .rpc-image-small-text {
   visibility: visible;
-  animation-name: openTooltip;
-  animation-duration: 250ms;
-  animation-fill-mode: linear;
+  -webkit-animation-name: openTooltip;
+          animation-name: openTooltip;
+  -webkit-animation-duration: 250ms;
+          animation-duration: 250ms;
+  -webkit-animation-fill-mode: linear;
+          animation-fill-mode: linear;
 }
 
 .rpc-image-small {
@@ -687,7 +724,8 @@ a {
   height: 30px;
   image-resolution: contain;
   background-size: cover;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   border-radius: 50%;
   border: 2px solid #18191c;
   position: absolute;
@@ -1146,6 +1184,4 @@ a {
   display: flex;
   align-items: center;
   gap: 20px;
-}
-
-/*# sourceMappingURL=index.css.map */
+}/*# sourceMappingURL=index.css.map */
