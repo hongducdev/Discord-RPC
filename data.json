@@ -3,54 +3,22 @@
   "profile": [
     {
       "profile": "aiko",
-      "name": "",
+      "name": "Muse Dash",
       "type": "",
-      "application_id": "817229550684471297",
+      "application_id": "820344593357996092",
       "url": "",
-      "state": "state",
-      "details": "detail",
+      "state": "pa pi pu pi pu pi pa - ころねぽち With 立秋",
+      "details": "Hard - Lvl.8",
       "party": {
-        "min": "99",
-        "max": "0"
-      },
-      "timestamps": null,
-      "assets": {
-        "large_text": "",
-        "large_image": "",
-        "small_text": "",
-        "small_image": ""
-      },
-      "buttons": [
-        {
-          "url": "",
-          "text": ""
-        },
-        {
-          "url": "",
-          "text": ""
-        }
-      ],
-      "mode": 1,
-      "token": ""
-    },
-    {
-      "profile": "New Profile",
-      "name": "",
-      "type": "",
-      "application_id": "817229550684471297",
-      "url": "",
-      "state": "",
-      "details": "",
-      "party": {
-        "min": "0",
+        "min": "",
         "max": ""
       },
       "timestamps": null,
       "assets": {
         "large_text": "",
-        "large_image": "",
+        "large_image": "https://musedash.moe/covers/papipupipupipa_cover.hash.93ae31d41.png",
         "small_text": "",
-        "small_image": ""
+        "small_image": "https://musedash.moe/covers/lights_of_muse_cover.hash.1c18e1e22.png"
       },
       "buttons": [
         {},

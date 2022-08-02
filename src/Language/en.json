@@ -142,6 +142,15 @@
         "success": {
             "stop": "Clear Presence successfully",
             "save": "Save data successfully"
+        },
+        "modal": {
+            "setting": {
+                "title": "Settings",
+                "language": {
+                    "title": "Choose Language",
+                    "item":"Select Item"
+                }
+            }
         }
     }
 }

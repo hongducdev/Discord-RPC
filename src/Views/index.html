@@ -33,6 +33,7 @@
 
 <body>
     <div class="root">
+        <section class="overlay" id="overlay"></section>
         <div class="container">
             <div class="saved">
                 <div class="profile-control">
@@ -55,7 +56,8 @@
                 <div class="login-setting">
                     <fieldset id="setting-login">
                         <div class="login">
-                            <input type="text" class="login-id" placeholder="ID / Token" required="true" disabled id="profile-input">
+                            <input type="text" class="login-id" placeholder="ID / Token" required="true" disabled
+                                id="profile-input">
                             <div class="dropdown dropdown-login">
                                 <div class="dropdown-select dropdown-select-login">
                                     <span class="select select-login" id="profile-modelogin">
@@ -303,19 +305,24 @@
                                             <i class="fa fa-caret-down icon"></i>
                                         </div>
                                         <div class="dropdown-list dropdown-list-timestamp">
-                                            <div class="dropdown-list__item dropdown-list__item-timestamp" id="rpc-time0">
+                                            <div class="dropdown-list__item dropdown-list__item-timestamp"
+                                                id="rpc-time0">
                                                 JSON=rpc.time.options.off
                                             </div>
-                                            <div class="dropdown-list__item dropdown-list__item-timestamp" id="rpc-time1">
+                                            <div class="dropdown-list__item dropdown-list__item-timestamp"
+                                                id="rpc-time1">
                                                 JSON=rpc.time.options.app
                                             </div>
-                                            <div class="dropdown-list__item dropdown-list__item-timestamp" id="rpc-time2">
+                                            <div class="dropdown-list__item dropdown-list__item-timestamp"
+                                                id="rpc-time2">
                                                 JSON=rpc.time.options.update
                                             </div>
-                                            <div class="dropdown-list__item dropdown-list__item-timestamp" id="rpc-time3">
+                                            <div class="dropdown-list__item dropdown-list__item-timestamp"
+                                                id="rpc-time3">
                                                 JSON=rpc.time.options.local
                                             </div>
-                                            <div class="dropdown-list__item dropdown-list__item-timestamp" id="rpc-time4">
+                                            <div class="dropdown-list__item dropdown-list__item-timestamp"
+                                                id="rpc-time4">
                                                 JSON=rpc.time.options.custom
                                             </div>
                                         </div>
@@ -363,13 +370,15 @@
                             <div class="rpc-main">
                                 <div class="rpc-image">
                                     <div class="rpc-img-large">
-                                        <img id="preview-asset-large-image" src="https://source.unsplash.com/random" alt="" class="rpc-image-large">
+                                        <img id="preview-asset-large-image" src="https://source.unsplash.com/random"
+                                            alt="" class="rpc-image-large">
                                         <p id="preview-asset-large-text" class="rpc-image-large-text top blue">
                                             JSON=preview.asset.large
                                         </p>
                                     </div>
                                     <div class="rpc-img-small">
-                                        <img id="preview-asset-small-image" src="https://source.unsplash.com/random" alt="" class="rpc-image-small">
+                                        <img id="preview-asset-small-image" src="https://source.unsplash.com/random"
+                                            alt="" class="rpc-image-small">
                                         <p id="preview-asset-small-text" class="rpc-image-small-text bottom blue">
                                             JSON=preview.asset.small
                                         </p>
@@ -405,8 +414,44 @@
                                 <li><a href=""><i class="fab fa-github icon-rpc-preview"></i></a></li>
                                 <li><a href=""><i class="fas fa-globe icon-rpc-preview"></i></a></li>
                                 <li><a href=""><i class="fas fa-question-circle icon-rpc-preview"></i></a></li>
-                                <li><a href=""><i class="fas fa-cog icon-rpc-preview"></i></a></li>
+                                <li class="icon__setting"><i class="fas fa-cog icon-rpc-preview"></i></li>
                             </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal__setting">
+            <div class="modal__control">
+                <div class="modal__control__bar">
+                    <div class="modal__control__close">
+                        <i class="fas fa-times modal__control__close__icon"></i>
+                    </div>
+                    <div class="modal__control__yellow"></div>
+                    <div class="modal__control__green"></div>
+                </div>
+                <div class="modal__control__title">
+                    <h2>JSON=modal.setting.title</h2>
+                </div>
+            </div>
+            <div class="modal__control__content">
+                <div class="modal__control__content__update"></div>
+                <div class="modal__control__content__languague">
+                    <p class="">JSON=modal.setting.language.title</p>
+                    <div class="dropdown dropdown-language">
+                        <div class="dropdown-select dropdown-select-language">
+                            <span class="select select-language">
+                                JSON=modal.setting.language.item
+                            </span>
+                            <i class="fa fa-caret-down icon"></i>
+                        </div>
+                        <div class="dropdown-list dropdown-list-language">
+                            <div class="dropdown-list__item dropdown-list__item-language">
+                                EngLish
+                            </div>
+                            <div class="dropdown-list__item dropdown-list__item-language">
+                                Vietnamese
+                            </div>
                         </div>
                     </div>
                 </div>

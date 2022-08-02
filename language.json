@@ -1,0 +1,22 @@
+[
+    {
+        "en_name": "English",
+        "local_name": "English",
+        "translator": {
+            "name": "Shiraori",
+            "discord": "https://discord.com/users/721746046543331449"
+        },
+        "lang_code": "en",
+        "change_notif": "Changed language to English, app will restart to save changes"
+    },
+    {
+        "en_name": "Vietnamese",
+        "local_name": "Tiếng Việt",
+        "translator": {
+            "name": "Shiraori",
+            "discord": "https://discord.com/users/721746046543331449"
+        },
+        "lang_code": "vi",
+        "change_notif": "Đã chuyển ngôn ngữ sang Tiếng Việt, ứng dụng sẽ khởi động lại để lưu thay đổi"
+    }
+]

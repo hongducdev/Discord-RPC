@@ -16,7 +16,8 @@ module.exports = async (client, msg) => {
     if (
 		parseInt(msg.data.party?.min) &&
 		parseInt(msg.data.party?.max) &&
-		parseInt(msg.data.party?.min) <= parseInt(msg.data.party?.max)
+		parseInt(msg.data.party?.min) <= parseInt(msg.data.party?.max) &&
+        parseInt(msg.data.party?.max) > 0 && parseInt(msg.data.party?.min) > 0
 	)
 		rpc.setParty({
 			max: parseInt(msg.data.party?.max),

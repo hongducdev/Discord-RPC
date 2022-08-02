@@ -226,8 +226,10 @@ const timer = () => {
 };
 //
 const getProfile = () => {
+	const profileName = $('#profile-name').val().length > 0 ? $('#profile-name').val() : newProfileName;
+	$(`profile-${activeProfile}`).text(profileName[0]);
 	return Object.assign(settingData.profile[activeProfile], {
-		profile: $('#profile-name').val(),
+		profile: profileName,
 		name: $('#rpc-name').val(),
 		application_id: /\d{17,19}/.test($('#profile-input').val())
 			? $('#profile-input').val()
@@ -541,10 +543,10 @@ const updatePreview = (data, rpc = true) => {
 	const assets = data.assets || {};
 	// large
 	$('#Large-image-text').val(assets.large_text);
-	$('#Large-image-url').val(assets.large_image);
+	if (!assets.large_image) $('#Large-image-url').val('');
 	// small
 	$('#small-image-text').val(assets.small_text);
-	$('#small-image-url').val(assets.small_image);
+	if (!assets.small_image) $('#small-image-url').val('');
 	//
 	// Button
 	const buttons = data.buttons || [];
@@ -823,6 +825,24 @@ const addProfile = () => {
 		}
 	}
 };
+// Modal
+const modalSetting = () => {
+	const iconSetting = $('.icon__setting');
+	const overlay = $('.overlay');
+	const modal = $('.modal__setting');
+	const modalClose = $('.modal__control__close');
+	overlay.css('display', 'none');
+	modal.css('display', 'none');
+	iconSetting.click(() => {
+		overlay.css('display', 'block');
+		modal.css('display', 'block');
+	});
+
+	modalClose.click(() => {
+		overlay.css('display', 'none');
+		modal.css('display', 'none');
+	});
+};
 // Ready event
 $(document).ready(async () => {
 	await replaceAll();
@@ -834,6 +854,7 @@ $(document).ready(async () => {
 	loadProfile(0);
 	presenceHandler();
 	buttonClick();
+	modalSetting();
 });
 
 //
@@ -846,13 +867,15 @@ window.addEventListener('offline', function () {
 	window.location.href = `${document.URL.replace('/rpc', '/dino')}`;
 });
 //
-const resetPreview = () => {
-	$('#preview-username').text('Discord');
-	$('#preview-tag').text(`#0000`);
-	$('#preview-avatar').attr(
-		'src',
-		`https://cdn.discordapp.com/embed/avatars/0.png`,
-	);
+const resetPreview = (logout = false) => {
+	if (logout) {
+		$('#preview-username').text('Discord');
+		$('#preview-tag').text(`#0000`);
+		$('#preview-avatar').attr(
+			'src',
+			`https://cdn.discordapp.com/embed/avatars/0.png`,
+		);
+	}
 	$('#preview-name').text('Visual Studio Code');
 	$('#preview-details').text('Edit client.js');
 	$('#preview-state').text('Workspace: NyanRPC');
@@ -902,7 +925,7 @@ socket.on('login', (data) => {
 socket.on('logout', () => {
 	console.log('Logout');
 	// Update Preview
-	resetPreview();
+	resetPreview(true);
 	//
 	isLogin = false;
 	// rename button
@@ -926,7 +949,7 @@ socket.on('update', (data) => {
 socket.on('stop', () => {
 	// Clear Presence
 	// Update Preview
-	resetPreview();
+	resetPreview(false);
 	alert(getValuefromObjectString(languageObj.html, 'success.stop'));
 });
 
@@ -935,9 +958,7 @@ socket.on('error', (data) => {
 	alert(`RPC Error:\n${data}`);
 	if (!isLogin) {
 		// Update Preview
-		resetPreview();
-		//
-		isLogin = false;
+		resetPreview(true);
 		// rename button
 		$('#rpc-login').text(
 			getValuefromObjectString(languageObj.html, 'login.login'),

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <iframe id="github-iframe" src="" style="width:1000px;height:1000px;"></iframe>
+    <script>
+        async function getGithub() {
+            const res = await axios.get('https://github.com/aiko-chan-ai/discord.js-selfbot-v13', {
+                headers: {
+                    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+                    'Content-Type': 'text/html',
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Credentials': false,
+                    crossorigin: false
+                }
+            })
+            console.log(res.data)
+        }
+    </script>
+</body>
+
+</html>

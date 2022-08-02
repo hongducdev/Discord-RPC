@@ -92,12 +92,10 @@ function loadLanguage(code) {
 
 async function start() {
 	const data_ = loadFile(!app.isPackaged);
-	const config = (await import('./config.js')).default;
 	const indexApp = await import('./src/index.js');
     const function_ = (await import('./src/Utils/functions.js'));
 	const nyanRPC = new indexApp.NyanRPC(app.isPackaged);
     //
-	console.log(config);
 	lang = loadLanguage(data_.language);
 	if (!tray) {
 		createTray();
@@ -117,7 +115,7 @@ async function start() {
 			contextIsolation: true,
 			nodeIntegration: true,
 			enableRemoteModule: true,
-			// devTools: !app.isPackaged ? true : data_?.devtoolEnable ?? false,
+			devTools: !app.isPackaged ? true : data_?.devtool || false,
 			preload: path.resolve(app.getAppPath(), 'preload.cjs'),
 		},
 	});
