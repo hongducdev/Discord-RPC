@@ -14,6 +14,12 @@ const packageData = require('./package.json');
 const path = require('path');
 const fs = require('fs');
 
+console.log(
+	`Try reading,`,
+	fs.readdirSync(path.resolve(process.env.APPDIR || '.')),
+	process.env,
+);
+
 let tray = null;
 let lang;
 let mainWindow;
@@ -24,7 +30,7 @@ function sleep(miliseconds) {
 }
 
 function createTray(minimize = false) {
-	const icon = path.resolve('.', 'src', 'Assets', 'icon.ico');
+	const icon = path.resolve(process.env.APPDIR || '.', 'src', 'Assets', 'icon.ico');
 	const trayicon = nativeImage.createFromPath(icon);
 	tray ? tray : (tray = new Tray(trayicon.resize({ width: 16 })));
 	const contextMenu = Menu.buildFromTemplate([
@@ -61,13 +67,13 @@ function loadFile(devMode, writeData) {
 		fs.mkdirSync(pathFolder);
 	}
 	const pathFile = devMode
-		? path.resolve('.', 'data.json')
+		? path.resolve(process.env.APPDIR || '.', 'data.json')
 		: path.resolve(pathFolder, 'data.json');
 	//
 	let defaultData = {
 		language: 'en',
 		profile: [],
-		devtool: true,
+		devtool: false,
 		background: null,
 		check_for_update: true,
 	};
@@ -110,13 +116,13 @@ async function start() {
 		resizable: true,
 		title: 'Starting ...',
 		autoHideMenuBar: true,
-		icon: path.resolve('.', 'src', 'Assets', 'icon.ico'),
+		icon: path.resolve(process.env.APPDIR || '.', 'src', 'Assets', 'icon.ico'),
 		webPreferences: {
 			contextIsolation: true,
 			nodeIntegration: true,
 			enableRemoteModule: true,
 			devTools: !app.isPackaged ? true : data_?.devtool || false,
-			preload: path.resolve(app.getAppPath(), 'preload.cjs'),
+			// preload: path.resolve(app.getAppPath(), 'preload.cjs'),
 		},
 	});
 	await nyanRPC.start();

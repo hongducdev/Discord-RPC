@@ -2,10 +2,21 @@
   "name": "rpcapps",
   "version": "2.0.0",
   "description": "Simple Discord RPC Client ~nya",
+  "author": "Shiraori <example@gmail.com>",
+  "homepage": "https://github.com",
   "build": {
     "appId": "NyanRPC",
+    "asar": false,
+    "asarUnpack": [
+      "**/*"
+    ],
     "productName": "NyanRPC",
-    "copyright": "Copyright © year ${author}",
+    "copyright": "Copyright © 2022 Shiraori#1782 & PinkDuwc._#3443",
+    "mac": {
+      "category": "public.app-category.utilities",
+      "target": "dmg",
+      "icon": "src/Assets/icon.icns"
+    },
     "win": {
       "target": [
         "nsis"
@@ -27,6 +38,9 @@
       "createDesktopShortcut": true,
       "createStartMenuShortcut": true,
       "menuCategory": false
+    },
+    "linux": {
+      "target": ["AppImage", "deb"]
     }
   },
   "main": "index.cjs",
@@ -35,11 +49,12 @@
     "test": "npm i && npm run download && npm run build && pause",
     "start": "electron index.cjs",
     "download": "npm i -g electron electron-builder",
-    "buildPortable": "electron-packager . nyan --overwrite --platform=win32 --arch=x64 --electronVersion=18.0.4  --icon=src/Assets/icon.ico --prune=true --out=release-builds --version-string.CompanyName=Aiko  --version-string.FileDescription=A Discord RPC product  --version-string.ProductName=\"NyanRPC\"",
-    "build": "electron-builder"
+    "buildPortable": "electron-packager . nyan --overwrite --platform=win32 --arch=x64 --electronVersion=19.0.10  --icon=src/Assets/icon.ico --prune=true --out=release-builds --version-string.CompanyName=Aiko  --version-string.FileDescription=A Discord RPC product  --version-string.ProductName=\"NyanRPC\"",
+    "build:win": "electron-builder -w --x64",
+    "build:mac": "electron-builder -m --x64",
+    "build:linux": "electron-builder -l --x64"
   },
   "keywords": [],
-  "author": "",
   "license": "ISC",
   "dependencies": {
     "ascii-table": "^0.0.9",
@@ -54,6 +69,7 @@
     "url": "^0.11.0"
   },
   "devDependencies": {
-    "electron": "^19.0.10"
+    "electron": "^19.0.10",
+    "electron-builder": "^23.3.3"
   }
 }

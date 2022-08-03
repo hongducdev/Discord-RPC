@@ -4,11 +4,11 @@ export default {
 	path: '/rpc',
 	run: async (req, res) => {
 		// Check path correct with fs
-		let pathCorrect = path.resolve('.', 'src', 'Views', 'index.html');
+		let pathCorrect = path.resolve(process.env.APPDIR || '.', 'src', 'Views', 'index.html');
 		// check if path exists
 		if (!fs.existsSync(pathCorrect)) {
 			pathCorrect = path.resolve(
-				'.',
+				process.env.APPDIR || '.',
 				'resources',
 				'app',
 				'src',
@@ -17,6 +17,6 @@ export default {
 			);
 		}
 		res.sendFile(pathCorrect);
-		// res.sendFile(path.resolve('.', 'index.html'));
+		// res.sendFile(path.resolve(process.env.APPDIR || '.', 'index.html'));
 	},
 };

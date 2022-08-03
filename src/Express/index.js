@@ -25,12 +25,10 @@ app.use(
 );
 
 app.use(cors());
-let pathCorrect_ = path.resolve('.', 'resources', 'app');
+let pathCorrect_ = path.resolve(process.env.APPDIR || '.', 'resources', 'app');
 // check if path exists
 if (!fs.existsSync(pathCorrect_)) {
-	pathCorrect_ = path.resolve(
-		'.',
-	);
+	pathCorrect_ = path.resolve(process.env.APPDIR || '.');
 }
 app.use(express.static(pathCorrect_));
 
@@ -41,11 +39,11 @@ eventTable.setHeading(
 	chalk.bold.blueBright('File'),
 	chalk.bold.greenBright('Status'),
 );
-let pathCorrect = path.resolve('.', 'src', 'Express', 'routes');
+let pathCorrect = path.resolve(process.env.APPDIR || '.', 'src', 'Express', 'routes');
 // check if path exists
 if (!fs.existsSync(pathCorrect)) {
 	pathCorrect = path.resolve(
-		'.',
+		process.env.APPDIR || '.',
 		'resources',
 		'app',
 		'src',

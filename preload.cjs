@@ -1,1 +1,0 @@
-console.log('RPC Preload - Electron but nothing here');

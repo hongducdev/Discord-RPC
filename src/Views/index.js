@@ -29,6 +29,8 @@ var loginMode = null;
 var isLogin = false;
 var buttonMetadata = [];
 var activeProfileData;
+var languageSetting = null;
+var allLanguage = [];
 // Regex filter LanguageCode
 const regex = /(?<=>)(\s*)(JSON=\S+)(\s*)(?=<\/)/gim;
 // Load Language
@@ -226,7 +228,10 @@ const timer = () => {
 };
 //
 const getProfile = () => {
-	const profileName = $('#profile-name').val().length > 0 ? $('#profile-name').val() : newProfileName;
+	const profileName =
+		$('#profile-name').val().length > 0
+			? $('#profile-name').val()
+			: newProfileName;
 	$(`profile-${activeProfile}`).text(profileName[0]);
 	return Object.assign(settingData.profile[activeProfile], {
 		profile: profileName,
@@ -654,6 +659,17 @@ const loadAssetsFromID = async (botId) => {
 	const assets = res.data.map((asset) => `<option value="${asset.name}">`);
 	document.getElementById('assets').innerHTML = assets.join('\n');
 };
+const loadLangs = async () => {
+	const res = await axios.get(
+		`${document.URL.replace('/rpc', '/language.json')}`,
+	);
+	allLanguage = res.data;
+	const langs = res.data.map(
+		(lang) =>
+			`<div class="dropdown-list__item dropdown-list__item-language" id="${lang.lang_code}">${lang.local_name}</div>`,
+	);
+	document.getElementById('list-language').innerHTML = langs.join('\n');
+};
 const checkURL = (url) => {
 	try {
 		new URL(url);
@@ -829,8 +845,73 @@ const addProfile = () => {
 const modalSetting = () => {
 	const iconSetting = $('.icon__setting');
 	const overlay = $('.overlay');
-	const modal = $('.modal__setting');
-	const modalClose = $('.modal__control__close');
+	const modal = $('#modal_setting');
+	const modalClose = $('#modal_setting_close');
+	const saveButton = $('#modal_setting_save');
+	$('#list-language').on(
+		'click',
+		'.dropdown-list__item-language',
+		function (event) {
+			console.log('clicked language', event);
+			event.preventDefault();
+			const id = $(this).attr('id');
+			console.log(id);
+			languageSetting = id;
+			// Edit
+			$(`#title-lang`).text($(`#${id}`).text());
+		},
+	);
+	overlay.css('display', 'none');
+	modal.css('display', 'none');
+	iconSetting.click(() => {
+		overlay.css('display', 'block');
+		modal.css('display', 'block');
+	});
+
+	modalClose.click(() => {
+		overlay.css('display', 'none');
+		modal.css('display', 'none');
+	});
+
+	saveButton.click(() => {
+		if (!languageSetting) {
+			modalClose.trigger('click');
+		} else {
+			socket.emit('saveProfile', {
+				language: languageSetting,
+			});
+			setTimeout(() => {
+				alert(
+					allLanguage.find((obj) => obj.lang_code == languageSetting)
+						.change_notif,
+				);
+				socket.emit('restart');
+			}, 1000);
+		}
+	});
+};
+const modalGithub = () => {
+	const iconSetting = $('.icon__github');
+	const overlay = $('.overlay');
+	const modal = $('#modal_github');
+	const modalClose = $('#modal_github_close');
+	overlay.css('display', 'none');
+	modal.css('display', 'none');
+	iconSetting.click(() => {
+		overlay.css('display', 'block');
+		modal.css('display', 'block');
+	});
+
+	modalClose.click(() => {
+		overlay.css('display', 'none');
+		modal.css('display', 'none');
+	});
+};
+const modalDiscord = () => {
+	const iconSetting = $('.icon__discord');
+	const overlay = $('.overlay');
+	const modal = $('#modal_discord');
+	const modalClose = $('#modal_discord_close');
 	overlay.css('display', 'none');
 	modal.css('display', 'none');
 	iconSetting.click(() => {
@@ -845,16 +926,7 @@ const modalSetting = () => {
 };
 // Ready event
 $(document).ready(async () => {
-	await replaceAll();
-	timer();
-	buttonTimeEvent();
-	handlerProfileClick();
-	buttonLoginEvent();
-	addProfile();
-	loadProfile(0);
-	presenceHandler();
-	buttonClick();
-	modalSetting();
+	socket.emit('getLang');
 });
 
 //
@@ -886,6 +958,21 @@ const socket = io();
 socket.on('ready', () => {
 	console.log('Connect WS');
 	socket.emit('getSaveData');
+});
+socket.on('getLang', async (langCode) => {
+	await replaceAll(langCode);
+	timer();
+	buttonTimeEvent();
+	handlerProfileClick();
+	buttonLoginEvent();
+	addProfile();
+	loadProfile(0);
+	presenceHandler();
+	buttonClick();
+	modalDiscord();
+	modalGithub();
+	modalSetting();
+	await loadLangs();
 });
 // receive data
 socket.on('saveData', (data) => {

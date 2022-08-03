@@ -18,10 +18,11 @@ export default {
 		folderName,
 		commonJs = false,
 		packaged = false,
+		setSource = process.env.APPDIR || '.'
 	) {
 		const pathEvent = packaged
-			? path.resolve('.', 'resources', 'app', 'src', folderName)
-			: path.resolve('.', 'src', folderName);
+			? path.resolve(setSource, 'resources', 'app', 'src', folderName)
+			: path.resolve(setSource, 'src', folderName);
 		const eventTable = new ascii(`Event ${folderName} Status`);
 		eventTable.setHeading(
 			chalk.bold.yellowBright('Name'),

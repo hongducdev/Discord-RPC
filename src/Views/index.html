@@ -409,11 +409,9 @@
                         </div>
                         <div class="preview-rpc-bar">
                             <ul class="preview-rpc-set-list">
-                                <li><a href=""><i class="fas fa-donate icon-rpc-preview"></i></a></li>
-                                <li><a href=""><i class="fab fa-discord icon-rpc-preview"></i></a></li>
-                                <li><a href=""><i class="fab fa-github icon-rpc-preview"></i></a></li>
-                                <li><a href=""><i class="fas fa-globe icon-rpc-preview"></i></a></li>
-                                <li><a href=""><i class="fas fa-question-circle icon-rpc-preview"></i></a></li>
+                                <li class="icon__discord"><i class="fab fa-discord icon-rpc-preview"></i></li>
+                                <li class="icon__github"><i class="fab fa-github icon-rpc-preview"></i></li>
+                                <li><a href="https://discord.com/developers/applications"><i class="fas fa-question-circle icon-rpc-preview"></i></a></li>
                                 <li class="icon__setting"><i class="fas fa-cog icon-rpc-preview"></i></li>
                             </ul>
                         </div>
@@ -421,10 +419,10 @@
                 </div>
             </div>
         </div>
-        <div class="modal__setting">
+        <div class="modal__setting modal" id="modal_setting">
             <div class="modal__control">
                 <div class="modal__control__bar">
-                    <div class="modal__control__close">
+                    <div class="modal__control__close setting__close" id="modal_setting_close">
                         <i class="fas fa-times modal__control__close__icon"></i>
                     </div>
                     <div class="modal__control__yellow"></div>
@@ -435,28 +433,117 @@
                 </div>
             </div>
             <div class="modal__control__content">
-                <div class="modal__control__content__update"></div>
+                <!--
+                <div class="modal__control__content__update">
+                    <input type="checkbox">
+                    <label for="">JSON=modal.setting.update</label>
+                </div>
+            -->
                 <div class="modal__control__content__languague">
                     <p class="">JSON=modal.setting.language.title</p>
                     <div class="dropdown dropdown-language">
                         <div class="dropdown-select dropdown-select-language">
-                            <span class="select select-language">
+                            <span class="select select-language" id="title-lang">
                                 JSON=modal.setting.language.item
                             </span>
                             <i class="fa fa-caret-down icon"></i>
                         </div>
-                        <div class="dropdown-list dropdown-list-language">
-                            <div class="dropdown-list__item dropdown-list__item-language">
-                                EngLish
-                            </div>
-                            <div class="dropdown-list__item dropdown-list__item-language">
-                                Vietnamese
-                            </div>
+                        <div class="dropdown-list dropdown-list-language" id="list-language">
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="modal__control__save" id="modal_setting_save">
+                <button class="btn btn-save">JSON=profile.save</button>
+            </div>
         </div>
+
+        <div class="modal__github modal" id="modal_github">
+            <div class="modal__control">
+                <div class="modal__control__bar">
+                    <div class="modal__control__close github__close" id="modal_github_close">
+                        <i class="fas fa-times modal__control__close__icon"></i>
+                    </div>
+                    <div class="modal__control__yellow"></div>
+                    <div class="modal__control__green"></div>
+                </div>
+                <div class="modal__control__title modal__github__title">
+                    <h2>Github</h2>
+                </div>
+            </div>
+            <div class="modal__control__content modal__github__content">
+                <div class="github-hongduc">
+                    <img src="https://avatars.githubusercontent.com/u/73995275?v=4" alt="avt-github-hongduc">
+                    <a href="https://github.com/hongduccodedao">
+                        hongduccodedao
+                    </a>
+                    <p>🎨 Front-End</p>
+                </div>
+                <div class="github-shiraori">
+                    <img src="https://avatars.githubusercontent.com/u/71698422?v=4" alt="avt-github-shiraori">
+                    <a href="https://github.com/aiko-chan-ai">
+                        aiko-chan-ai
+                    </a>
+                    <p>🖥️ Back-End</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal__discord modal" id="modal_discord">
+            <div class="modal__control">
+                <div class="modal__control__bar">
+                    <div class="modal__control__close discord__close" id="modal_discord_close">
+                        <i class="fas fa-times modal__control__close__icon"></i>
+                    </div>
+                    <div class="modal__control__yellow"></div>
+                    <div class="modal__control__green"></div>
+                </div>
+                <div class="modal__control__title modal__discord__title">
+                    <h2>Discord</h2>
+                </div>
+            </div>
+            <div class="modal__control__content modal__discord__content">
+                <div class="discord-hongduc">
+                    <img src="https://cdn.discordapp.com/avatars/769244837030526976/bf3edd92fa4664702d7d5cfbf620e78f.webp?size=1024"
+                        alt="avt-discord-hongduc">
+                    <a href="https://discord.com/users/769244837030526976">
+                        PinkDuwc._#3443
+                    </a>
+                    <p>🎨 Front-End</p>
+                </div>
+                <div class="discord-shiraori">
+                    <img src="https://cdn.discordapp.com/avatars/721746046543331449/8eed40c9def99c03b26fb666129ab3f6.webp?size=1024"
+                        alt="avt-discord-shiraori">
+                    <a href="https://discord.com/users/721746046543331449">
+                        Shiraori#1782
+                    </a>
+                    <p>🖥️ Back-End</p>
+                </div>
+            </div>
+        </div>
+
+        <!--
+        <div class="check__updated">
+            <div class="check__updated__content">
+                <div class="check__updated__content__icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <div class="check__updated__content__text">
+                    <p>JSON=check.update.success</p>
+                </div>
+            </div>
+        </div>
+        <div class="check__update">
+            <div class="check__update__content">
+                <div class="check__update__content__icon">
+                    <i class="fas fa-exclamation-circle"></i>
+                </div>
+                <div class="check__update__content__text">
+                    <p>JSON=check.update.error</p>
+                </div>
+            </div>
+        </div>
+        -->
     </div>
 
     <!-- font awesome -->

@@ -1,0 +1,163 @@
+{
+    "exit": {
+        "title": "Xác nhận",
+        "message": "Bạn có muốn thoát khỏi ứng dụng?",
+        "buttons": [
+            "Chắc chắn rồi",
+            "Chưa đâu"
+        ]
+    },
+    "minimize": {
+        "title": "NyanRPC đang chạy trong nền",
+        "body": "Bạn có thể đóng hoàn toàn trong taskbar"
+    },
+    "tray": {
+        "hide": "Hiện ứng dụng",
+        "show": "Ẩn ứng dụng",
+        "exit": "Thoát"
+    },
+    "html": {
+        "profile": {
+            "save": "Lưu",
+            "delete": "Xóa",
+            "name": {
+                "title": "Tên cấu hình",
+                "message": "Nhập tên của cấu hình bạn muốn lưu"
+            }
+        },
+        "login": {
+            "self": "Selfbot",
+            "app": "ID Ứng dụng (Discord App)",
+            "login": "Đăng nhập",
+            "logout": "Đăng xuất",
+            "item": "Select Item"
+        },
+        "rpc": {
+            "name": {
+                "title": "Name",
+                "message": "Tên ứng dụng - Chỉ cho chế độ Selfbot"
+            },
+            "appid": {
+                "title": "Application ID",
+                "message": "ID ứng dụng - Chỉ cho chế độ Selfbot"
+            },
+            "details": {
+                "title": "Details",
+                "message": "Dòng thứ 1"
+            },
+            "state": {
+                "title": "State",
+                "message": "Dòng thứ 2"
+            },
+            "party": {
+                "title": "Party",
+                "message": "Dòng thứ 2 (min trên max)",
+                "of": "trên"
+            },
+            "asset": {
+                "large": {
+                    "image": {
+                        "title": "Ảnh lớn",
+                        "message": "Có thể là URL, AssetName"
+                    },
+                    "text": {
+                        "title": "Tên ảnh lớn",
+                        "message": "Hiển thị khi chuột được di chuyển vào"
+                    }
+                },
+                "small": {
+                    "image": {
+                        "title": "Ảnh nhỏ",
+                        "message": "Có thể là URL, AssetName"
+                    },
+                    "text": {
+                        "title": "Tên ảnh nhỏ",
+                        "message": "Hiển thị khi chuột được di chuyển vào"
+                    }
+                }
+            },
+            "button1": {
+                "message": "Thêm nút vào hoạt động",
+                "title": "Button 1",
+                "url": {
+                    "title": "URL",
+                    "message": "URL khi ấn vào nút"
+                },
+                "text": {
+                    "title": "Text",
+                    "message": "Tên hiển thị của nút"
+                }
+            },
+            "button2": {
+                "message": "Thêm nút (2) vào hoạt động",
+                "title": "Button 2",
+                "url": {
+                    "title": "URL",
+                    "message": "URL khi ấn vào nút"
+                },
+                "text": {
+                    "title": "Text",
+                    "message": "Tên hiển thị của nút"
+                }
+            },
+            "time": {
+                "title": "Thời gian",
+                "message": "{Thời gian} bắt đầu cho hoạt động",
+                "options": {
+                    "off": "Không dùng",
+                    "app": "Từ khi khởi động ứng dụng",
+                    "update": "Lần cập nhật trạng thái cuối",
+                    "local": "Đồng bộ với đồng hồ",
+                    "custom": "Tùy chỉnh"
+                }
+            }
+        },
+        "preview": {
+            "type": "CHƠI GAME",
+            "time": "đã trôi qua",
+            "asset": {
+                "large": "Đây là tên ảnh lớn",
+                "small": "Đây là tên ảnh nhỏ"
+            }
+        },
+        "app": {
+            "update": "Cập nhật",
+            "stop": "Dừng"
+        },
+        "error": {
+            "maxprofiles": "Bạn chỉ có thể có tối đa 10 cấu hình.",
+            "profile_login_valid_id": "ID ứng dụng Discord không hợp lệ",
+            "profile_login_valid_token": "Token tài khoản người dùng Discord không hợp lệ",
+            "login": [
+                "Whoa, bạn vẫn chưa đăng nhập NyanRPC vào Discord :c",
+                "Đăng nhập vào Discord và thử lại đi, baka",
+                "Heh, bạn không thể đặt trạng thái khi chưa đăng nhập, baka"
+            ]
+        },
+        "confirm": {
+            "delete": "Bạn có muốn xóa cấu hình này?",
+            "deleted": "Cấu hình đã được xóa (Hãy save để lưu thay đổi) !",
+            "logout": "Bạn có muốn đăng xuất khỏi ứng dụng (sẽ mất các trạng thái)?"
+        },
+        "success": {
+            "stop": "Đã xóa bỏ các trạng thái",
+            "save": "Đã lưu thay đổi"
+        },
+        "modal": {
+            "setting": {
+                "title": "Cài đặt",
+                "language": {
+                    "title": "Chọn ngôn ngữ",
+                    "item": "Chọn ở đây"
+                },
+                "update": "Tự động kiểm tra cập nhật"
+            }
+        },
+        "check": {
+            "update": {
+                "success": "NyanRPC đã được cập nhật\nPhiên bản hiện tại: {version}",
+                "error": "NyanRPC đã lỗi thời\nPhiên bản hiện tại: {version} - Phiên bản mới nhất: {latest}"
+            }
+        }
+    }
+}

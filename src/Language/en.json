@@ -149,7 +149,14 @@
                 "language": {
                     "title": "Choose Language",
                     "item":"Select Item"
-                }
+                },
+                "update": "Auto check for updates"
+            }
+        },
+        "check": {
+            "update": {
+                "success": "NyanRPC is up to date\nCurrent version: {version}",
+                "error": "NyanRPC is outdated\nCurrent version: {version} - Latest version: {latest}"
             }
         }
     }
