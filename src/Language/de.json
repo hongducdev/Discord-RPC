@@ -1,0 +1,164 @@
+{
+    "exit": {
+        "title": "Bestätigen",
+        "message": "Bist du dir sicher, dass du das Programm beenden möchtest?",
+        "buttons": [
+            "Ja",
+            "Nein"
+        ]
+    },
+    "minimize": {
+        "title": "NyanRPC läuft im Hintergrund",
+        "body": "Du kannst das Programm in der Taskleiste schließen."
+    },
+    "tray": {
+        "hide": "Ausblenden",
+        "show": "Anzeigen",
+        "exit": "Schließen"
+    },
+    "html": {
+        "profile": {
+            "save": "Speichern",
+            "delete": "Löschen",
+            "name": {
+                "title": "Profile Name",
+                "message": "Bitte gib einen Namen für das Profil ein."
+            }
+        },
+        "login": {
+            "self": "Selfbot",
+            "app": "Application ID (Discord App)",
+            "login": "Login",
+            "logout": "Logout",
+            "item": "Item auswählen"
+        },
+        "rpc": {
+            "name": {
+                "title": "Name",
+                "message": "Name der Applikation - Nur für Selfbots"
+            },
+            "appid": {
+                "title": "Applikation ID",
+                "message": "ID der Applikation - Nur für Selfbot"
+            },
+            "details": {
+                "title": "Details",
+                "message": "RPC Details"
+            },
+            "state": {
+                "title": "Zustand",
+                "message": "RPC Zustand"
+            },
+            "party": {
+                "title": "Party",
+                "message": "RPC Party (min , max)",
+                "of": "von"
+            },
+            "asset": {
+                "large": {
+                    "image": {
+                        "title": "Großes Bild",
+                        "message": "Großer Bild-Link, AssetID, AssetName"
+                    },
+                    "text": {
+                        "title": "Großer Text",
+                        "message": "Großer Text (Hover)"
+                    }
+                },
+                "small": {
+                    "image": {
+                        "title": "Kleines Bild",
+                        "message": "Kleiner Bild-Link, AssetID, AssetName"
+                    },
+                    "text": {
+                        "title": "Kleiner Text",
+                        "message": "Kleiner Text (Hover)"
+                    }
+                }
+            },
+            "button1": {
+                "message": "Füge Buttons zum RPC hinzu",
+                "title": "Button 1",
+                "url": {
+                    "title": "Link",
+                    "message": "Button Link"
+                },
+                "text": {
+                    "title": "Text",
+                    "message": "Button Text"
+                }
+            },
+            "button2": {
+                "message": "Füge Buttons zum RPC hinzu",
+                "title": "Button 2",
+                "url": {
+                    "title": "Link",
+                    "message": "Button Link"
+                },
+                "text": {
+                    "title": "Text",
+                    "message": "Button Text"
+                }
+            },
+            "time": {
+                "title": "Timestamp",
+                "message": "{Time} verstrichen seit dem Start des RPCs",
+                "options": {
+                    "off": "Keine",
+                    "app": "Seit NyanRPC gestarted ist",
+                    "update": "Seit dem letzten presence update",
+                    "local": "Deine lokale Zeit (Zeit Sync)",
+                    "custom": "Benutzerdefiniert"
+                }
+            }
+        },
+        "preview": {
+            "type": "SPIELT EIN SPIEL",
+            "time": "seit",
+            "asset": {
+                "large": "Das ist ein großes Bild",
+                "small": "Das ist ein kleines Bild"
+            }
+        },
+        "app": {
+            "update": "Aktualisiere RPC",
+            "stop": "Stop"
+        },
+        "error": {
+            "maxprofiles": "Du kannst nur 10 Profile haben.",
+            "profile_login_valid_id": "Ungültige Discord Applikations ID",
+            "profile_login_valid_token": "Ungültiger Discord TOKEN",
+            "login": [
+                "Whoa! Du bist nicht bei Discord eingeloggt!",
+                "Bitte logge dich bei Discord ein und versuche es erneut, baka",
+                "Heh, du kannst dich nicht ohne einem Token oder einer Applikations ID einloggen, baka"
+            ]
+        },
+        "confirm": {
+            "delete": "Bist du sicher, dass du das Profil löschen möchtest?",
+            "deleted": "Profil gelöscht!",
+            "logout": "Bist du dir sicher, dass du dich ausloggen möchtest?",
+            "selfbot": "ACHTUNG\nDie Benutzung von Selfbots ist nicht erlaubt und kann zu einer Sperrung führen. Möchtest du dennoch fortfahren?"
+        },
+        "success": {
+            "stop": "Presence erfolgreich gestoppt",
+            "save": "Daten erfolgreich gespeichert"
+        },
+        "modal": {
+            "setting": {
+                "title": "Einstellungen",
+                "language": {
+                    "title": "Sprache auswählen",
+                    "item":"Wähle eine Sprache aus"
+                },
+                "update": "Automatische Aktualisierung"
+            }
+        },
+        "check": {
+            "update": {
+                "success": "NyanRPC ist auf der neusten Version\nAktuelle Version: {version}",
+                "error": "NyanRPC is nicht mehr aktuell\nAktuelle Version: {version} - Neuste Version: {latest}"
+            }
+        }
+    }
+}

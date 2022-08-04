@@ -18,5 +18,15 @@
         },
         "lang_code": "vi",
         "change_notif": "Đã chuyển ngôn ngữ sang Tiếng Việt, ứng dụng sẽ khởi động lại để lưu thay đổi"
+    },
+    {
+        "en_name": "German",
+        "local_name": "Deutsch",
+        "translator": {
+            "name": "Mittelblut9",
+            "discord": "https://discord.com/users/395923095472570368"
+        },
+        "lang_code": "de",
+        "change_notif": "Die Sprache wurde zu Deutsch geändert, die Anwendung wird neu gestartet, um die Änderungen zu speichern"
     }
 ]
