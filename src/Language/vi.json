@@ -137,7 +137,8 @@
         "confirm": {
             "delete": "Bạn có muốn xóa cấu hình này?",
             "deleted": "Cấu hình đã được xóa (Hãy save để lưu thay đổi) !",
-            "logout": "Bạn có muốn đăng xuất khỏi ứng dụng (sẽ mất các trạng thái)?"
+            "logout": "Bạn có muốn đăng xuất khỏi ứng dụng (sẽ mất các trạng thái)?",
+            "selfbot": "CẢNH BÁO\nSử dụng SELFBOT có thể khiến bạn bị cấm do vi phạm Discord ToS. Chắc chắn chứ?"
         },
         "success": {
             "stop": "Đã xóa bỏ các trạng thái",

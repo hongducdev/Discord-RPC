@@ -340,6 +340,10 @@ a {
   padding: 20px;
 }
 
+fieldset {
+  border: none;
+}
+
 .root {
   background-color: rgb(54, 57, 63);
   width: 100vw;

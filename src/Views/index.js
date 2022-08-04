@@ -595,15 +595,15 @@ const updatePreview = (data, rpc = true) => {
 	}
 	if (buttons[0]) {
 		$('#switch')[0].checked = true;
-		$('#btn-1-url').val(buttons[0]);
-		$('#btn-1-text').val(buttonMetadata[0]);
+		$('#btn-1-url').val(buttonMetadata[1]);
+		$('#btn-1-text').val(buttons[0]);
 	} else {
 		$('#switch')[0].checked = false;
 	}
 	if (buttons[1]) {
 		$('#switch-2')[0].checked = true;
-		$('#btn-2-url').val(buttons[1]);
-		$('#btn-2-text').val(buttonMetadata[1]);
+		$('#btn-2-url').val(buttonMetadata[1]);
+		$('#btn-2-text').val(buttons[1]);
 	} else {
 		$('#switch-2')[0].checked = false;
 	}
@@ -786,11 +786,19 @@ const buttonLoginEvent = () => {
 			// Add class disable
 			$('#dropdown-login').addClass('disable');
 			// Disable button
-			// Send Login
-			socket.emit('login', {
-				mode: loginMode,
-				id: input.val(),
-			});
+			if (loginMode == 2 && confirm(getValuefromObjectString(languageObj.html, 'confirm.selfbot'))) {
+				// Send Login
+				socket.emit('login', {
+					mode: loginMode,
+					id: input.val(),
+				});
+			} else if (loginMode == 1) {
+				// Send Login
+				socket.emit('login', {
+					mode: loginMode,
+					id: input.val(),
+				});
+			}
 		} else if (
 			confirm(
 				getValuefromObjectString(languageObj.html, 'confirm.logout'),

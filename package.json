@@ -1,6 +1,6 @@
 {
-  "name": "rpcapps",
-  "version": "2.0.0",
+  "name": "NyanRPC",
+  "version": "2.0.1",
   "description": "Simple Discord RPC Client ~nya",
   "author": "Shiraori <example@gmail.com>",
   "homepage": "https://github.com",
@@ -40,7 +40,10 @@
       "menuCategory": false
     },
     "linux": {
-      "target": ["AppImage", "deb"]
+      "target": [
+        "AppImage",
+        "deb"
+      ]
     }
   },
   "main": "index.cjs",
@@ -49,7 +52,7 @@
     "test": "npm i && npm run download && npm run build && pause",
     "start": "electron index.cjs",
     "download": "npm i -g electron electron-builder",
-    "buildPortable": "electron-packager . nyan --overwrite --platform=win32 --arch=x64 --electronVersion=19.0.10  --icon=src/Assets/icon.ico --prune=true --out=release-builds --version-string.CompanyName=Aiko  --version-string.FileDescription=A Discord RPC product  --version-string.ProductName=\"NyanRPC\"",
+    "buildPortable": "electron-packager . nyan --overwrite --platform=win32 --arch=x64 --electronVersion=20.0.0  --icon=src/Assets/icon.ico --prune=true --out=release-builds --version-string.CompanyName=Aiko  --version-string.FileDescription=A Discord RPC product  --version-string.ProductName=\"NyanRPC\"",
     "build:win": "electron-builder -w --x64",
     "build:mac": "electron-builder -m --x64",
     "build:linux": "electron-builder -l --x64"
@@ -62,14 +65,14 @@
     "chalk": "^5.0.1",
     "cors": "^2.8.5",
     "discord-rpc": "^4.0.1",
-    "discord.js-selfbot-v13": "^2.4.7",
+    "discord.js-selfbot-v13": "^2.4.10",
     "express": "^4.18.1",
     "path": "^0.12.7",
     "socket.io": "^4.5.1",
     "url": "^0.11.0"
   },
   "devDependencies": {
-    "electron": "^19.0.10",
+    "electron": "^20.0.0",
     "electron-builder": "^23.3.3"
   }
 }
