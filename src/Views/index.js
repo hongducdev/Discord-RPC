@@ -595,7 +595,7 @@ const updatePreview = (data, rpc = true) => {
 	}
 	if (buttons[0]) {
 		$('#switch')[0].checked = true;
-		$('#btn-1-url').val(buttonMetadata[1]);
+		$('#btn-1-url').val(buttonMetadata[0]);
 		$('#btn-1-text').val(buttons[0]);
 	} else {
 		$('#switch')[0].checked = false;
