@@ -14,12 +14,6 @@ const packageData = require('./package.json');
 const path = require('path');
 const fs = require('fs');
 
-console.log(
-	`Try reading,`,
-	fs.readdirSync(path.resolve(process.env.APPDIR || '.')),
-	process.env,
-);
-
 let tray = null;
 let lang;
 let mainWindow;

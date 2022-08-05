@@ -1,6 +1,6 @@
 {
   "name": "NyanRPC",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Simple Discord RPC Client ~nya",
   "author": "Shiraori <example@gmail.com>",
   "homepage": "https://github.com",
@@ -14,19 +14,15 @@
     "copyright": "Copyright © 2022 Shiraori#1782 & PinkDuwc._#3443",
     "mac": {
       "category": "public.app-category.utilities",
-      "target": "dmg",
-      "icon": "src/Assets/icon.icns"
+      "target": "dmg"
     },
     "win": {
       "target": [
         "nsis"
       ],
-      "icon": "src/Assets/icon.ico",
       "legalTrademarks": "GitHub"
     },
     "nsis": {
-      "installerIcon": "src/Assets/icon.ico",
-      "uninstallerIcon": "src/Assets/icon.ico",
       "uninstallDisplayName": "${productName} ${version}",
       "license": "license.txt",
       "multiLanguageInstaller": false,
@@ -52,7 +48,7 @@
     "test": "npm i && npm run download && npm run build && pause",
     "start": "electron index.cjs",
     "download": "npm i -g electron electron-builder",
-    "buildPortable": "electron-packager . nyan --overwrite --platform=win32 --arch=x64 --electronVersion=20.0.0  --icon=src/Assets/icon.ico --prune=true --out=release-builds --version-string.CompanyName=Aiko  --version-string.FileDescription=A Discord RPC product  --version-string.ProductName=\"NyanRPC\"",
+    "buildPortable": "electron-packager . nyan --overwrite --platform=win32 --arch=x64 --electronVersion=20.0.0  --icon=build/icon.png --prune=true --out=release-builds --version-string.CompanyName=Aiko  --version-string.FileDescription=A Discord RPC product  --version-string.ProductName=\"NyanRPC\"",
     "build:win": "electron-builder -w --x64",
     "build:mac": "electron-builder -m --x64",
     "build:linux": "electron-builder -l --x64"
