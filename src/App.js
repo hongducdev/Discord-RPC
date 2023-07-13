@@ -1,25 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import { Suspense, lazy } from "react";
+import { Routes, Route } from "react-router-dom";
+import MainLayout from "./layout/MainLayout";
+import { paths } from "./utils/paths";
+import Loading from "./components/Loading/Loading";
+const Home = lazy(() => import("./pages/Home"));
+const About = lazy(() => import("./pages/About"));
+const Settings = lazy(() => import("./pages/Setting"));
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="dark:ctp-mocha">
+      <Suspense
+        fallback={
+          <div className="w-screen h-screen flex items-center justify-center bg-gradient-to-br from-ctp-base to-ctp-crust">
+            <Loading />
+          </div>
+        }
+      >
+        <Routes>
+          <Route element={<MainLayout />}>
+            <Route path={paths.HOME} element={<Home />} />
+            <Route path={paths.ABOUT} element={<About />} />
+            <Route path={paths.SETTINGS} element={<Settings />} />
+          </Route>
+        </Routes>
+      </Suspense>
     </div>
   );
-}
+};
 
 export default App;
