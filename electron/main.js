@@ -183,13 +183,20 @@ async function createWindow() {
 
 	// IPC Events (Discord RPC)
 	ipcMain.on('login', (event, args) => {
-		clientRPC
+		if (clientRPC.ready) {
+			mainWindow.webContents.send('login-response', {
+				success: false,
+				error: new Error('Already logged in'),
+			});
+		} else {
+			clientRPC
 			.login({ clientId: args })
 			.then(() => {
 				mainWindow.webContents.send('login-response', {
 					success: true,
 					user: clientRPC.user,
 				});
+				clientRPC.ready = true;
 			})
 			.catch((err) => {
 				mainWindow.webContents.send('login-response', {
@@ -197,6 +204,69 @@ async function createWindow() {
 					error: err,
 				});
 			});
+		}
+	});
+
+	ipcMain.on('setActivity', (event, args) => {
+		if (clientRPC.ready) {
+			clientRPC.setActivity(args).then((res) => {
+				mainWindow.webContents.send('setActivity-response', {
+					success: true,
+					result: res,
+				});
+			}).catch((err) => {
+				mainWindow.webContents.send('setActivity-response', {
+					success: false,
+					error: err,
+				});
+			});
+		} else {
+			mainWindow.webContents.send('setActivity-response', {
+				success: false,
+				error: new Error('Discord RPC is not ready'),
+			});
+		}
+	});
+
+	ipcMain.on('clearActivity', (event) => {
+		if (clientRPC.ready) {
+			clientRPC.clearActivity().then((res) => {
+				mainWindow.webContents.send('clearActivity-response', {
+					success: true,
+					result: res,
+				});
+			}).catch((err) => {
+				mainWindow.webContents.send('clearActivity-response', {
+					success: false,
+					error: err,
+				});
+			});
+		} else {
+			mainWindow.webContents.send('clearActivity-response', {
+				success: false,
+				error: new Error('Discord RPC is not ready'),
+			});
+		}
+	});
+
+	ipcMain.on('logout', (event) => {
+		if (clientRPC.ready) {
+			clientRPC.destroy().then((res) => {
+				mainWindow.webContents.send('logout-response', {
+					success: true,
+					result: res,
+				});
+				// Reinitialize clientRPC
+				clientRPC = new RPC.Client({
+					transport: 'ipc',
+				});
+			});
+		} else {
+			mainWindow.webContents.send('logout-response', {
+				success: false,
+				error: new Error('Discord RPC is not ready'),
+			});
+		}
 	});
 }
 

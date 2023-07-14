@@ -26,4 +26,28 @@ contextBridge.exposeInMainWorld('electron', {
 			});
 		});
 	},
+	setActivity: (data) => {
+		return new Promise((resolve) => {
+			ipcRenderer.send('setActivity', data);
+			ipcRenderer.once('setActivity-response', (event, response) => {
+				resolve(response);
+			});
+		});
+	},
+	clearActivity: () => {
+		return new Promise((resolve) => {
+			ipcRenderer.send('clearActivity');
+			ipcRenderer.once('clearActivity-response', (event, response) => {
+				resolve(response);
+			});
+		});
+	},
+	logout: () => {
+		return new Promise((resolve) => {
+			ipcRenderer.send('logout');
+			ipcRenderer.once('logout-response', (event, response) => {
+				resolve(response);
+			});
+		});
+	},
 });
