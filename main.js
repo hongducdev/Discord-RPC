@@ -1,5 +1,5 @@
 const { app, BrowserWindow, ipcMain } = require("electron");
-const path = require('path');
+const path = require("path");
 // const url = require("url");
 const DiscordRPC = require("discord-rpc");
 
@@ -36,8 +36,6 @@ function createWindow() {
   mainWindow.webContents.openDevTools();
   ipcMain.on("applicationId", (event, id) => {
     applicationId = id;
-    const clientId = applicationId;
-    rpc.login({ clientId }).catch(console.error);
   });
 }
 

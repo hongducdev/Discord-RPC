@@ -5,8 +5,6 @@ import Select from "../components/Inputs/Select";
 import { timestampTypes } from "../utils/constants";
 import ProfileCard from "../components/ProfileCard/ProfileCard";
 
-const electron = window.require("electron");
-
 const Home = () => {
   const [applicationId, setApplicationId] = useState("");
   const [payload, setPayload] = useState({
@@ -25,8 +23,10 @@ const Home = () => {
   });
 
   const handlerLogin = () => {
-    // console.log(applicationId);
-    electron.applicationIdAPI.setApplicationId(applicationId);
+    // gửi applicationId qua electron
+    console.log(applicationId);
+
+    window.electron.sendApplicationId(applicationId);
   };
 
   return (

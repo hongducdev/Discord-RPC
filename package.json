@@ -16,6 +16,11 @@
   },
   "main": "main.js",
   "homepage": "./",
+  "build": {
+    "appId": "com.example.ryanrpc",
+    "productName": "RyanRPC",
+    "nodeIntegration": true
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
