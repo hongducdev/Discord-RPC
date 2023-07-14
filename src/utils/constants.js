@@ -51,3 +51,76 @@ export const timestampTypes = [
     value: "custom",
   },
 ];
+
+export const colors = [
+  {
+    id: 1,
+    name: "Rosewater",
+    value: "ctp-rosewater",
+  },
+  {
+    id: 2,
+    name: "Flamingo",
+    value: "ctp-flamingo",
+  },
+  {
+    id: 3,
+    name: "Pink",
+    value: "ctp-pink",
+  },
+  {
+    id: 4,
+    name: "Mauve",
+    value: "ctp-mauve",
+  },
+  {
+    id: 5,
+    name: "Lavender",
+    value: "ctp-lavender",
+  },
+  {
+    id: 6,
+    name: "Red",
+    value: "ctp-red",
+  },
+  {
+    id: 7,
+    name: "Maroon",
+    value: "ctp-maroon",
+  },
+  {
+    id: 8,
+    name: "Peach",
+    value: "ctp-peach",
+  },
+  {
+    id: 9,
+    name: "Yellow",
+    value: "ctp-yellow",
+  },
+  {
+    id: 10,
+    name: "Green",
+    value: "ctp-green",
+  },
+  {
+    id: 11,
+    name: "Teal",
+    value: "ctp-teal",
+  },
+  {
+    id: 12,
+    name: "Blue",
+    value: "ctp-blue",
+  },
+  {
+    id: 13,
+    name: "Sky",
+    value: "ctp-sky",
+  },
+  {
+    id: 14,
+    name: "Sapphire",
+    value: "ctp-sapphire",
+  },
+];
