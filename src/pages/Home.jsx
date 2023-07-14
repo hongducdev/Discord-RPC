@@ -25,8 +25,6 @@ const Home = () => {
   const handlerLogin = () => {
     // gửi applicationId qua electron
     console.log(applicationId);
-
-    window.electron.sendApplicationId(applicationId);
   };
 
   return (

@@ -1,0 +1,221 @@
+/* global BigInt */
+const path = require('path');
+const {
+	app,
+	BrowserWindow,
+	shell,
+	ipcMain,
+	screen,
+	nativeImage,
+	Tray,
+	Menu,
+	Notification,
+} = require('electron');
+const log = require('electron-log');
+const isDev = require('electron-is-dev');
+const Store = require('electron-store');
+const RPC = require('discord-rpc');
+const appData = new Store();
+
+const APP_NAME = 'NyanRPC';
+
+log.info('App starting...');
+
+const iconPath = path.join(__dirname, 'Icon.png');
+
+let clientRPC = new RPC.Client({
+	transport: 'ipc',
+});
+
+function createTray(win, port) {
+	const tray = new Tray(
+		nativeImage.createFromPath(iconPath).resize({ width: 16 }),
+	);
+	tray.setToolTip(APP_NAME);
+	tray.on('click', () => {
+		win.show();
+	});
+	const menu = Menu.buildFromTemplate([
+		{
+			label: APP_NAME,
+			icon: nativeImage.createFromPath(iconPath).resize({ width: 16 }),
+			enabled: false,
+		},
+		{
+			type: 'separator',
+		},
+		{
+			label: 'Check for Updates...',
+			type: 'normal',
+			visible: process.platform !== 'darwin',
+			click: () => {},
+		},
+		{
+			label: 'Github Repository',
+			type: 'normal',
+			visible: process.platform !== 'darwin',
+			click: () => shell.openExternal('https://github.com/aiko-chan-ai/'),
+		},
+		{
+			type: 'separator',
+		},
+		{
+			label: 'Reload',
+			click: () => {
+				win.reload();
+			},
+		},
+		{
+			label: 'Toggle Developer Tools',
+			click: () => {
+				win.webContents.toggleDevTools();
+			},
+		},
+		{
+			type: 'separator',
+		},
+		{
+			label: 'Quit',
+			role: 'quit',
+		},
+	]);
+	tray.setContextMenu(menu);
+	return tray;
+}
+
+function createNotification(
+	title,
+	description,
+	icon,
+	silent = false,
+	callbackWhenClick = () => {},
+) {
+	const n = new Notification({
+		title,
+		body: description,
+		icon,
+		silent,
+	});
+	n.once('click', (e) => {
+		e.preventDefault();
+		typeof callbackWhenClick == 'function' && callbackWhenClick();
+		n.close();
+	});
+	n.show();
+}
+
+async function createWindow() {
+	const primaryDisplay = screen.getPrimaryDisplay();
+	const { width, height } = primaryDisplay.workAreaSize;
+	// Create the browser window.
+	const mainWindow = new BrowserWindow({
+		width: width * 0.9,
+		height: height * 0.9,
+		minWidth: 800,
+		minHeight: 600,
+		icon: nativeImage.createFromPath(iconPath).resize({ width: 128 }),
+		webPreferences: {
+			webSecurity: false,
+			nodeIntegration: false,
+			enableRemoteModule: false,
+			preload: path.join(__dirname, 'preload.js'),
+			contextIsolation: true,
+		},
+		frame: false,
+		backgroundColor: '#36393f',
+		title: 'NyanRPC',
+		titleBarStyle: 'hidden',
+	});
+
+	createTray(mainWindow);
+
+	mainWindow.loadURL(
+		isDev
+			? 'http://localhost:3000'
+			: `file://${path.join(__dirname, '../build/index.html')}`,
+	);
+	mainWindow.maximize();
+	mainWindow.setMenu(null);
+
+	mainWindow.webContents.on('will-navigate', (event, url) => {
+		if (
+			url ===
+			(isDev
+				? 'http://localhost:3000/'
+				: `file://${path.join(__dirname, '../build/index.html')}`)
+		)
+			return;
+		console.log(url);
+		event.preventDefault();
+		shell.openExternal(url);
+	});
+
+	if (isDev) {
+		const devTools = new BrowserWindow();
+		mainWindow.webContents.setDevToolsWebContents(devTools.webContents);
+		mainWindow.webContents.openDevTools({ mode: 'detach' });
+	}
+
+	mainWindow.on('hide', function (e) {
+		e.preventDefault();
+		createNotification(
+			APP_NAME + ' is running in background',
+			'You can close the application in the taskbar',
+		);
+	});
+
+	// IPC Events (Title Bar)
+	ipcMain.on('minimize', (event) => {
+		mainWindow.minimize();
+	});
+
+	ipcMain.on('max', (event) => {
+		if (mainWindow.isMaximized()) {
+			mainWindow.restore();
+		} else {
+			mainWindow.maximize();
+		}
+	});
+
+	ipcMain.on('close', (event) => {
+		mainWindow.hide();
+	});
+
+	// IPC Events (Discord RPC)
+	ipcMain.on('login', (event, args) => {
+		clientRPC
+			.login({ clientId: args })
+			.then(() => {
+				mainWindow.webContents.send('login-response', {
+					success: true,
+					user: clientRPC.user,
+				});
+			})
+			.catch((err) => {
+				mainWindow.webContents.send('login-response', {
+					success: false,
+					error: err,
+				});
+			});
+	});
+}
+
+app.whenReady().then(() => {
+	createWindow();
+});
+
+app.on('window-all-closed', () => {
+	if (process.platform !== 'darwin') {
+		app.quit();
+	}
+});
+
+app.on('activate', () => {
+	if (BrowserWindow.getAllWindows().length === 0) {
+		createWindow();
+	}
+});
+
+app.on('before-quit', () => {
+	log.info('App closing...');
+});
