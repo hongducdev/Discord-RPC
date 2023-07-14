@@ -5,6 +5,8 @@ import Select from "../components/Inputs/Select";
 import { timestampTypes } from "../utils/constants";
 import ProfileCard from "../components/ProfileCard/ProfileCard";
 
+const electron = window.require("electron");
+
 const Home = () => {
   const [applicationId, setApplicationId] = useState("");
   const [payload, setPayload] = useState({
@@ -22,6 +24,11 @@ const Home = () => {
     button2Link: "",
   });
 
+  const handlerLogin = () => {
+    // console.log(applicationId);
+    electron.applicationIdAPI.setApplicationId(applicationId);
+  };
+
   return (
     <div>
       <ListProfile />
@@ -35,7 +42,10 @@ const Home = () => {
               value={applicationId}
               onChange={(e) => setApplicationId(e.target.value)}
             />
-            <button className="bg-ctp-blue h-12 px-3 rounded-lg text-ctp-base">
+            <button
+              className="bg-ctp-blue h-12 px-3 rounded-lg text-ctp-base"
+              onClick={handlerLogin}
+            >
               Login
             </button>
           </div>
