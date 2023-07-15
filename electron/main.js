@@ -266,7 +266,7 @@ async function createWindow() {
 					clientRPC.activity = res;
 					mainWindow.webContents.send('setActivity-response', {
 						success: true,
-						result: res,
+						result: parseRawToActivity(res),
 					});
 				})
 				.catch((err) => {
