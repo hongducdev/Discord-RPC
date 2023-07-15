@@ -207,11 +207,41 @@ async function createWindow() {
     }
   });
 
+  ipcMain.on("getCurrentUser", (event) => {
+    if (clientRPC.ready) {
+      mainWindow.webContents.send("getCurrentUser-response", {
+        success: true,
+        user: clientRPC.user,
+      });
+    } else {
+      mainWindow.webContents.send("getCurrentUser-response", {
+        success: false,
+        error: new Error("Discord RPC is not ready"),
+      });
+    }
+  });
+
+  ipcMain.on("getActivity", (event) => {
+    if (clientRPC.ready) {
+      mainWindow.webContents.send("getActivity-response", {
+        success: true,
+        activity: clientRPC.activity,
+        application: clientRPC.application,
+      });
+    } else {
+      mainWindow.webContents.send("getActivity-response", {
+        success: false,
+        error: new Error("Discord RPC is not ready"),
+      });
+    }
+  });
+
   ipcMain.on("setActivity", (event, args) => {
     if (clientRPC.ready) {
       clientRPC
         .setActivity(args)
         .then((res) => {
+          clientRPC.activity = res;
           mainWindow.webContents.send("setActivity-response", {
             success: true,
             result: res,
@@ -236,6 +266,7 @@ async function createWindow() {
       clientRPC
         .clearActivity()
         .then((res) => {
+          clientRPC.activity = undefined;
           mainWindow.webContents.send("clearActivity-response", {
             success: true,
             result: res,
