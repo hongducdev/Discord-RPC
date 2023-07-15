@@ -9,20 +9,32 @@ import { toast } from "react-toastify";
 const Home = () => {
   const [applicationId, setApplicationId] = useState("");
   const [isLogin, setIsLogin] = useState(false);
+  const [currentUser, setCurrentUser] = useState(null);
   const [payload, setPayload] = useState({
     details: "",
     state: "",
     partySize: "",
     partyMax: "",
-    linkLargeImage: "",
-    textLargeImage: "",
-    linkSmallImage: "",
-    textSmallImage: "",
-    button1Label: "",
-    button1Link: "",
-    button2Label: "",
-    button2Link: "",
+    largeImageKey: "",
+    largeImageText: "",
+    smallImageKey: "",
+    smallImageText: "",
+    buttons: [
+      { label: "", url: "" },
+      { label: "", url: "" },
+    ],
   });
+
+  const getCurrentUser = async () => {
+    const response = await window.electron.getCurrentUser();
+    if (response.success) {
+      setCurrentUser(response.user);
+    }
+  };
+
+  useEffect(() => {
+    getCurrentUser();
+  }, [applicationId, isLogin]);
 
   const handleLogin = async () => {
     const response = await window.electron.login(applicationId);
@@ -41,6 +53,16 @@ const Home = () => {
       toast.success("Logout success");
       setIsLogin(false);
       setApplicationId("");
+    } else {
+      console.log(response);
+      toast.error(response.error.message);
+    }
+  };
+
+  const handleStartRPC = async () => {
+    const response = await window.electron.setActivity(payload);
+    if (response.success) {
+      toast.success("Update RPC success");
     } else {
       console.log(response);
       toast.error(response.error.message);
@@ -147,18 +169,18 @@ const Home = () => {
                 label="Link large image"
                 id="link-large-image"
                 placeholder="Link large image"
-                value={payload.linkLargeImage}
+                value={payload.largeImageKey}
                 onChange={(e) => {
-                  setPayload({ ...payload, linkLargeImage: e.target.value });
+                  setPayload({ ...payload, largeImageKey: e.target.value });
                 }}
               />
               <Input
                 label="Text large image"
                 id="text-large-image"
                 placeholder="Text large image"
-                value={payload.textLargeImage}
+                value={payload.largeImageText}
                 onChange={(e) => {
-                  setPayload({ ...payload, textLargeImage: e.target.value });
+                  setPayload({ ...payload, largeImageText: e.target.value });
                 }}
               />
             </div>
@@ -167,18 +189,18 @@ const Home = () => {
                 label="Link small image"
                 id="link-small-image"
                 placeholder="Link small image"
-                value={payload.linkSmallImage}
+                value={payload.smallImageKey}
                 onChange={(e) => {
-                  setPayload({ ...payload, linkSmallImage: e.target.value });
+                  setPayload({ ...payload, smallImageKey: e.target.value });
                 }}
               />
               <Input
                 label="Text small image"
                 id="text-small-image"
                 placeholder="Text small image"
-                value={payload.textSmallImage}
+                value={payload.smallImageText}
                 onChange={(e) => {
-                  setPayload({ ...payload, textSmallImage: e.target.value });
+                  setPayload({ ...payload, smallImageText: e.target.value });
                 }}
               />
             </div>
@@ -188,18 +210,22 @@ const Home = () => {
                 label="Button 1 label"
                 id="button-1-label"
                 placeholder="Button 1 label"
-                value={payload.button1Label}
+                value={payload.buttons[0].label}
                 onChange={(e) => {
-                  setPayload({ ...payload, button1Label: e.target.value });
+                  const newButtons = [...payload.buttons];
+                  newButtons[0].label = e.target.value;
+                  setPayload({ ...payload, buttons: newButtons });
                 }}
               />
               <Input
                 label="Button 1 link"
                 id="button-1-link"
                 placeholder="Button 1 link"
-                value={payload.button1Link}
+                value={payload.buttons[0].url}
                 onChange={(e) => {
-                  setPayload({ ...payload, button1Link: e.target.value });
+                  const newButtons = [...payload.buttons];
+                  newButtons[0].url = e.target.value;
+                  setPayload({ ...payload, buttons: newButtons });
                 }}
               />
             </div>
@@ -209,18 +235,22 @@ const Home = () => {
                 label="Button 2 label"
                 id="button-2-label"
                 placeholder="Button 2 label"
-                value={payload.button2Label}
+                value={payload.buttons[1].label}
                 onChange={(e) => {
-                  setPayload({ ...payload, button2Label: e.target.value });
+                  const newButtons = [...payload.buttons];
+                  newButtons[1].label = e.target.value;
+                  setPayload({ ...payload, buttons: newButtons });
                 }}
               />
               <Input
                 label="Button 2 link"
                 id="button-2-link"
                 placeholder="Button 2 link"
-                value={payload.button2Link}
+                value={payload.buttons[1].url}
                 onChange={(e) => {
-                  setPayload({ ...payload, button2Link: e.target.value });
+                  const newButtons = [...payload.buttons];
+                  newButtons[1].url = e.target.value;
+                  setPayload({ ...payload, buttons: newButtons });
                 }}
               />
             </div>
@@ -238,7 +268,10 @@ const Home = () => {
             </div>
           </div>
           <div className="flex gap-3 mt-3">
-            <button className="bg-ctp-green h-12 px-3 rounded-lg text-ctp-base flex-auto">
+            <button
+              className="bg-ctp-green h-12 px-3 rounded-lg text-ctp-base flex-auto"
+              onClick={handleStartRPC}
+            >
               Update
             </button>
             <button className="bg-ctp-red h-12 px-3 rounded-lg text-ctp-base flex-auto">
@@ -246,7 +279,7 @@ const Home = () => {
             </button>
           </div>
         </div>
-        <ProfileCard payload={payload} />
+        <ProfileCard payload={payload} currentUser={currentUser} />
       </div>
     </div>
   );
