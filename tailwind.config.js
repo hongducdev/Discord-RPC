@@ -21,7 +21,7 @@ module.exports = {
   plugins: [
     require("@catppuccin/tailwindcss")({
       prefix: "ctp",
-      defaultFlavour: "latte",
+      defaultFlavour: "mocha",
     }),
   ],
 };

@@ -9,7 +9,7 @@ const Settings = lazy(() => import("./pages/Setting"));
 
 const App = () => {
   return (
-    <div className="dark:ctp-mocha">
+    <div className="dark:ctp-mocha md:overflow-x-hidden">
       <Suspense
         fallback={
           <div className="w-screen h-screen flex items-center justify-center bg-gradient-to-br from-ctp-base to-ctp-crust">

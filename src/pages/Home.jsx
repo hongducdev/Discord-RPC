@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ListProfile from "../components/ListProfile/ListProfile";
 import Input from "../components/Inputs/Input";
 import Select from "../components/Inputs/Select";
 import { timestampTypes } from "../utils/constants";
 import ProfileCard from "../components/ProfileCard/ProfileCard";
+import { toast } from "react-toastify";
 
 const Home = () => {
   const [applicationId, setApplicationId] = useState("");
+  const [isLogin, setIsLogin] = useState(false);
   const [payload, setPayload] = useState({
     details: "",
     state: "",
@@ -22,9 +24,27 @@ const Home = () => {
     button2Link: "",
   });
 
-  const handlerLogin = () => {
-    // gửi applicationId qua electron
-    console.log(applicationId);
+  const handleLogin = async () => {
+    const response = await window.electron.login(applicationId);
+    if (response.success) {
+      toast.success("Login success");
+      setIsLogin(true);
+    } else {
+      console.log(response);
+      toast.error(response.error.message);
+    }
+  };
+
+  const handleLogout = async () => {
+    const response = await window.electron.logout();
+    if (response.success) {
+      toast.success("Logout success");
+      setIsLogin(false);
+      setApplicationId("");
+    } else {
+      console.log(response);
+      toast.error(response.error.message);
+    }
   };
 
   return (
@@ -40,12 +60,21 @@ const Home = () => {
               value={applicationId}
               onChange={(e) => setApplicationId(e.target.value)}
             />
-            <button
-              className="bg-ctp-blue h-12 px-3 rounded-lg text-ctp-base"
-              onClick={handlerLogin}
-            >
-              Login
-            </button>
+            {isLogin ? (
+              <button
+                className="bg-ctp-blue h-12 px-3 rounded-lg text-ctp-base"
+                onClick={handleLogout}
+              >
+                Logout
+              </button>
+            ) : (
+              <button
+                className="bg-ctp-blue h-12 px-3 rounded-lg text-ctp-base"
+                onClick={handleLogin}
+              >
+                Login
+              </button>
+            )}
           </div>
           <div className="w-full h-[1px] bg-ctp-subtext0 rounded-full my-3"></div>
           <div className="flex flex-col gap-3 max-h-[380px] overflow-x-auto px-2">
