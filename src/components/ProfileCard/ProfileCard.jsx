@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { avatarURL } from "../../utils/functions";
 import { useSelector } from "react-redux";
+import { userFlags } from "../../utils/flag";
 
 const ProfileCard = () => {
   const { isLogged, dataInput } = useSelector((state) => state.home);
@@ -23,6 +24,8 @@ const ProfileCard = () => {
     }
   };
 
+  console.log(currentUser);
+
   useEffect(() => {
     getCurrentUser();
   }, [isLogged]);
@@ -30,15 +33,29 @@ const ProfileCard = () => {
   return (
     <div className="flex-4 bg-ctp-surface0 rounded-xl">
       <div className={`w-full bg-${colorPrimary} h-[120px] rounded-t-xl`}></div>
-      <img
-        src={
-          currentUser
-            ? avatarURL(currentUser)
-            : "https://source.unsplash.com/random"
-        }
-        alt="Avatar"
-        className="w-28 h-28 object-cover rounded-full border-4 border-ctp-surface0 -mt-10 ml-3"
-      />
+      <div className="flex justify-between">
+        <img
+          src={
+            currentUser
+              ? avatarURL(currentUser)
+              : "https://source.unsplash.com/random"
+          }
+          alt="Avatar"
+          className="w-28 h-28 object-cover rounded-full border-4 border-ctp-surface0 -mt-10 ml-3"
+        />
+        <div className="mr-3 mt-3 bg-ctp-surface1 h-fit px-1 py-[2px] rounded-md">
+          <div className="flex items-center">
+            {userFlags(currentUser?.flags).map((flag) => (
+              <img
+                key={flag.id}
+                src={`https://cdn.discordapp.com/badge-icons/${flag.icon}.png`}
+                alt={flag.description}
+                className="w-7 h-7"
+              />
+            ))}
+          </div>
+        </div>
+      </div>
       <div className="bg-gradient-to-br from-ctp-base to-ctp-crust m-3 p-3 rounded-lg flex flex-col">
         <span className="text-2xl font-semibold">
           {currentUser?.global_name || "Global Name"}
