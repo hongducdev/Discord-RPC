@@ -2,7 +2,7 @@ import React from "react";
 
 const TitleBar = () => {
   return (
-    <div className="max-w-screen bg-ctp-crust text-ctp-text py-3 px-5 flex items-center justify-between fixed top-0 w-full">
+    <div className="max-w-screen bg-ctp-crust text-ctp-text py-3 px-5 flex items-center justify-between fixed top-0 w-full drag">
       <div className="select-none">NyanRPC</div>
       <div className="flex items-center gap-5">
         <span
