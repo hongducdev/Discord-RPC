@@ -1,14 +1,9 @@
 import { colors } from "../utils/constants";
-import { useDispatch, useSelector } from "react-redux";
-import { setColorPrimary } from "../app/color/colorSlice";
+import ColorCard from "../components/ColorCard/ColorCard";
+import { useSelector } from "react-redux";
 
 const Setting = () => {
-  const dispatch = useDispatch();
   const { colorPrimary } = useSelector((state) => state.color);
-
-  const handleChangeColor = (color) => {
-    dispatch(setColorPrimary(color));
-  };
 
   return (
     <div className="w-full bg-ctp-surface0 p-5 rounded-xl">
@@ -18,14 +13,7 @@ const Setting = () => {
         <span className="text-xl text-semibold">Color</span>
         <div className="flex items-center gap-2 mt-2 flex-wrap">
           {colors.map((color) => (
-            <div
-              key={color.id}
-              className="inline-flex items-center gap-2 border border-ctp-subtext1 px-4 py-2 rounded-lg cursor-pointer hover:bg-ctp-subtext1 hover:text-ctp-base hover:duration-300 hover:ease-in-out"
-              onClick={() => handleChangeColor(color.value)}
-            >
-              <div className={`w-6 h-6 rounded-full bg-${color.value}`}></div>
-              <span>{color.name}</span>
-            </div>
+            <ColorCard key={color.id} name={color.name} value={color.value} />
           ))}
         </div>
       </div>
