@@ -194,12 +194,12 @@ function getIPCPath(id) {
   return `${prefix.replace(/\/$/, "")}/discord-ipc-${id}`;
 }
 __name(getIPCPath, "getIPCPath");
-function getIPC(id = 0) {
+function getIPC(id = 0, auto = true) {
   return new Promise((resolve, reject) => {
     const path = getIPCPath(id);
     const onerror = /* @__PURE__ */ __name(() => {
-      if (id < 10) {
-        resolve(getIPC(id + 1));
+      if (id < 10 && auto) {
+        resolve(getIPC(id + 1, auto));
       } else {
         reject(new Error("Could not connect"));
       }
@@ -264,7 +264,6 @@ var IPCTransport = class extends import_events.default {
   _expecting = /* @__PURE__ */ new Map();
   clientId;
   user;
-  rawActivity;
   activity;
   assets;
   constructor(client) {
@@ -274,7 +273,7 @@ var IPCTransport = class extends import_events.default {
     this.ipcId = 0;
   }
   async connect(ipcId) {
-    const data = await getIPC(ipcId ?? this.ipcId);
+    const data = await getIPC(ipcId ?? this.ipcId, ipcId ? false : true);
     this.ipcId = data.id;
     const socket = this.socket = data.sock;
     socket.on("close", this.onClose.bind(this));
@@ -584,16 +583,17 @@ var RPCClient = class extends import_events2.EventEmitter {
       Array.from(this.transports.values()).map((t) => t.close())
     );
   }
-  async loginBruteForce(clientId = "817229550684471297") {
-    const map = /* @__PURE__ */ new Map();
+  async fetchOpenSocket() {
+    const opens = [];
     for (let i = 0; i < 10; i++) {
-      const trans = await this.connect(clientId, i).catch(() => null);
-      if (!trans)
-        break;
-      map.set(trans.ipcId, trans.user);
+      const trans = new ipc_default(this);
+      opens.push(i);
+      await trans.connect(i).catch(() => {
+        opens.pop();
+      });
       trans.close();
     }
-    return map;
+    return opens;
   }
 };
 var client_default = RPCClient;

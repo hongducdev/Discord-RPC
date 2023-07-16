@@ -1,5 +1,10 @@
 const { contextBridge, ipcRenderer } = require('electron');
 
+const uuid = () =>
+	([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, (a) =>
+		(a ^ ((Math.random() * 16) >> (a / 4))).toString(16),
+	);
+
 contextBridge.exposeInMainWorld('titleBar', {
 	minimize: () => {
 		ipcRenderer.send('minimize');
@@ -12,58 +17,224 @@ contextBridge.exposeInMainWorld('titleBar', {
 	},
 });
 
+contextBridge.exposeInMainWorld('RPCStorage', {
+	get: (key) => {
+		return new Promise((resolve) => {
+			const nonce = uuid();
+			ipcRenderer.send('localStorage', {
+				action: 'get',
+				key,
+				nonce,
+			});
+			const handler = (event, response) => {
+				if (response.nonce === nonce) {
+					ipcRenderer.removeListener(
+						'localStorage-response',
+						handler,
+					);
+					resolve(response);
+				}
+			};
+			ipcRenderer.on('localStorage-response', handler);
+		});
+	},
+	set: (key, value) => {
+		return new Promise((resolve) => {
+			const nonce = uuid();
+			ipcRenderer.send('localStorage', {
+				action: 'set',
+				key,
+				value,
+				nonce,
+			});
+			const handler = (event, response) => {
+				if (response.nonce === nonce) {
+					ipcRenderer.removeListener(
+						'localStorage-response',
+						handler,
+					);
+					resolve(response);
+				}
+			};
+			ipcRenderer.on('localStorage-response', handler);
+		});
+	},
+	delete: (key) => {
+		return new Promise((resolve) => {
+			const nonce = uuid();
+			ipcRenderer.send('localStorage', {
+				action: 'delete',
+				key,
+				nonce,
+			});
+			const handler = (event, response) => {
+				if (response.nonce === nonce) {
+					ipcRenderer.removeListener(
+						'localStorage-response',
+						handler,
+					);
+					resolve(response);
+				}
+			};
+			ipcRenderer.on('localStorage-response', handler);
+		});
+	},
+	has: (key) => {
+		return new Promise((resolve) => {
+			const nonce = uuid();
+			ipcRenderer.send('localStorage', {
+				action: 'has',
+				key,
+				nonce,
+			});
+			const handler = (event, response) => {
+				if (response.nonce === nonce) {
+					ipcRenderer.removeListener(
+						'localStorage-response',
+						handler,
+					);
+					resolve(response);
+				}
+			};
+			ipcRenderer.on('localStorage-response', handler);
+		});
+	},
+	clear: () => {
+		return new Promise((resolve) => {
+			const nonce = uuid();
+			ipcRenderer.send('localStorage', {
+				action: 'clear',
+				nonce,
+			});
+			const handler = (event, response) => {
+				if (response.nonce === nonce) {
+					ipcRenderer.removeListener(
+						'localStorage-response',
+						handler,
+					);
+					resolve(response);
+				}
+			};
+			ipcRenderer.on('localStorage-response', handler);
+		});
+	},
+	all: () => {
+		return new Promise((resolve) => {
+			const nonce = uuid();
+			ipcRenderer.send('localStorage', {
+				action: 'all',
+				nonce,
+			});
+			const handler = (event, response) => {
+				if (response.nonce === nonce) {
+					ipcRenderer.removeListener(
+						'localStorage-response',
+						handler,
+					);
+					resolve(response);
+				}
+			};
+			ipcRenderer.on('localStorage-response', handler);
+		});
+	},
+});
+
 contextBridge.exposeInMainWorld('electron', {
-	login: (id) => {
+	getOpenSockets: () => {
+		return new Promise((resolve) => {
+			ipcRenderer.send('getOpenSockets');
+			ipcRenderer.once('getOpenSockets-response', (event, response) => {
+				resolve(response);
+			});
+		});
+	},
+	login: (id, socketId) => {
 		return new Promise((resolve) => {
 			if (!/\d{17,19}/.test(id))
 				return resolve({
 					success: false,
 					error: new Error('Invalid ID'),
 				});
-			ipcRenderer.send('login', id);
-			ipcRenderer.once('login-response', (event, response) => {
+			const nonce = uuid();
+			ipcRenderer.send('login', {
+				clientId: id,
+				socketId,
+				nonce,
+			});
+			ipcRenderer.once(`login-response-${nonce}`, (event, response) => {
 				resolve(response);
 			});
 		});
 	},
-	getCurrentUser: () => {
+	getCurrentUser: (socketId) => {
 		return new Promise((resolve) => {
-			ipcRenderer.send('getCurrentUser');
-			ipcRenderer.once('getCurrentUser-response', (event, response) => {
-				resolve(response);
+			const nonce = uuid();
+			ipcRenderer.send('getCurrentUser', {
+				socketId,
+				nonce,
 			});
+			ipcRenderer.once(
+				`getCurrentUser-response-${nonce}`,
+				(event, response) => {
+					resolve(response);
+				},
+			);
 		});
 	},
-	getActivity: () => {
+	setActivity: (socketId, activity) => {
 		return new Promise((resolve) => {
-			ipcRenderer.send('getActivity');
-			ipcRenderer.once('getActivity-response', (event, response) => {
+			const nonce = uuid();
+			ipcRenderer.send('setActivity', {
+				socketId,
+				activity,
+				nonce,
+			});
+			ipcRenderer.once(`setActivity-response-${nonce}`, (event, response) => {
 				resolve(response);
 			});
 		});
 	},
-	setActivity: (data) => {
+	getActivity: (socketId) => {
 		return new Promise((resolve) => {
-			ipcRenderer.send('setActivity', data);
-			ipcRenderer.once('setActivity-response', (event, response) => {
+			const nonce = uuid();
+			ipcRenderer.send('getActivity', {
+				socketId,
+				nonce,
+			});
+			ipcRenderer.once(`getActivity-response-${nonce}`, (event, response) => {
 				resolve(response);
 			});
 		});
 	},
-	clearActivity: () => {
+	clearActivity: (socketId) => {
 		return new Promise((resolve) => {
-			ipcRenderer.send('clearActivity');
-			ipcRenderer.once('clearActivity-response', (event, response) => {
+			const nonce = uuid();
+			ipcRenderer.send('clearActivity', {
+				socketId,
+				nonce,
+			});
+			ipcRenderer.once(`clearActivity-response-${nonce}`, (event, response) => {
 				resolve(response);
 			});
 		});
 	},
-	logout: () => {
+	logout: (socketId) => {
 		return new Promise((resolve) => {
-			ipcRenderer.send('logout');
-			ipcRenderer.once('logout-response', (event, response) => {
+			const nonce = uuid();
+			ipcRenderer.send('logout', {
+				socketId,
+				nonce,
+			});
+			ipcRenderer.once(`logout-response-${nonce}`, (event, response) => {
 				resolve(response);
 			});
 		});
 	},
+	listenEvent: (eventName, callback) => {
+		if (typeof callback !== 'function') throw new Error('Callback must be a function');
+		ipcRenderer.on(eventName, callback);
+	},
+	sendEventFromClientToMain: (eventName, data) => {
+		ipcRenderer.send(eventName, data);
+	}
 });

@@ -69,7 +69,6 @@ declare class IPCTransport extends EventEmitter {
     _expecting: Map<any, any>;
     clientId: string;
     user: User;
-    rawActivity?: RawPresence;
     activity?: RawPresence;
     assets?: {
         id: string;
@@ -107,7 +106,7 @@ declare class RPCClient extends EventEmitter$1 {
     setActivity(args?: Presence, pid?: number | null, ipcId?: number): Promise<RawPresence>;
     clearActivity(pid?: number | null, ipcId?: number): Promise<any>;
     destroy(): Promise<void>;
-    loginBruteForce(clientId?: string): Promise<Map<any, any>>;
+    fetchOpenSocket(): Promise<number[]>;
 }
 
 export { RPCClient as Client, RPCClient as default };

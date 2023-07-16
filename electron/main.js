@@ -25,7 +25,7 @@ const iconPath = path.join(__dirname, 'Icon.png');
 
 const clientRPC = new RPC.Client();
 
-function createTray(win, port) {
+function createTray(win) {
 	const tray = new Tray(
 		nativeImage.createFromPath(iconPath).resize({ width: 16 }),
 	);
@@ -81,29 +81,6 @@ function createTray(win, port) {
 	return tray;
 }
 
-function parseRawToActivity(raw) {
-	return {
-		state: raw.state,
-		details: raw.details,
-		startTimestamp: raw.timestamps?.start,
-		endTimestamp: raw.timestamps?.end,
-		largeImageKey: raw.assets?.large_image,
-		largeImageText: raw.assets?.large_text,
-		smallImageKey: raw.assets?.small_image,
-		smallImageText: raw.assets?.small_text,
-		instance: true,
-		partyId: raw.party?.id,
-		partySize: raw.party?.size[0],
-		partyMax: raw.party?.size[1],
-		buttons: raw.buttons?.map((key, index) => {
-			return {
-				label: key,
-				url: raw.metadata?.button_urls[index],
-			};
-		}),
-	};
-}
-
 function createNotification(
 	title,
 	description,
@@ -126,6 +103,8 @@ function createNotification(
 }
 
 async function createWindow() {
+	let allSockets = await clientRPC.fetchOpenSocket();
+
 	const primaryDisplay = screen.getPrimaryDisplay();
 	const { width, height } = primaryDisplay.workAreaSize;
 	// Create the browser window.
@@ -201,25 +180,83 @@ async function createWindow() {
 		mainWindow.hide();
 	});
 
+	// IPC Events (Local Storage)
+	ipcMain.on('localStorage', (event, args) => {
+		switch (args.action) {
+			case 'get':
+				return mainWindow.webContents.send('localStorage-response', {
+					nonce: args.nonce,
+					success: true,
+					value: appData.get(args.key),
+				});
+			case 'set':
+				appData.set(args.key, args.value);
+				return mainWindow.webContents.send('localStorage-response', {
+					nonce: args.nonce,
+					success: true,
+					value: appData.get(args.key),
+				});
+			case 'delete':
+				appData.delete(args.key);
+				return mainWindow.webContents.send('localStorage-response', {
+					nonce: args.nonce,
+					success: true,
+					value: appData.get(args.key),
+				});
+			case 'has':
+				return mainWindow.webContents.send('localStorage-response', {
+					nonce: args.nonce,
+					success: true,
+					value: appData.has(args.key),
+				});
+			case 'clear':
+				return mainWindow.webContents.send('localStorage-response', {
+					nonce: args.nonce,
+					success: true,
+					value: appData.clear(),
+				});
+			case 'all':
+				return mainWindow.webContents.send('localStorage-response', {
+					nonce: args.nonce,
+					success: true,
+					value: appData.store,
+				});
+			default:
+				return mainWindow.webContents.send('localStorage-response', {
+					nonce: args.nonce,
+					success: false,
+					error: new Error('Invalid action: ' + args.action),
+				});
+		}
+	});
+
 	// IPC Events (Discord RPC)
+	ipcMain.on('getOpenSockets', () => {
+		mainWindow.webContents.send('getOpenSockets-response', {
+			success: true,
+			ports: allSockets,
+		});
+	});
+
 	ipcMain.on('login', (event, args) => {
-		if (clientRPC.ready) {
-			mainWindow.webContents.send('login-response', {
+		const { clientId, socketId, nonce } = args;
+		if (clientRPC.transports.get(socketId)) {
+			mainWindow.webContents.send(`login-response-${nonce}`, {
 				success: false,
 				error: new Error('Already logged in'),
 			});
 		} else {
 			clientRPC
-				.login({ clientId: args })
-				.then(() => {
-					mainWindow.webContents.send('login-response', {
+				.login({ clientId, ipcId: socketId })
+				.then((trans) => {
+					mainWindow.webContents.send(`login-response-${nonce}`, {
 						success: true,
-						user: clientRPC.user,
+						user: trans.user,
+						ipcId: trans.ipcId,
 					});
-					clientRPC.ready = true;
 				})
 				.catch((err) => {
-					mainWindow.webContents.send('login-response', {
+					mainWindow.webContents.send(`login-response-${nonce}`, {
 						success: false,
 						error: err,
 					});
@@ -227,110 +264,127 @@ async function createWindow() {
 		}
 	});
 
-	ipcMain.on('getCurrentUser', (event) => {
-		if (clientRPC.ready) {
-			mainWindow.webContents.send('getCurrentUser-response', {
-				success: true,
-				user: clientRPC.user,
-			});
-		} else {
-			mainWindow.webContents.send('getCurrentUser-response', {
-				success: false,
-				error: new Error('Discord RPC is not ready'),
-			});
-		}
-	});
-
-	ipcMain.on('getActivity', (event) => {
-		if (clientRPC.ready) {
-			mainWindow.webContents.send('getActivity-response', {
-				success: true,
-				activity: parseRawToActivity(clientRPC.activity),
-			});
-		} else {
-			mainWindow.webContents.send('getActivity-response', {
-				success: false,
-				error: new Error('Discord RPC is not ready'),
-			});
-		}
+	ipcMain.on('getCurrentUser', (event, args) => {
+		const trans = clientRPC.transports.get(args.socketId);
+		mainWindow.webContents.send(`getCurrentUser-response-${args.nonce}`, {
+			success: trans?.user ? true : false,
+			user: trans?.user,
+			ipcId: trans?.ipcId || args.socketId,
+		});
 	});
 
 	ipcMain.on('setActivity', (event, args) => {
-		if (clientRPC.ready) {
-			clientRPC
-				.setActivity(args)
-				.then((res) => {
-					clientRPC.activity = res;
-					mainWindow.webContents.send('setActivity-response', {
+		const { activity, socketId, nonce } = args;
+		const trans = clientRPC.transports.get(socketId);
+		if (!trans) {
+			return mainWindow.webContents.send(
+				`setActivity-response-${nonce}`,
+				{
+					success: false,
+					error: new Error('Not logged in'),
+				},
+			);
+		}
+		trans
+			.setActivity(activity)
+			.then(() => {
+				return mainWindow.webContents.send(
+					`setActivity-response-${nonce}`,
+					{
 						success: true,
-						result: parseRawToActivity(res),
-					});
-				})
-				.catch((err) => {
-					mainWindow.webContents.send('setActivity-response', {
+						ipcId: trans.ipcId,
+						activity: trans.getActivity(),
+					},
+				);
+			})
+			.catch((err) => {
+				return mainWindow.webContents.send(
+					`setActivity-response-${nonce}`,
+					{
 						success: false,
 						error: err,
-					});
-				});
-		} else {
-			mainWindow.webContents.send('setActivity-response', {
-				success: false,
-				error: new Error('Discord RPC is not ready'),
+						ipcId: trans.ipcId,
+					},
+				);
 			});
-		}
 	});
 
-	ipcMain.on('clearActivity', (event) => {
-		if (clientRPC.ready) {
-			clientRPC
-				.clearActivity()
-				.then((res) => {
-					clientRPC.activity = undefined;
-					mainWindow.webContents.send('clearActivity-response', {
-						success: true,
-						result: res,
-					});
-				})
-				.catch((err) => {
-					mainWindow.webContents.send('clearActivity-response', {
-						success: false,
-						error: err,
-					});
-				});
-		} else {
-			mainWindow.webContents.send('clearActivity-response', {
-				success: false,
-				error: new Error('Discord RPC is not ready'),
-			});
+	ipcMain.on('getActivity', (event, args) => {
+		const { socketId, nonce } = args;
+		const trans = clientRPC.transports.get(socketId);
+		if (!trans) {
+			return mainWindow.webContents.send(
+				`getActivity-response-${nonce}`,
+				{
+					success: false,
+					error: new Error('Not logged in'),
+				},
+			);
 		}
+		return mainWindow.webContents.send(`getActivity-response-${nonce}`, {
+			success: true,
+			activity: trans.getActivity(),
+			ipcId: trans.ipcId,
+		});
 	});
 
-	ipcMain.on('logout', (event) => {
-		if (clientRPC.ready) {
-			clientRPC.destroy().then((res) => {
-				mainWindow.webContents.send('logout-response', {
+	ipcMain.on('clearActivity', (event, args) => {
+		const { socketId, nonce } = args;
+		const trans = clientRPC.transports.get(socketId);
+		if (!trans) {
+			return mainWindow.webContents.send(
+				`clearActivity-response-${nonce}`,
+				{
+					success: false,
+					error: new Error('Not logged in'),
+				},
+			);
+		}
+		trans
+			.clearActivity()
+			.then(() => {
+				mainWindow.webContents.send(`clearActivity-response-${nonce}`, {
 					success: true,
-					result: res,
+					activity: null,
+					ipcId: trans.ipcId,
 				});
-				// Reinitialize clientRPC
-				clientRPC = new RPC.Client({
-					transport: 'ipc',
+			})
+			.catch((err) => {
+				mainWindow.webContents.send(`clearActivity-response-${nonce}`, {
+					success: false,
+					error: err,
+					ipcId: trans.ipcId,
 				});
 			});
-		} else {
-			mainWindow.webContents.send('logout-response', {
-				success: false,
-				error: new Error('Discord RPC is not ready'),
-			});
+	});
+
+	ipcMain.on('logout', async (event, args) => {
+		const { socketId, nonce } = args;
+		const trans = clientRPC.transports.get(socketId);
+		if (!trans) {
+			return mainWindow.webContents.send(
+				`logout-response-${nonce}`,
+				{
+					success: false,
+					error: new Error('Not logged in'),
+				},
+			);
 		}
+		await trans.close();
+		mainWindow.webContents.send(`logout-response-${nonce}`, {
+			success: true,
+			user: null,
+			ipcId: trans.ipcId,
+		});
+		clientRPC.transports.delete(socketId);
 	});
 }
 
-app.whenReady().then(() => {;
+app.whenReady().then(() => {
 	ElectronDevtool.installExtension(ElectronDevtool.REACT_DEVELOPER_TOOLS, {
 		loadExtensionOptions: {
 			allowFileAccess: true,
-		}
+		},
 	})
 		.then((name) => console.log(`Added Extension:  ${name}`))
 		.catch((err) => console.log('An error occurred: ', err))
