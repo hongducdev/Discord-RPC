@@ -147,7 +147,6 @@ async function createWindow() {
 		frame: false,
 		backgroundColor: '#36393f',
 		title: 'NyanRPC',
-		titleBarStyle: 'hidden',
 	});
 
 	createTray(mainWindow);
