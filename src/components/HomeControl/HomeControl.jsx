@@ -8,7 +8,7 @@ import { setIsLogged, setDataInput } from "../../app/home/homeSlice";
 
 const HomeControl = () => {
   const dispatch = useDispatch();
-  const { isLogged, dataInput } = useSelector((state) => state.home);
+  const { isLogged } = useSelector((state) => state.home);
 
   const [applicationId, setApplicationId] = useState("");
   const [payload, setPayload] = useState({
@@ -61,6 +61,16 @@ const HomeControl = () => {
       toast.error(response.error.message);
     }
   };
+
+  const handleClearRPC = async () => {
+    const response = await window.electron.clearActivity();
+    if (response.success) {
+      toast.success("Clear RPC success");
+    } else {
+      console.log(response);
+      toast.error(response.error.message);
+    }
+  }
 
   return (
     <div className="flex-6 bg-ctp-surface0 p-5 rounded-xl">
@@ -262,7 +272,9 @@ const HomeControl = () => {
         >
           Update
         </button>
-        <button className="bg-ctp-red h-12 px-3 rounded-lg text-ctp-base flex-auto">
+        <button className="bg-ctp-red h-12 px-3 rounded-lg text-ctp-base flex-auto"
+          onClick={handleClearRPC}
+        >
           Stop
         </button>
       </div>
