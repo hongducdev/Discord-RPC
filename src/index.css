@@ -4,7 +4,6 @@
 
 body {
   @apply font-primary;
-  -webkit-app-region: drag;
 }
 
 /* @layer components {

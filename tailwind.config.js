@@ -2,6 +2,7 @@
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   darkMode: "class",
+  mode: "jit",
   theme: {
     extend: {
       fontFamily: {
@@ -23,5 +24,11 @@ module.exports = {
       prefix: "ctp",
       defaultFlavour: "mocha",
     }),
+  ],
+  safelist: [
+    {
+      pattern:
+        /ctp-(rosewater|flamingo|pink|mauve|lavender|red|maroon|peach|yellow|green|teal|blue|sky|sapphire)/,
+    },
   ],
 };
