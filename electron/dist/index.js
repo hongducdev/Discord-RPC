@@ -367,7 +367,8 @@ var IPCTransport = class extends import_events.default {
       buttons: this.activity.buttons?.map((name, index) => ({
         label: name,
         url: this.activity?.metadata?.button_urls?.[index]
-      }))
+      })),
+      raw: this.activity
     };
     return data;
   }
