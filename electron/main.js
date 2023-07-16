@@ -13,7 +13,7 @@ const {
 const log = require('electron-log');
 const isDev = require('electron-is-dev');
 const Store = require('electron-store');
-const RPC = require('discord-rpc');
+const RPC = require('./dist/index');
 const ElectronDevtool = require('electron-extension-installer');
 const appData = new Store();
 
@@ -23,9 +23,7 @@ log.info('App starting...');
 
 const iconPath = path.join(__dirname, 'Icon.png');
 
-let clientRPC = new RPC.Client({
-	transport: 'ipc',
-});
+const clientRPC = new RPC.Client();
 
 function createTray(win, port) {
 	const tray = new Tray(
