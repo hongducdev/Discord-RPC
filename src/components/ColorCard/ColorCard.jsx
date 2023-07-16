@@ -8,8 +8,6 @@ const ColorCard = ({ name, value }) => {
     dispatch(setColorPrimary(color));
   };
 
-  console.log("🚀 ~ ColorCard ~ value:", value);
-
   return (
     <div
       className="inline-flex items-center gap-2 border border-ctp-subtext1 px-4 py-2 rounded-lg cursor-pointer hover:bg-ctp-subtext1 hover:text-ctp-base hover:duration-300 hover:ease-in-out"

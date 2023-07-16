@@ -41,18 +41,20 @@ const ProfileCard = () => {
           alt="Avatar"
           className="w-28 h-28 object-cover rounded-full border-4 border-ctp-surface0 -mt-10 ml-3"
         />
-        <div className="mr-3 mt-3 bg-ctp-surface1 h-fit px-1 py-[2px] rounded-md">
-          <div className="flex items-center">
-            {userFlags(currentUser?.flags).map((flag) => (
-              <img
-                key={flag.id}
-                src={`https://cdn.discordapp.com/badge-icons/${flag.icon}.png`}
-                alt={flag.description}
-                className="w-7 h-7"
-              />
-            ))}
+        {currentUser?.flags && (
+          <div className="mr-3 mt-3 bg-ctp-surface1 h-fit px-1 py-[2px] rounded-md">
+            <div className="flex items-center">
+              {userFlags(currentUser?.flags).map((flag) => (
+                <img
+                  key={flag.id}
+                  src={`https://cdn.discordapp.com/badge-icons/${flag.icon}.png`}
+                  alt={flag.description}
+                  className="w-7 h-7"
+                />
+              ))}
+            </div>
           </div>
-        </div>
+        )}
       </div>
       <div className="bg-gradient-to-br from-ctp-base to-ctp-crust m-3 p-3 rounded-lg flex flex-col">
         <span className="text-2xl font-semibold">
