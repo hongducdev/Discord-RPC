@@ -201,7 +201,7 @@ const HomeControl = () => {
             value={payload.buttons[0].label}
             onChange={(e) => {
               const newButtons = [...payload.buttons];
-              newButtons[0].label = e.target.value;
+              newButtons[0] = { ...newButtons[0], label: e.target.value };
               setPayload({ ...payload, buttons: newButtons });
             }}
           />
@@ -212,7 +212,7 @@ const HomeControl = () => {
             value={payload.buttons[0].url}
             onChange={(e) => {
               const newButtons = [...payload.buttons];
-              newButtons[0].url = e.target.value;
+              newButtons[0] = { ...newButtons[0], url: e.target.value };
               setPayload({ ...payload, buttons: newButtons });
             }}
           />
@@ -226,7 +226,7 @@ const HomeControl = () => {
             value={payload.buttons[1].label}
             onChange={(e) => {
               const newButtons = [...payload.buttons];
-              newButtons[1].label = e.target.value;
+              newButtons[1] = { ...newButtons[1], label: e.target.value };
               setPayload({ ...payload, buttons: newButtons });
             }}
           />
@@ -237,7 +237,7 @@ const HomeControl = () => {
             value={payload.buttons[1].url}
             onChange={(e) => {
               const newButtons = [...payload.buttons];
-              newButtons[1].url = e.target.value;
+              newButtons[1] = { ...newButtons[1], url: e.target.value };
               setPayload({ ...payload, buttons: newButtons });
             }}
           />
