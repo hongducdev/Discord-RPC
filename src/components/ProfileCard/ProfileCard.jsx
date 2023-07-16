@@ -24,8 +24,6 @@ const ProfileCard = () => {
     }
   };
 
-  console.log(currentUser);
-
   useEffect(() => {
     getCurrentUser();
   }, [isLogged]);
