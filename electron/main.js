@@ -1,4 +1,3 @@
-/* global BigInt */
 const path = require('path');
 const {
 	app,
@@ -15,6 +14,7 @@ const log = require('electron-log');
 const isDev = require('electron-is-dev');
 const Store = require('electron-store');
 const RPC = require('discord-rpc');
+const ElectronDevtool = require('electron-extension-installer');
 const appData = new Store();
 
 const APP_NAME = 'NyanRPC';
@@ -329,8 +329,15 @@ async function createWindow() {
 	});
 }
 
-app.whenReady().then(() => {
-	createWindow();
+app.whenReady().then(() => {;
+	ElectronDevtool.installExtension(ElectronDevtool.REACT_DEVELOPER_TOOLS, {
+		loadExtensionOptions: {
+			allowFileAccess: true,
+		}
+	})
+		.then((name) => console.log(`Added Extension:  ${name}`))
+		.catch((err) => console.log('An error occurred: ', err))
+		.finally(createWindow);
 });
 
 app.on('window-all-closed', () => {
