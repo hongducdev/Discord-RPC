@@ -4,6 +4,7 @@
 
 body {
   @apply font-primary;
+  -webkit-app-region: drag;
 }
 
 /* @layer components {
@@ -25,4 +26,12 @@ body {
 /* Handle */
 ::-webkit-scrollbar-thumb {
   @apply bg-ctp-flamingo rounded-lg;
+}
+
+.drag {
+  -webkit-app-region: drag;
+}
+
+.not-drag {
+  -webkit-app-region: no-drag;
 }
