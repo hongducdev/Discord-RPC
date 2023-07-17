@@ -7,7 +7,6 @@ const { RiDiscordFill } = icons;
 
 const NavBar = () => {
   const { colorPrimary } = useSelector((state) => state.color);
-  console.log("🚀 ~ NavBar ~ colorPrimary:", colorPrimary)
 
   const notActiveClasses = `w-16 h-16 flex items-center justify-center text-2xl cursor-pointer hover:bg-ctp-surface1 hover:text-${colorPrimary} rounded-xl duration-200 ease-in-out`;
 
