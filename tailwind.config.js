@@ -21,7 +21,7 @@ module.exports = {
 	plugins: [
 		require('@catppuccin/tailwindcss')({
 			prefix: 'ctp',
-			defaultFlavour: 'mocha',
+			defaultFlavour: 'latte',
 		}),
 	],
 	safelist: [
