@@ -8,7 +8,7 @@ interface User {
     global_name?: string;
     avatar: string | null;
     avatar_decoration: string | null;
-    bot?: boolean;
+    bot: boolean;
     flags?: number;
     premium_type?: number;
 }
@@ -62,6 +62,24 @@ interface RawPresence {
         button_urls?: string[];
     };
 }
+interface RawApplication {
+    id: string;
+    name: string;
+    icon?: string;
+    description?: string;
+    summary?: string;
+    type: any;
+    cover_image?: string;
+    hook: boolean;
+    guild_id?: Snowflake;
+    bot_public: boolean;
+    bot_require_code_grant: boolean;
+    terms_of_service_url?: string;
+    privacy_policy_url?: string;
+    verify_key: string;
+    flags: number;
+    tags: string[];
+}
 
 declare interface IPCTransport {
     on(event: 'open', listener: () => void): this;
@@ -83,13 +101,15 @@ declare class IPCTransport extends EventEmitter {
         name: string;
     }[];
     config?: {
-        cdn_host: "cdn.discordapp.com";
-        api_endpoint: "//discord.com/api" | "//ptb.discord.com/api" | "//canary.discord.com/api";
-        environment: "production";
+        cdn_host: 'cdn.discordapp.com';
+        api_endpoint: '//discord.com/api' | '//ptb.discord.com/api' | '//canary.discord.com/api';
+        environment: 'production';
     };
+    application?: RawApplication;
     constructor(client: RPCClient);
     connect(ipcId?: number): Promise<void>;
     fetchAssets(): Promise<this>;
+    fetchApplication(): Promise<this>;
     parseImageAnyToAsset(image?: string): string | null;
     getActivity(): Presence | null;
     onClose(e: any): void;

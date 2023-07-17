@@ -259,6 +259,7 @@ async function createWindow() {
 						success: true,
 						user: trans.user,
 						ipcId: trans.ipcId,
+						application: trans.application,
 					});
 				})
 				.catch((err) => {
@@ -271,11 +272,23 @@ async function createWindow() {
 	});
 
 	ipcMain.on('getCurrentUser', (event, args) => {
-		const trans = clientRPC.transports.get(args.socketId);
-		mainWindow.webContents.send(`getCurrentUser-response-${args.nonce}`, {
-			success: trans?.user ? true : false,
-			user: trans?.user,
-			ipcId: trans?.ipcId || args.socketId,
+		const { socketId, nonce } = args;
+		const trans = clientRPC.transports.get(socketId);
+		if (!trans) {
+			return mainWindow.webContents.send(
+				`getCurrentUser-response-${nonce}`,
+				{
+					success: false,
+					error: new Error('Not logged in'),
+				},
+			);
+		}
+		return mainWindow.webContents.send(`getCurrentUser-response-${nonce}`, {
+			success: true,
+			activity: trans.getActivity(),
+			ipcId: trans.ipcId,
+			application: trans.application,
+			user: trans.user,
 		});
 	});
 
@@ -313,25 +326,6 @@ async function createWindow() {
 					},
 				);
 			});
-	});
-
-	ipcMain.on('getActivity', (event, args) => {
-		const { socketId, nonce } = args;
-		const trans = clientRPC.transports.get(socketId);
-		if (!trans) {
-			return mainWindow.webContents.send(
-				`getActivity-response-${nonce}`,
-				{
-					success: false,
-					error: new Error('Not logged in'),
-				},
-			);
-		}
-		return mainWindow.webContents.send(`getActivity-response-${nonce}`, {
-			success: true,
-			activity: trans.getActivity(),
-			ipcId: trans.ipcId,
-		});
 	});
 
 	ipcMain.on('clearActivity', (event, args) => {

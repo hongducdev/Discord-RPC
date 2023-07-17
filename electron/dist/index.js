@@ -267,6 +267,7 @@ var IPCTransport = class extends import_events.default {
   activity;
   assets;
   config;
+  application;
   constructor(client) {
     super();
     this.client = client;
@@ -316,6 +317,22 @@ var IPCTransport = class extends import_events.default {
         if (r.ok) {
           r.json().then((assets) => {
             this.assets = assets;
+            resolve(this);
+          });
+        } else {
+          reject(r);
+        }
+      }).catch(reject);
+    });
+  }
+  fetchApplication() {
+    return new Promise((resolve, reject) => {
+      (0, import_node_fetch.default)(
+        `https://discord.com/api/v9/oauth2/applications/${this.clientId}/rpc`
+      ).then((r) => {
+        if (r.ok) {
+          r.json().then((data) => {
+            this.application = data;
             resolve(this);
           });
         } else {
@@ -421,7 +438,10 @@ var RPCClient = class extends import_events2.EventEmitter {
             this.user = message.data.user;
             this.config = message.data.config;
           }
-          this.fetchAssets().then(() => {
+          Promise.all([
+            this.fetchAssets(),
+            this.fetchApplication()
+          ]).then(() => {
             this.client.emit("connected", this);
           });
         } else if (this._expecting.has(message.nonce)) {

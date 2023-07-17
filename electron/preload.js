@@ -194,18 +194,6 @@ contextBridge.exposeInMainWorld('electron', {
 			});
 		});
 	},
-	getActivity: (socketId) => {
-		return new Promise((resolve) => {
-			const nonce = uuid();
-			ipcRenderer.send('getActivity', {
-				socketId,
-				nonce,
-			});
-			ipcRenderer.once(`getActivity-response-${nonce}`, (event, response) => {
-				resolve(response);
-			});
-		});
-	},
 	clearActivity: (socketId) => {
 		return new Promise((resolve) => {
 			const nonce = uuid();
