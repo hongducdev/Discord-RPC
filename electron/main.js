@@ -81,6 +81,12 @@ function createTray(win) {
 	return tray;
 }
 
+function getDiscordAppFromAPI(api) {
+	if (api.includes('ptb.')) return 'Discord PTB';
+	if (api.includes('canary.')) return 'Discord Canary';
+	return 'Discord Stable';
+}
+
 function createNotification(
 	title,
 	description,
@@ -377,6 +383,25 @@ async function createWindow() {
 			ipcId: trans.ipcId,
 		});
 		clientRPC.transports.delete(socketId);
+	});
+
+	ipcMain.on('getDiscordAppName', (event, args) => {
+		const { socketId, nonce } = args;
+		const trans = clientRPC.transports.get(socketId);
+		if (!trans) {
+			return mainWindow.webContents.send(
+				`getDiscordAppName-response-${nonce}`,
+				{
+					success: false,
+					error: new Error('Not logged in'),
+				},
+			);
+		}
+		mainWindow.webContents.send(`getDiscordAppName-response-${nonce}`, {
+			success: true,
+			discord: getDiscordAppFromAPI(trans.config.api_endpoint),
+			ipcId: trans.ipcId,
+		});
 	});
 }
 

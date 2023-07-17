@@ -148,7 +148,7 @@ contextBridge.exposeInMainWorld('electron', {
 			});
 		});
 	},
-	login: (id, socketId) => {
+	login: (socketId, id) => {
 		return new Promise((resolve) => {
 			if (!/\d{17,19}/.test(id))
 				return resolve({
@@ -226,6 +226,18 @@ contextBridge.exposeInMainWorld('electron', {
 				nonce,
 			});
 			ipcRenderer.once(`logout-response-${nonce}`, (event, response) => {
+				resolve(response);
+			});
+		});
+	},
+	getDiscordAppName: (socketId) => {
+		return new Promise((resolve) => {
+			const nonce = uuid();
+			ipcRenderer.send('getDiscordAppName', {
+				socketId,
+				nonce,
+			});
+			ipcRenderer.once(`getDiscordAppName-response-${nonce}`, (event, response) => {
 				resolve(response);
 			});
 		});

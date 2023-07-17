@@ -266,6 +266,7 @@ var IPCTransport = class extends import_events.default {
   user;
   activity;
   assets;
+  config;
   constructor(client) {
     super();
     this.client = client;
@@ -418,6 +419,7 @@ var RPCClient = class extends import_events2.EventEmitter {
         if (message.cmd === RPCCommands.DISPATCH && message.evt === RPCEvents.READY) {
           if (message.data.user) {
             this.user = message.data.user;
+            this.config = message.data.config;
           }
           this.fetchAssets().then(() => {
             this.client.emit("connected", this);
@@ -464,6 +466,7 @@ var RPCClient = class extends import_events2.EventEmitter {
           e.reject(new Error("connection closed"));
         });
         this.emit("disconnected", transport);
+        this.transports.delete(transport.ipcId);
         reject(new Error("connection closed"));
       });
       transport.connect(id).catch(reject);

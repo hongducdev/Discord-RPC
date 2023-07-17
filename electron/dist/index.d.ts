@@ -33,6 +33,7 @@ interface Presence {
         label: string;
         url: string;
     }[];
+    raw?: RawPresence;
 }
 interface RawPresence {
     state?: string;
@@ -62,6 +63,12 @@ interface RawPresence {
     };
 }
 
+declare interface IPCTransport {
+    on(event: 'open', listener: () => void): this;
+    on(event: 'close', listener: (e: any) => void): this;
+    on(event: 'message', listener: (data: any) => void): this;
+    on(event: string, listener: Function): this;
+}
 declare class IPCTransport extends EventEmitter {
     client: RPCClient;
     socket: net.Socket | null;
@@ -75,6 +82,11 @@ declare class IPCTransport extends EventEmitter {
         type: number;
         name: string;
     }[];
+    config?: {
+        cdn_host: "cdn.discordapp.com";
+        api_endpoint: "//discord.com/api" | "//ptb.discord.com/api" | "//canary.discord.com/api";
+        environment: "production";
+    };
     constructor(client: RPCClient);
     connect(ipcId?: number): Promise<void>;
     fetchAssets(): Promise<this>;
