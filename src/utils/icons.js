@@ -9,6 +9,7 @@ import {
   RiDeleteBinLine,
   RiSaveLine,
   RiGithubFill,
+  RiCloseFill,
 } from "react-icons/ri";
 
 const icons = {
@@ -22,6 +23,7 @@ const icons = {
   RiDeleteBinLine,
   RiSaveLine,
   RiGithubFill,
+  RiCloseFill,
 };
 
 export default icons;

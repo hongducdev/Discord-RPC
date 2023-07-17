@@ -4,7 +4,12 @@ import Select from "../Inputs/Select";
 import { timestampTypes } from "../../utils/constants";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
-import { setIsLogged, setDataInput } from "../../app/home/homeSlice";
+import {
+  setIsLogged,
+  setDataInput,
+  setShowModalSelectSession,
+  setApplication,
+} from "../../app/home/homeSlice";
 
 const HomeControl = () => {
   const dispatch = useDispatch();
@@ -31,13 +36,9 @@ const HomeControl = () => {
   }, [payload, dispatch]);
 
   const handleLogin = async () => {
-    const response = await window.electron.login(applicationId);
-    if (response.success) {
-      toast.success("Login success");
-      dispatch(setIsLogged(true));
-    } else {
-      toast.error(response.error.message);
-    }
+
+    dispatch(setShowModalSelectSession(true));
+    dispatch(setApplication(applicationId));
   };
 
   const handleLogout = async () => {
@@ -70,7 +71,7 @@ const HomeControl = () => {
       console.log(response);
       toast.error(response.error.message);
     }
-  }
+  };
 
   return (
     <div className="flex-6 bg-ctp-surface0 p-5 rounded-xl">
@@ -272,7 +273,8 @@ const HomeControl = () => {
         >
           Update
         </button>
-        <button className="bg-ctp-red h-12 px-3 rounded-lg text-ctp-base flex-auto"
+        <button
+          className="bg-ctp-red h-12 px-3 rounded-lg text-ctp-base flex-auto"
           onClick={handleClearRPC}
         >
           Stop
