@@ -10,7 +10,7 @@
     "electron-is-dev": "^2.0.0",
     "electron-log": "^4.4.8",
     "electron-store": "^8.1.0",
-    "node-fetch": "2",
+    "node-fetch": "^2.6.12",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.10.1",
