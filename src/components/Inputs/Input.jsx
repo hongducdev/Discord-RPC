@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
 const Input = ({
   label,
@@ -9,13 +10,16 @@ const Input = ({
   onChange,
   error,
 }) => {
+
+  const {colorPrimary} = useSelector((state) => state.color);
+
   return (
     <div className="flex-auto">
       <label htmlFor={id} className="text-ctp-text text-sm font-semibold">
         {label}
       </label>
       <input
-        className="w-full h-12 rounded-xl bg-ctp-surface1 text-ctp-text px-4 outline-none focus:ring-2 focus:ring-ctp-flamingo focus:ring-opacity-50 transition-all duration-300 ease-in-out hover:bg-ctp-surface2 cursor-pointer mt-2"
+        className={`w-full h-12 rounded-xl bg-ctp-surface1 text-ctp-text px-4 outline-none focus:ring-2 focus:ring-${colorPrimary} focus:ring-opacity-50 transition-all duration-300 ease-in-out hover:bg-ctp-surface2 cursor-pointer mt-2`}
         type={type}
         id={id}
         name={id}
