@@ -109,8 +109,6 @@ function createNotification(
 }
 
 async function createWindow() {
-	let allSockets = await clientRPC.fetchOpenSocket();
-
 	const primaryDisplay = screen.getPrimaryDisplay();
 	const { width, height } = primaryDisplay.workAreaSize;
 	// Create the browser window.
@@ -237,10 +235,10 @@ async function createWindow() {
 	});
 
 	// IPC Events (Discord RPC)
-	ipcMain.on('getOpenSockets', () => {
+	ipcMain.on('getOpenSockets', async () => {
 		mainWindow.webContents.send('getOpenSockets-response', {
 			success: true,
-			ports: allSockets,
+			ports: await clientRPC.fetchOpenSocket(),
 		});
 	});
 
