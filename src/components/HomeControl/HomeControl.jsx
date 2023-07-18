@@ -36,9 +36,13 @@ const HomeControl = () => {
   }, [payload, dispatch]);
 
   const handleLogin = async () => {
-
-    dispatch(setShowModalSelectSession(true));
-    dispatch(setApplication(applicationId));
+    if (applicationId === "") {
+      toast.error("Application ID is required");
+      return;
+    } else {
+      dispatch(setShowModalSelectSession(true));
+      dispatch(setApplication(applicationId));
+    }
   };
 
   const handleLogout = async () => {

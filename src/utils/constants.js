@@ -1,7 +1,13 @@
 import icons from "./icons";
 import { paths } from "./paths";
 
-const { RiHome6Line, RiSettingsLine, RiCodeLine } = icons;
+const {
+  RiHome6Line,
+  RiSettingsLine,
+  RiCodeLine,
+  RiFileCopyLine,
+  RiClipboardLine,
+} = icons;
 
 export const menu = [
   {
@@ -122,5 +128,18 @@ export const colors = [
     id: 14,
     name: "Sapphire",
     value: "ctp-sapphire",
+  },
+];
+
+export const contextMenuItems = [
+  {
+    id: 0,
+    label: "Copy",
+    icon: <RiFileCopyLine />,
+  },
+  {
+    id: 1,
+    label: "Paste",
+    icon: <RiClipboardLine />,
   },
 ];

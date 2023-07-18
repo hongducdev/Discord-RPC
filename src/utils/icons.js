@@ -10,6 +10,8 @@ import {
   RiSaveLine,
   RiGithubFill,
   RiCloseFill,
+  RiFileCopyLine,
+  RiClipboardLine,
 } from "react-icons/ri";
 
 const icons = {
@@ -24,6 +26,8 @@ const icons = {
   RiSaveLine,
   RiGithubFill,
   RiCloseFill,
+  RiFileCopyLine,
+  RiClipboardLine,
 };
 
 export default icons;
