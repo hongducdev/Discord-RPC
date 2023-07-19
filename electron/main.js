@@ -15,6 +15,7 @@ const isDev = require('electron-is-dev');
 const Store = require('electron-store');
 const RPC = require('./dist/index');
 const ElectronDevtool = require('electron-extension-installer');
+const { clipboard } = require('electron/common');
 const appData = new Store();
 
 const APP_NAME = 'NyanRPC';
@@ -171,6 +172,11 @@ async function createWindow() {
 	ipcMain.on('minimize', (event) => {
 		mainWindow.minimize();
 	});
+
+	ipcMain.on('copy', (event, args) => {
+		clipboard.writeText(args.text)
+
+	})
 
 	ipcMain.on('max', (event) => {
 		if (mainWindow.isMaximized()) {
