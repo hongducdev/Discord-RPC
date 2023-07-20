@@ -110,28 +110,26 @@ function createNotification(
 }
 
 async function createWindow() {
-  let allSockets = await clientRPC.fetchOpenSocket();
-
-  const primaryDisplay = screen.getPrimaryDisplay();
-  const { width, height } = primaryDisplay.workAreaSize;
-  // Create the browser window.
-  const mainWindow = new BrowserWindow({
-    width: width * 0.9,
-    height: height * 0.9,
-    minWidth: 800,
-    minHeight: 600,
-    icon: nativeImage.createFromPath(iconPath).resize({ width: 128 }),
-    webPreferences: {
-      webSecurity: false,
-      nodeIntegration: false,
-      enableRemoteModule: false,
-      preload: path.join(__dirname, "preload.js"),
-      contextIsolation: true,
-    },
-    frame: false,
-    backgroundColor: "#36393f",
-    title: "NyanRPC",
-  });
+	const primaryDisplay = screen.getPrimaryDisplay();
+	const { width, height } = primaryDisplay.workAreaSize;
+	// Create the browser window.
+	const mainWindow = new BrowserWindow({
+		width: width * 0.9,
+		height: height * 0.9,
+		minWidth: 800,
+		minHeight: 600,
+		icon: nativeImage.createFromPath(iconPath).resize({ width: 128 }),
+		webPreferences: {
+			webSecurity: false,
+			nodeIntegration: false,
+			enableRemoteModule: false,
+			preload: path.join(__dirname, 'preload.js'),
+			contextIsolation: true,
+		},
+		frame: false,
+		backgroundColor: '#36393f',
+		title: 'NyanRPC',
+	});
 
   createTray(mainWindow);
 
@@ -237,13 +235,13 @@ async function createWindow() {
     }
   });
 
-  // IPC Events (Discord RPC)
-  ipcMain.on("getOpenSockets", () => {
-    mainWindow.webContents.send("getOpenSockets-response", {
-      success: true,
-      ports: allSockets,
-    });
-  });
+	// IPC Events (Discord RPC)
+	ipcMain.on('getOpenSockets', async () => {
+		mainWindow.webContents.send('getOpenSockets-response', {
+			success: true,
+			ports: await clientRPC.fetchOpenSocket(),
+		});
+	});
 
   ipcMain.on("login", (event, args) => {
     const { clientId, socketId, nonce } = args;
