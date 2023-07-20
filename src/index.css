@@ -34,7 +34,3 @@ body {
 .not-drag {
   -webkit-app-region: no-drag;
 }
-
-li {
-  list-style: none;
-}

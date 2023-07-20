@@ -5,20 +5,6 @@ const uuid = () =>
 		(a ^ ((Math.random() * 16) >> (a / 4))).toString(16),
 	);
 
-contextBridge.exposeInMainWorld('menu', {
-	copy: (text) => {
-		ipcRenderer.send('copy', {
-			text: text
-		});
-		ipcRenderer.on('copied', (text) => {
-			console.log(text)
-		})
-	},
-	paste: () => {
-		ipcRenderer.send('paste');
-	}
-})
-
 contextBridge.exposeInMainWorld('titleBar', {
 	minimize: () => {
 		ipcRenderer.send('minimize');

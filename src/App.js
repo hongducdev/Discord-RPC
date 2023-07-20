@@ -1,4 +1,4 @@
-import { Suspense, lazy, useEffect } from "react";
+import { Suspense, lazy } from "react";
 import { Routes, Route } from "react-router-dom";
 import MainLayout from "./layout/MainLayout";
 import { paths } from "./utils/paths";
@@ -8,7 +8,6 @@ const About = lazy(() => import("./pages/About"));
 const Settings = lazy(() => import("./pages/Setting"));
 
 const App = () => {
-  
   return (
     <div className="dark:ctp-mocha md:overflow-x-hidden">
       <Suspense
