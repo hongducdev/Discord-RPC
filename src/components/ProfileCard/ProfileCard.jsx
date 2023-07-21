@@ -5,7 +5,6 @@ import { userFlags } from "../../utils/flag";
 
 const ProfileCard = () => {
   const { isLogged, dataInput } = useSelector((state) => state.home);
-  console.log("🚀 ~ ProfileCard ~ isLogged:", isLogged)
   const { colorPrimary } = useSelector((state) => state.color);
 
   const [activeTooltip, setActiveTooltip] = useState(null);
@@ -28,8 +27,6 @@ const ProfileCard = () => {
   useEffect(() => {
     getCurrentUser();
   }, [isLogged]);
-
-  console.log(currentUser)
 
   return (
     <div className="flex-4 bg-ctp-surface0 rounded-xl">
