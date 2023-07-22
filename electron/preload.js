@@ -190,9 +190,12 @@ contextBridge.exposeInMainWorld('electron', {
 				activity,
 				nonce,
 			});
-			ipcRenderer.once(`setActivity-response-${nonce}`, (event, response) => {
-				resolve(response);
-			});
+			ipcRenderer.once(
+				`setActivity-response-${nonce}`,
+				(event, response) => {
+					resolve(response);
+				},
+			);
 		});
 	},
 	clearActivity: (socketId) => {
@@ -202,9 +205,12 @@ contextBridge.exposeInMainWorld('electron', {
 				socketId,
 				nonce,
 			});
-			ipcRenderer.once(`clearActivity-response-${nonce}`, (event, response) => {
-				resolve(response);
-			});
+			ipcRenderer.once(
+				`clearActivity-response-${nonce}`,
+				(event, response) => {
+					resolve(response);
+				},
+			);
 		});
 	},
 	logout: (socketId) => {
@@ -226,16 +232,34 @@ contextBridge.exposeInMainWorld('electron', {
 				socketId,
 				nonce,
 			});
-			ipcRenderer.once(`getDiscordAppName-response-${nonce}`, (event, response) => {
-				resolve(response);
-			});
+			ipcRenderer.once(
+				`getDiscordAppName-response-${nonce}`,
+				(event, response) => {
+					resolve(response);
+				},
+			);
 		});
 	},
 	listenEvent: (eventName, callback) => {
-		if (typeof callback !== 'function') throw new Error('Callback must be a function');
+		if (typeof callback !== 'function')
+			throw new Error('Callback must be a function');
 		ipcRenderer.on(eventName, callback);
 	},
 	sendEventFromClientToMain: (eventName, data) => {
 		ipcRenderer.send(eventName, data);
-	}
+	},
+	getAllUsers: () => {
+		return new Promise((resolve) => {
+			const nonce = uuid();
+			ipcRenderer.send('getAllUsers', {
+				nonce,
+			});
+			ipcRenderer.once(
+				`getAllUsers-response-${nonce}`,
+				(event, response) => {
+					resolve(response);
+				},
+			);
+		});
+	},
 });
