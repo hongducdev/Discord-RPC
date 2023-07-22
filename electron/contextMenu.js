@@ -1,21 +1,21 @@
-const contextMenu = require("electron-context-menu");
+const contextMenu = require('electron-context-menu');
+const { nativeImage } = require('electron');
+const path = require('path');
 
-contextMenu({
-  prepend: (defaultActions, params, browserWindow) => [
-    {
-      label: "Copy",
-      visible: params.selectionText.trim().length > 0,
-      click: () => {
-        browserWindow.webContents.copy();
-      },
-    },
-    {
-      label: "Paste",
-      role: "paste",
-      visible: params.editFlags.canPaste,
-      click: () => {
-        browserWindow.webContents.paste();
-      },
-    },
-  ],
-});
+module.exports = (win) =>
+	contextMenu({
+		menu: (actions, props, browserWindow, dictionarySuggestions) => [
+			{
+				label: 'Unicorn',
+				sublabel: 'Magical creature',
+				icon: nativeImage
+					.createFromPath(path.join(__dirname, 'Icon.png'))
+					.resize({ width: 16 }),
+				type: 'normal',
+			},
+			actions.separator(), // dấu ngăn cách
+			actions.copy(),
+			actions.paste(),
+			// Docs: https://www.electronjs.org/docs/latest/api/menu-item/
+		],
+	});

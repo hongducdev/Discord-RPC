@@ -16,7 +16,7 @@ const Store = require('electron-store');
 const RPC = require('./dist/index');
 const ElectronDevtool = require('electron-extension-installer');
 const appData = new Store();
-require('./contextMenu');
+const createMenu = require('./contextMenu');
 
 const APP_NAME = 'NyanRPC';
 
@@ -25,89 +25,6 @@ log.info('App starting...');
 const iconPath = path.join(__dirname, 'Icon.png');
 
 const clientRPC = new RPC.Client();
-
-function createTray(win) {
-	const tray = new Tray(
-		nativeImage.createFromPath(iconPath).resize({ width: 16 }),
-	);
-	tray.setToolTip(APP_NAME);
-	tray.on('click', () => {
-		win.show();
-	});
-	const menu = Menu.buildFromTemplate([
-		{
-			label: APP_NAME,
-			icon: nativeImage.createFromPath(iconPath).resize({ width: 16 }),
-			enabled: false,
-		},
-		{
-			type: 'separator',
-		},
-		{
-			label: 'Check for Updates...',
-			type: 'normal',
-			visible: process.platform !== 'darwin',
-			click: () => {},
-		},
-		{
-			label: 'Github Repository',
-			type: 'normal',
-			visible: process.platform !== 'darwin',
-			click: () => shell.openExternal('https://github.com/aiko-chan-ai/'),
-		},
-		{
-			type: 'separator',
-		},
-		{
-			label: 'Reload',
-			click: () => {
-				win.reload();
-			},
-		},
-		{
-			label: 'Toggle Developer Tools',
-			click: () => {
-				win.webContents.toggleDevTools();
-			},
-		},
-		{
-			type: 'separator',
-		},
-		{
-			label: 'Quit',
-			role: 'quit',
-		},
-	]);
-	tray.setContextMenu(menu);
-	return tray;
-}
-
-function getDiscordAppFromAPI(api) {
-	if (api.includes('ptb.')) return 'Discord PTB';
-	if (api.includes('canary.')) return 'Discord Canary';
-	return 'Discord Stable';
-}
-
-function createNotification(
-	title,
-	description,
-	icon,
-	silent = false,
-	callbackWhenClick = () => {},
-) {
-	const n = new Notification({
-		title,
-		body: description,
-		icon,
-		silent,
-	});
-	n.once('click', (e) => {
-		e.preventDefault();
-		typeof callbackWhenClick == 'function' && callbackWhenClick();
-		n.close();
-	});
-	n.show();
-}
 
 async function createWindow() {
 	const primaryDisplay = screen.getPrimaryDisplay();
@@ -132,6 +49,7 @@ async function createWindow() {
 	});
 
 	createTray(mainWindow);
+	createMenu(mainWindow);
 
 	mainWindow.loadURL(
 		isDev
@@ -167,6 +85,12 @@ async function createWindow() {
 			'You can close the application in the taskbar',
 		);
 	});
+
+	/*
+	mainWindow.webContents.on('context-menu', (event, params) => {
+		console.log(params, event);
+	});
+	*/
 
 	// IPC Events (Title Bar)
 	ipcMain.on('minimize', (event) => {
@@ -435,3 +359,86 @@ app.on('activate', () => {
 app.on('before-quit', () => {
 	log.info('App closing...');
 });
+
+function createTray(win) {
+	const tray = new Tray(
+		nativeImage.createFromPath(iconPath).resize({ width: 16 }),
+	);
+	tray.setToolTip(APP_NAME);
+	tray.on('click', () => {
+		win.show();
+	});
+	const menu = Menu.buildFromTemplate([
+		{
+			label: APP_NAME,
+			icon: nativeImage.createFromPath(iconPath).resize({ width: 16 }),
+			enabled: false,
+		},
+		{
+			type: 'separator',
+		},
+		{
+			label: 'Check for Updates...',
+			type: 'normal',
+			visible: process.platform !== 'darwin',
+			click: () => {},
+		},
+		{
+			label: 'Github Repository',
+			type: 'normal',
+			visible: process.platform !== 'darwin',
+			click: () => shell.openExternal('https://github.com/aiko-chan-ai/'),
+		},
+		{
+			type: 'separator',
+		},
+		{
+			label: 'Reload',
+			click: () => {
+				win.reload();
+			},
+		},
+		{
+			label: 'Toggle Developer Tools',
+			click: () => {
+				win.webContents.toggleDevTools();
+			},
+		},
+		{
+			type: 'separator',
+		},
+		{
+			label: 'Quit',
+			role: 'quit',
+		},
+	]);
+	tray.setContextMenu(menu);
+	return tray;
+}
+
+function getDiscordAppFromAPI(api) {
+	if (api.includes('ptb.')) return 'Discord PTB';
+	if (api.includes('canary.')) return 'Discord Canary';
+	return 'Discord Stable';
+}
+
+function createNotification(
+	title,
+	description,
+	icon,
+	silent = false,
+	callbackWhenClick = () => {},
+) {
+	const n = new Notification({
+		title,
+		body: description,
+		icon,
+		silent,
+	});
+	n.once('click', (e) => {
+		e.preventDefault();
+		typeof callbackWhenClick == 'function' && callbackWhenClick();
+		n.close();
+	});
+	n.show();
+}
