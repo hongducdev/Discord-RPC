@@ -10,12 +10,11 @@ import {
   setShowModalSelectSession,
   setApplication,
 } from "../../app/home/homeSlice";
+import ApplicationInput from "./ApplicationInput";
 
 const HomeControl = () => {
   const dispatch = useDispatch();
-  const { isLogged } = useSelector((state) => state.home);
-
-  const [applicationId, setApplicationId] = useState("");
+  const [sessionId, setSessionId] = useState(null);
   const [payload, setPayload] = useState({
     details: "",
     state: "",
@@ -31,34 +30,14 @@ const HomeControl = () => {
     ],
   });
 
+  useEffect(() => {}, []);
+
   useEffect(() => {
     dispatch(setDataInput(payload));
   }, [payload, dispatch]);
 
-  const handleLogin = async () => {
-    if (applicationId === "") {
-      toast.error("Application ID is required");
-      return;
-    } else {
-      dispatch(setShowModalSelectSession(true));
-      dispatch(setApplication(applicationId));
-    }
-  };
-
-  const handleLogout = async () => {
-    const response = await window.electron.logout();
-    if (response.success) {
-      toast.success("Logout success");
-      setApplicationId("");
-      dispatch(setIsLogged(false));
-    } else {
-      console.log(response);
-      toast.error(response.error.message);
-    }
-  };
-
   const handleStartRPC = async () => {
-    const response = await window.electron.setActivity(payload);
+    const response = await window.electron.setActivity(sessionId, payload);
     if (response.success) {
       toast.success("Update RPC success");
     } else {
@@ -79,30 +58,7 @@ const HomeControl = () => {
 
   return (
     <div className="flex-6 bg-ctp-surface0 p-5 rounded-xl">
-      <div className="flex gap-4 items-end">
-        <Input
-          label="Application ID"
-          id="application-id"
-          placeholder="Application ID"
-          value={applicationId}
-          onChange={(e) => setApplicationId(e.target.value)}
-        />
-        {isLogged ? (
-          <button
-            className="bg-ctp-blue h-12 px-3 rounded-lg text-ctp-base"
-            onClick={handleLogout}
-          >
-            Logout
-          </button>
-        ) : (
-          <button
-            className="bg-ctp-blue h-12 px-3 rounded-lg text-ctp-base"
-            onClick={handleLogin}
-          >
-            Login
-          </button>
-        )}
-      </div>
+      <ApplicationInput />
       <div className="w-full h-[1px] bg-ctp-subtext0 rounded-full my-3"></div>
       <div className="flex flex-col gap-3 max-h-[380px] overflow-x-auto px-2">
         <Input

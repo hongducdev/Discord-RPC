@@ -4,12 +4,13 @@ import { useSelector } from "react-redux";
 import { userFlags } from "../../utils/flag";
 
 const ProfileCard = () => {
-  const { isLogged, dataInput, sessionId } = useSelector((state) => state.home);
+  const { dataInput } = useSelector((state) => state.home);
   const { colorPrimary } = useSelector((state) => state.color);
 
   const [activeTooltip, setActiveTooltip] = useState(null);
   const [currentUser, setCurrentUser] = useState(null);
   const [currentApplication, setCurrentApplication] = useState(null);
+
   const handleMouseEnter = (index) => {
     setActiveTooltip(index);
   };
@@ -18,18 +19,15 @@ const ProfileCard = () => {
     setActiveTooltip(null);
   };
 
-  const getCurrentUser = async () => {
-    const response = await window.electron.getCurrentUser(sessionId);
-    console.log("🚀 ~ getCurrentUser ~ response:", response)
-    if (response.success) {
-      setCurrentUser(response.user);
-      setCurrentApplication(response.application);
-    }
-  };
-
   useEffect(() => {
+    const getCurrentUser = async () => {
+      const response = await window.RPCStorage.get('currentUser');
+      console.log("🚀 ~ getCurrentUser ~ response:", response)
+      setCurrentUser(response.value.user);
+      setCurrentApplication(response.value.application);
+    };
     getCurrentUser();
-  }, [isLogged, sessionId]);
+  }, []);
 
   return (
     <div className="flex-4 bg-ctp-surface0 rounded-xl">
@@ -99,9 +97,7 @@ const ProfileCard = () => {
           </div>
           <div className="flex flex-col">
             <span className="font-semibold text-lg">
-              {
-                currentApplication?.name || "NyanRPC"
-              }
+              {currentApplication?.name || "NyanRPC"}
             </span>
             <span className="text-sm">
               {dataInput?.details || "Editing in index.js"}

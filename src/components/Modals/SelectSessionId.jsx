@@ -1,36 +1,51 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import icons from "../../utils/icons";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  setIsLogged,
-  setSessionId,
-  setShowModalSelectSession,
-} from "../../app/home/homeSlice";
+import { setShowModalSelectSession } from "../../app/home/homeSlice";
 import { toast } from "react-toastify";
 
 const { RiCloseFill } = icons;
 
 const SelectSessionId = () => {
   const [sessionIds, setSessionIds] = useState([]);
+  const [applicationId, setApplicationId] = useState("");
   const [selectedSessionId, setSelectedSessionId] = useState(null);
   const dispatch = useDispatch();
-  const { applicationId } = useSelector((state) => state.home);
   const { colorPrimary } = useSelector((state) => state.color);
 
-  const getSessions = async () => {
-    const response = await window.electron.getOpenSockets();
-    if (response.success) {
-      setSessionIds(response.ports);
-    }
-  };
+  useEffect(() => {
+    const getApplicationId = async () => {
+      const response = await window.RPCStorage.get("applicationId");
+      if (response.success) {
+        setApplicationId(response.value);
+      }
+    };
+    getApplicationId();
+  }, []);
 
   useEffect(() => {
+    const getSessions = async () => {
+      const response = await window.electron.getOpenSockets();
+      if (response.success) {
+        setSessionIds(response.ports);
+      }
+    };
     getSessions();
   }, []);
 
+  // Sửa lỗi không lưu sessionId vào local storage
+  useEffect(() => {
+    const setSessionIdLocal = async () => {
+      if (selectedSessionId !== null) {
+        await window.RPCStorage.set("sessionId", selectedSessionId);
+      }
+    };
+
+    setSessionIdLocal();
+  }, [selectedSessionId]);
+
   const handleSelectSession = async (sessionId) => {
     setSelectedSessionId(sessionId);
-    dispatch(setSessionId(sessionId));
   };
 
   const handleLogin = async () => {
@@ -40,7 +55,8 @@ const SelectSessionId = () => {
     );
     if (response.success) {
       toast.success("Login success");
-      dispatch(setIsLogged(true));
+      await window.RPCStorage.set("isLogged", true);
+      await window.RPCStorage.set("currentUser", response);
       dispatch(setShowModalSelectSession(false));
     } else {
       toast.error(response.error.message);
