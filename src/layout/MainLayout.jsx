@@ -4,7 +4,6 @@ import { Outlet } from "react-router-dom";
 import TitleBar from "../components/TittleBar/TitleBar";
 import SelectSessionId from "../components/Modals/SelectSessionId";
 import { useSelector } from "react-redux";
-import ContextMenu from "../components/ContextMenu/ContextMenu";
 
 const MainLayout = () => {
   const { isOpenModalSelectSession } = useSelector((state) => state.home);
@@ -26,7 +25,6 @@ const MainLayout = () => {
           </div>
         </div>
       )}
-      <ContextMenu />
     </div>
   );
 };

@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import icons from "../../utils/icons";
 import { useDispatch, useSelector } from "react-redux";
 import {
   setIsLogged,
+  setSessionId,
   setShowModalSelectSession,
 } from "../../app/home/homeSlice";
 import { toast } from "react-toastify";
@@ -14,7 +15,7 @@ const SelectSessionId = () => {
   const [selectedSessionId, setSelectedSessionId] = useState(null);
   const dispatch = useDispatch();
   const { applicationId } = useSelector((state) => state.home);
-  const {colorPrimary} = useSelector((state) => state.color);
+  const { colorPrimary } = useSelector((state) => state.color);
 
   const getSessions = async () => {
     const response = await window.electron.getOpenSockets();
@@ -22,18 +23,14 @@ const SelectSessionId = () => {
       setSessionIds(response.ports);
     }
   };
-  const getAppName = async () => {
-    const response = await window.electron.getDiscordAppName();
-    console.log(response);
-  };
 
   useEffect(() => {
     getSessions();
-    getAppName();
   }, []);
 
   const handleSelectSession = async (sessionId) => {
     setSelectedSessionId(sessionId);
+    dispatch(setSessionId(sessionId));
   };
 
   const handleLogin = async () => {

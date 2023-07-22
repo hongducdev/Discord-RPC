@@ -4,11 +4,12 @@ import { useSelector } from "react-redux";
 import { userFlags } from "../../utils/flag";
 
 const ProfileCard = () => {
-  const { isLogged, dataInput } = useSelector((state) => state.home);
+  const { isLogged, dataInput, sessionId } = useSelector((state) => state.home);
   const { colorPrimary } = useSelector((state) => state.color);
 
   const [activeTooltip, setActiveTooltip] = useState(null);
   const [currentUser, setCurrentUser] = useState(null);
+  const [currentApplication, setCurrentApplication] = useState(null);
   const handleMouseEnter = (index) => {
     setActiveTooltip(index);
   };
@@ -18,15 +19,17 @@ const ProfileCard = () => {
   };
 
   const getCurrentUser = async () => {
-    const response = await window.electron.getCurrentUser();
+    const response = await window.electron.getCurrentUser(sessionId);
+    console.log("🚀 ~ getCurrentUser ~ response:", response)
     if (response.success) {
       setCurrentUser(response.user);
+      setCurrentApplication(response.application);
     }
   };
 
   useEffect(() => {
     getCurrentUser();
-  }, [isLogged]);
+  }, [isLogged, sessionId]);
 
   return (
     <div className="flex-4 bg-ctp-surface0 rounded-xl">
@@ -95,7 +98,11 @@ const ProfileCard = () => {
             )}
           </div>
           <div className="flex flex-col">
-            <span className="font-semibold text-lg">Visual Studio Code</span>
+            <span className="font-semibold text-lg">
+              {
+                currentApplication?.name || "NyanRPC"
+              }
+            </span>
             <span className="text-sm">
               {dataInput?.details || "Editing in index.js"}
             </span>
