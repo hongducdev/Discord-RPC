@@ -97,7 +97,7 @@
   "devDependencies": {
     "@catppuccin/tailwindcss": "^0.1.6",
     "concurrently": "^8.2.0",
-    "electron": "^25.3.0",
+    "electron": "^25.8.4",
     "electron-builder": "^24.4.0",
     "electron-extension-installer": "^1.2.0",
     "path-browserify": "^1.0.1",
